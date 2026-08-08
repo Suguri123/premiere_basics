@@ -33,7 +33,7 @@
                         </button>
                     </li>
                     <li>
-                        <button class="nav-item" data-target="curriculum">
+                        <button class="nav-item" data-target="ch1" onclick="switchChapter('ch1')">
                             <span class="nav-icon">🎬</span> 커리큘럼
                         </button>
                         <!-- Submenu for Chapters -->
@@ -135,93 +135,67 @@
 
             </section>
 
-            <!-- 2. Curriculum Section -->
-            <section id="curriculum" class="app-section">
+            <!-- 2. Curriculum Section - Chapter 1 -->
+            <section id="ch1" class="app-section">
                 <div class="container">
-                    <div class="section-header text-center">
-                        <span class="section-tag">CURRICULUM</span>
-                        <h2 class="section-title">스마트 4단계 커리큘럼</h2>
-                        <p class="section-subtitle">배우고 싶은 차시를 선택하고 각 클립의 핵심 학습 내용을 살펴보세요.</p>
-                    </div>
-
-                    <!-- Chapter Tabs -->
-                    <div class="chapter-tabs">
-                        <button class="tab-btn active" data-tab="ch1">
-                            <span class="tab-num">1차시</span>
-                            <span class="tab-title">프리미어 기초 이해</span>
-                        </button>
-                        <button class="tab-btn" data-tab="ch2">
-                            <span class="tab-num">2차시</span>
-                            <span class="tab-title">AI 활용 영상 제작</span>
-                        </button>
-                        <button class="tab-btn" data-tab="ch3">
-                            <span class="tab-num">3차시</span>
-                            <span class="tab-title">AI 활용 편집 실습</span>
-                        </button>
-                        <button class="tab-btn" data-tab="ch4">
-                            <span class="tab-num">4차시</span>
-                            <span class="tab-title">영상 제작 & 피드백</span>
-                        </button>
-                    </div>
-
-                    <!-- Tab Content Panels -->
-                    <div class="tab-content">
-                        <!-- Chapter 1 -->
-                        <div class="tab-panel active" id="ch1">
-                            <div class="chapter-overview-card glass-panel">
-                                <div class="overview-badge">1차시 개요</div>
-                                <h3>프리미어 영상편집 기초 이해 (8클립)</h3>
-                                <p>프리미어 인터페이스와 기본 컷 편집을 익혀 30초 영상을 완성합니다.</p>
-                                <div class="overview-meta">
-                                    <span>🔑 핵심 결과물: <strong>"나의 하루 30초" 여행 브이로그 영상</strong></span>
-                                    <span>📦 사용 실습 소스: <strong>실습 소스팩 A (바다·거리·음식)</strong></span>
-                                </div>
-                            </div>
-                            <div class="clips-grid" id="ch1-clips"></div>
-                        </div>
-
-                        <!-- Chapter 2 -->
-                        <div class="tab-panel" id="ch2">
-                            <div class="chapter-overview-card glass-panel">
-                                <div class="overview-badge">2차시 개요</div>
-                                <h3>AI 활용 기초 영상 제작 실습 (8클립)</h3>
-                                <p>AI 음성 인식과 자동 자막 기능으로 영상 편집을 빠르게 완성합니다.</p>
-                                <div class="overview-meta">
-                                    <span>🔑 핵심 결과물: <strong>"AI 배경 자기소개 영상"</strong></span>
-                                    <span>📦 사용 실습 소스: <strong>실습 소스팩 B (내레이션/스피치 녹음 + 배경음악)</strong></span>
-                                </div>
-                            </div>
-                            <div class="clips-grid" id="ch2-clips"></div>
-                        </div>
-
-                        <!-- Chapter 3 -->
-                        <div class="tab-panel" id="ch3">
-                            <div class="chapter-overview-card glass-panel">
-                                <div class="overview-badge">3차시 개요</div>
-                                <h3>AI 활용 기초 영상 편집 실습 (8클립)</h3>
-                                <p>마스크와 키프레임을 활용해 시네마틱 인트로를 제작합니다.</p>
-                                <div class="overview-meta">
-                                    <span>🔑 핵심 결과물: <strong>"내 채널 시네마틱 인트로 (15초)"</strong></span>
-                                    <span>📦 사용 실습 소스: <strong>실습 소스팩 C, Firefly 생성 리소스</strong></span>
-                                </div>
-                            </div>
-                            <div class="clips-grid" id="ch3-clips"></div>
-                        </div>
-
-                        <!-- Chapter 4 -->
-                        <div class="tab-panel" id="ch4">
-                            <div class="chapter-overview-card glass-panel">
-                                <div class="overview-badge">4차시 개요</div>
-                                <h3>영상 제작 및 피드백 (8클립)</h3>
-                                <p>생성형 확장 기능을 활용해 숏폼 영상을 완성하고 피드백합니다.</p>
-                                <div class="overview-meta">
-                                    <span>🔑 핵심 결과물: <strong>"AI 활용 홍보 숏폼 (30초)"</strong></span>
-                                    <span>📦 사용 실습 소스: <strong>기획 템플릿, 단축키 정리표</strong></span>
-                                </div>
-                            </div>
-                            <div class="clips-grid" id="ch4-clips"></div>
+                    <div class="chapter-overview-card glass-panel">
+                        <div class="overview-badge">1차시 개요</div>
+                        <h3>프리미어 영상편집 기초 이해 (8클립)</h3>
+                        <p>프리미어 인터페이스와 기본 컷 편집을 익혀 30초 영상을 완성합니다.</p>
+                        <div class="overview-meta">
+                            <span>🔑 핵심 결과물: <strong>"나의 하루 30초" 여행 브이로그 영상</strong></span>
+                            <span>📦 사용 실습 소스: <strong>실습 소스팩 A (바다·거리·음식)</strong></span>
                         </div>
                     </div>
+                    <div class="clips-grid" id="ch1-clips"></div>
+                </div>
+            </section>
+
+            <!-- Chapter 2 -->
+            <section id="ch2" class="app-section">
+                <div class="container">
+                    <div class="chapter-overview-card glass-panel">
+                        <div class="overview-badge">2차시 개요</div>
+                        <h3>AI 활용 기초 영상 제작 실습 (8클립)</h3>
+                        <p>AI 음성 인식과 자동 자막 기능으로 영상 편집을 빠르게 완성합니다.</p>
+                        <div class="overview-meta">
+                            <span>🔑 핵심 결과물: <strong>"AI 배경 자기소개 영상"</strong></span>
+                            <span>📦 사용 실습 소스: <strong>실습 소스팩 B (내레이션/스피치 녹음 + 배경음악)</strong></span>
+                        </div>
+                    </div>
+                    <div class="clips-grid" id="ch2-clips"></div>
+                </div>
+            </section>
+
+            <!-- Chapter 3 -->
+            <section id="ch3" class="app-section">
+                <div class="container">
+                    <div class="chapter-overview-card glass-panel">
+                        <div class="overview-badge">3차시 개요</div>
+                        <h3>AI 활용 기초 영상 편집 실습 (8클립)</h3>
+                        <p>마스크와 키프레임을 활용해 시네마틱 인트로를 제작합니다.</p>
+                        <div class="overview-meta">
+                            <span>🔑 핵심 결과물: <strong>"내 채널 시네마틱 인트로 (15초)"</strong></span>
+                            <span>📦 사용 실습 소스: <strong>실습 소스팩 C, Firefly 생성 리소스</strong></span>
+                        </div>
+                    </div>
+                    <div class="clips-grid" id="ch3-clips"></div>
+                </div>
+            </section>
+
+            <!-- Chapter 4 -->
+            <section id="ch4" class="app-section">
+                <div class="container">
+                    <div class="chapter-overview-card glass-panel">
+                        <div class="overview-badge">4차시 개요</div>
+                        <h3>영상 제작 및 피드백 (8클립)</h3>
+                        <p>생성형 확장 기능을 활용해 숏폼 영상을 완성하고 피드백합니다.</p>
+                        <div class="overview-meta">
+                            <span>🔑 핵심 결과물: <strong>"AI 활용 홍보 숏폼 (30초)"</strong></span>
+                            <span>📦 사용 실습 소스: <strong>기획 템플릿, 단축키 정리표</strong></span>
+                        </div>
+                    </div>
+                    <div class="clips-grid" id="ch4-clips"></div>
                 </div>
             </section>
 

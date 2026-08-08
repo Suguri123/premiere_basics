@@ -106,7 +106,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const targetSection = document.getElementById(targetId);
         if (targetSection) targetSection.classList.add("active");
         
-        const targetNavItem = document.querySelector(`.nav-item[data-target="${targetId}"]`);
+        let navLookupId = targetId;
+        if (targetId.startsWith('ch')) {
+            navLookupId = 'ch1';
+        }
+        const targetNavItem = document.querySelector(`.nav-item[data-target="${navLookupId}"]`);
         if (targetNavItem) targetNavItem.classList.add("active");
         
         // Scroll to top of content area
@@ -118,14 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     window.switchChapter = function(chapterId) {
-        // 1. Switch to curriculum section
-        switchSection('curriculum');
-        
-        // 2. Select the corresponding chapter tab
-        const tabBtn = document.querySelector(`.tab-btn[data-tab="${chapterId}"]`);
-        if (tabBtn) {
-            tabBtn.click();
-        }
+        switchSection(chapterId);
     };
     
     navItems.forEach(item => {

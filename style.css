@@ -640,9 +640,6 @@ body.dark-theme .btn-outline:hover {
 
 /* Tab Panels */
 .tab-panel {
-    display: none;
-}
-.tab-panel.active {
     display: block;
 }
 
