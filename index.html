@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 활용 프리미어 영상편집 기초과정</title>
+    <meta name="description" content="AI를 결합한 가장 스마트하고 빠른 어도비 프리미어 프로 영상편집 기초 강의. 대시보드에서 편리하게 학습하세요!">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dashboard-body">
+    <div class="app-container">
+        <!-- Left Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="#" class="logo">
+                    <span class="logo-icon">Pr</span>
+                    <span class="logo-text" style="white-space: normal; line-height: 1.1;">Adobe Premiere <span class="accent-text" style="font-size: 0.95rem; font-weight: 700; display: block; margin-top: 4px;">Video Editing Basics</span></span>
+                </a>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <button class="nav-item active" data-target="hero">
+                            <span class="nav-icon">🏠</span> 소개 및 홈
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-item" data-target="curriculum">
+                            <span class="nav-icon">🎬</span> 커리큘럼
+                        </button>
+                        <!-- Submenu for Chapters -->
+                        <ul class="sub-nav">
+                            <li><button class="sub-nav-item" onclick="switchChapter('ch1')">1차시: 프리미어 기초 이해</button></li>
+                            <li><button class="sub-nav-item" onclick="switchChapter('ch2')">2차시: AI 활용 영상 제작</button></li>
+                            <li><button class="sub-nav-item" onclick="switchChapter('ch3')">3차시: AI 활용 편집 실습</button></li>
+                            <li><button class="sub-nav-item" onclick="switchChapter('ch4')">4차시: 영상 제작 & 피드백</button></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <button class="nav-item" data-target="prompt-builder">
+                            <span class="nav-icon">🪄</span> AI 프롬프트 빌더
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-item" data-target="shortcuts">
+                            <span class="nav-icon">⌨️</span> 단축키 사전
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-item" data-target="resources">
+                            <span class="nav-icon">📦</span> 실습 자료실
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-item" data-target="plugins">
+                            <span class="nav-icon">🔌</span> 필수 플러그인 & 도구
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-item" data-target="ai-qna">
+                            <span class="nav-icon">🤖</span> AI 1:1 문의게시판
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button id="theme-toggle-btn" class="btn btn-outline btn-sm btn-block">🌙 다크 모드</button>
+            </div>
+        </aside>
+
+        <!-- Right Main Content Area -->
+        <main class="content-area">
+            <!-- Mobile Toggle Header (Visible only on mobile) -->
+            <header class="mobile-header">
+                <button id="mobile-menu-btn" class="mobile-menu-toggle">☰</button>
+                <div class="logo">
+                    <span class="logo-icon">Pr</span>
+                    <span class="logo-text" style="white-space: normal; line-height: 1.1;">Adobe Premiere <span class="accent-text" style="font-size: 0.85rem; font-weight: 700; display: block; margin-top: 2px;">Video Editing Basics</span></span>
+                </div>
+            </header>
+
+            <!-- 1. Home / Intro Section -->
+            <section id="hero" class="app-section active">
+                <div class="hero-section">
+                    <div class="hero-bg-glow"></div>
+                    <div class="container hero-container">
+                        <div class="hero-content">
+                            <h1 class="hero-title">
+                                AI 활용 
+                                <span class="gradient-text">프리미어 영상편집 기초과정</span>
+                            </h1>
+                            <p class="hero-desc">
+                                프리미어 인터페이스와 컷 편집부터 AI 오디오 편집과 자동 자막,<br>
+                                Adobe Firefly 이미지·비디오 생성, 마스크·키프레임까지 단계별로 익힙니다.<br>
+                                왼쪽 메뉴에서 학습 단계를 클릭해 시작해보세요!
+                            </p>
+                            <div class="hero-cta">
+                                <button class="btn btn-primary btn-lg" onclick="switchSection('curriculum')">강의 커리큘럼 보기</button>
+                                <button class="btn btn-outline btn-lg" onclick="switchSection('resources')">자료실 바로가기</button>
+                            </div>
+                        </div>
+                        <div class="hero-visual">
+                            <div class="glass-panel video-preview-card">
+                                <div class="video-header">
+                                    <span class="dot red"></span>
+                                    <span class="dot yellow"></span>
+                                    <span class="dot green"></span>
+                                    <span class="video-title">Project: 나의 하루 30초.prproj</span>
+                                </div>
+                                <div class="video-screen">
+                                    <div class="play-overlay">
+                                        <span class="play-btn"></span>
+                                    </div>
+                                    <div class="preview-caption">"T키 → 화면 클릭 → 바로 입력"</div>
+                                </div>
+                                <div class="timeline-visual">
+                                    <div class="track v-track">V1 | 🎬 바다.mp4 [루미트리 색보정 적용]</div>
+                                    <div class="track v-track2">V2 | 💬 자막: 나의 하루</div>
+                                    <div class="track a-track">A1 | 🎵 배경음악.mp3 [-20dB]</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </section>
+
+            <!-- 2. Curriculum Section -->
+            <section id="curriculum" class="app-section">
+                <div class="container">
+                    <div class="section-header text-center">
+                        <span class="section-tag">CURRICULUM</span>
+                        <h2 class="section-title">스마트 4단계 커리큘럼</h2>
+                        <p class="section-subtitle">배우고 싶은 차시를 선택하고 각 클립의 핵심 학습 내용을 살펴보세요.</p>
+                    </div>
+
+                    <!-- Chapter Tabs -->
+                    <div class="chapter-tabs">
+                        <button class="tab-btn active" data-tab="ch1">
+                            <span class="tab-num">1차시</span>
+                            <span class="tab-title">프리미어 기초 이해</span>
+                        </button>
+                        <button class="tab-btn" data-tab="ch2">
+                            <span class="tab-num">2차시</span>
+                            <span class="tab-title">AI 활용 영상 제작</span>
+                        </button>
+                        <button class="tab-btn" data-tab="ch3">
+                            <span class="tab-num">3차시</span>
+                            <span class="tab-title">AI 활용 편집 실습</span>
+                        </button>
+                        <button class="tab-btn" data-tab="ch4">
+                            <span class="tab-num">4차시</span>
+                            <span class="tab-title">영상 제작 & 피드백</span>
+                        </button>
+                    </div>
+
+                    <!-- Tab Content Panels -->
+                    <div class="tab-content">
+                        <!-- Chapter 1 -->
+                        <div class="tab-panel active" id="ch1">
+                            <div class="chapter-overview-card glass-panel">
+                                <div class="overview-badge">1차시 개요</div>
+                                <h3>프리미어 영상편집 기초 이해 (8클립)</h3>
+                                <p>프리미어 인터페이스와 기본 컷 편집을 익혀 30초 영상을 완성합니다.</p>
+                                <div class="overview-meta">
+                                    <span>🔑 핵심 결과물: <strong>"나의 하루 30초" 여행 브이로그 영상</strong></span>
+                                    <span>📦 사용 실습 소스: <strong>실습 소스팩 A (바다·거리·음식)</strong></span>
+                                </div>
+                            </div>
+                            <div class="clips-grid" id="ch1-clips"></div>
+                        </div>
+
+                        <!-- Chapter 2 -->
+                        <div class="tab-panel" id="ch2">
+                            <div class="chapter-overview-card glass-panel">
+                                <div class="overview-badge">2차시 개요</div>
+                                <h3>AI 활용 기초 영상 제작 실습 (8클립)</h3>
+                                <p>AI 음성 인식과 자동 자막 기능으로 영상 편집을 빠르게 완성합니다.</p>
+                                <div class="overview-meta">
+                                    <span>🔑 핵심 결과물: <strong>"AI 배경 자기소개 영상"</strong></span>
+                                    <span>📦 사용 실습 소스: <strong>실습 소스팩 B (내레이션/스피치 녹음 + 배경음악)</strong></span>
+                                </div>
+                            </div>
+                            <div class="clips-grid" id="ch2-clips"></div>
+                        </div>
+
+                        <!-- Chapter 3 -->
+                        <div class="tab-panel" id="ch3">
+                            <div class="chapter-overview-card glass-panel">
+                                <div class="overview-badge">3차시 개요</div>
+                                <h3>AI 활용 기초 영상 편집 실습 (8클립)</h3>
+                                <p>마스크와 키프레임을 활용해 시네마틱 인트로를 제작합니다.</p>
+                                <div class="overview-meta">
+                                    <span>🔑 핵심 결과물: <strong>"내 채널 시네마틱 인트로 (15초)"</strong></span>
+                                    <span>📦 사용 실습 소스: <strong>실습 소스팩 C, Firefly 생성 리소스</strong></span>
+                                </div>
+                            </div>
+                            <div class="clips-grid" id="ch3-clips"></div>
+                        </div>
+
+                        <!-- Chapter 4 -->
+                        <div class="tab-panel" id="ch4">
+                            <div class="chapter-overview-card glass-panel">
+                                <div class="overview-badge">4차시 개요</div>
+                                <h3>영상 제작 및 피드백 (8클립)</h3>
+                                <p>생성형 확장 기능을 활용해 숏폼 영상을 완성하고 피드백합니다.</p>
+                                <div class="overview-meta">
+                                    <span>🔑 핵심 결과물: <strong>"AI 활용 홍보 숏폼 (30초)"</strong></span>
+                                    <span>📦 사용 실습 소스: <strong>기획 템플릿, 단축키 정리표</strong></span>
+                                </div>
+                            </div>
+                            <div class="clips-grid" id="ch4-clips"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Prompt Builder Section -->
+            <section id="prompt-builder" class="app-section">
+                <div class="container">
+                    <div class="glass-panel prompt-builder-container">
+                        <div class="prompt-builder-header">
+                            <span class="badge badge-cyan">Adobe Firefly 연동 팁</span>
+                            <h2>AI 이미지 & 비디오 프롬프트 메이커</h2>
+                            <p class="section-subtitle">버튼 클릭 몇 번으로 비주얼 생성에 최적화된 프롬프트를 조합해 보세요!</p>
+                        </div>
+                        
+                        <div class="prompt-grid">
+                            <div class="prompt-controls">
+                                <div class="control-group">
+                                    <label>1. 피사체/주제 (Subject)</label>
+                                    <select id="prompt-subject">
+                                        <option value="안개 낀 새벽 숲 속의 오솔길">🌲 안개 낀 새벽 숲 속의 오솔길 (신비로움)</option>
+                                        <option value="해질녘 네온사인이 하나둘 켜지는 사이버펑크 도시 거리">🌆 해질녘 네온사인 도시 거리 (시티팝/사이버펑크)</option>
+                                        <option value="드넓은 우주 공간 속에서 천천히 자전하며 빛나는 푸른 지구">🌍 우주 속 자전하는 지구 (SF/장엄)</option>
+                                        <option value="은은한 스탠드 조명이 켜진 유럽풍 서재와 흔들의자">📚 아늑한 서재 (학습/평화)</option>
+                                        <option value="거대한 폭포가 쏟아져 내리는 에메랄드빛 깊은 계곡">🌊 폭포와 계곡 (대자연)</option>
+                                        <option value="끝없는 모래사막 위로 붉은 태양이 떠오르는 장엄한 풍경">🏜️ 모래사막과 일출 (장엄/황량)</option>
+                                        <option value="미래 도시의 마천루 사이를 소리 없이 가르는 하이테크 플라잉 카">🛸 미래 도시 비행 (SF/하이테크)</option>
+                                        <option value="비 내리는 날 유리창 너머로 김이 피어오르는 머그잔과 고요한 카페 내부">☕ 비 오는 날 카페 (감성/힐링)</option>
+                                        <option value="네온 조명 아래 헤드폰을 쓰고 리듬을 타며 미소 짓는 DJ">🎧 리듬 타는 DJ (인물/사이버펑크)</option>
+                                        <option value="따스한 햇살이 내리쬐는 창가에서 평화롭게 낮잠을 자는 아기 고양이">🐱 창가에서 낮잠 자는 아기 고양이 (동물/감성)</option>
+                                        <option value="안개 자욱한 숲속을 고요하고 우아하게 걸어가는 신비로운 하얀 사슴">🦌 안개 숲 속의 신비로운 흰 사슴 (동물/신비)</option>
+                                        <option value="우주복을 입고 거친 달 표면을 천천히 도보하는 우주비행사의 뒷모습">🧑‍🚀 달 표면을 걷는 우주비행사 (인물/SF)</option>
+                                        <option value="바람에 휘날리는 머리카락을 매만지며 카메라를 향해 환하게 미소 짓는 여성">👤 미소 짓는 여성 프로필 (인물/포트레이트)</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="control-group">
+                                    <label>2. 스타일 (Style)</label>
+                                    <div class="option-chips" id="prompt-style-chips">
+                                        <span class="chip active" data-val="영화 스틸컷 (시네마틱 아나모픽 렌즈)">영화 스틸컷 (시네마틱)</span>
+                                        <span class="chip" data-val="3D 옥테인 렌더링 일러스트 (Octane render 3D)">3D 옥테인 렌더</span>
+                                        <span class="chip" data-val="사이버펑크 미래 지향적 네온 아트">사이버펑크 아트</span>
+                                        <span class="chip" data-val="부드러운 파스텔 수채화 감성">파스텔 수채화</span>
+                                        <span class="chip" data-val="하이퍼 리얼리스틱 포토그래픽 실사">포토그래픽 실사</span>
+                                        <span class="chip" data-val="레트로 80년대 필름 카메라 질감 (Vintage 85mm film)">빈티지 필름 질감</span>
+                                        <span class="chip" data-val="판타지 컨셉 아트 일러스트">판타지 컨셉아트</span>
+                                        <span class="chip" data-val="미니멀 일러스트 및 벡터 아트">미니멀 벡터아트</span>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label>3. 카메라 무브먼트/구도 (Camera)</label>
+                                    <div class="option-chips" id="prompt-camera-chips">
+                                        <span class="chip active" data-val="카메라가 천천히 전진하는 피사체 밀착 트래킹 슬로우 줌인">밀착 트래킹 줌인</span>
+                                        <span class="chip" data-val="하늘 높이 비행하며 시야가 넓어지는 초고화질 드론 항공 촬영 뷰">초고화질 드론 항공뷰</span>
+                                        <span class="chip" data-val="바닥에서 위를 올려다보며 웅장함을 극대화하는 로우 앵글 웜즈 아이 뷰">웜즈아이 로우앵글</span>
+                                        <span class="chip" data-val="좌에서 우로 시선이 자연스럽게 쓸고 지나가는 수평 180도 패닝 샷">수평 180도 패닝</span>
+                                        <span class="chip" data-val="역동적인 피사체 추적 핸드헬드 쉐이키 캠 효과">핸드헬드 쉐이키캠</span>
+                                        <span class="chip" data-val="피사체를 정중앙에 둔 시네마틱 시메트리 대칭 구도">시네마틱 대칭구도</span>
+                                        <span class="chip" data-val="깊은 아웃포커싱이 적용된 극도의 초근접 매크로 클로즈업">초근접 매크로 렌즈</span>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label>4. 분위기 & 색감 (Mood)</label>
+                                    <div class="option-chips" id="prompt-mood-chips">
+                                        <span class="chip active" data-val="따뜻하고 감성적인 주황빛 햇살이 내리쬐는 웜톤">따뜻한 석양 빛</span>
+                                        <span class="chip" data-val="차갑고 신비로운 새벽녘의 짙은 안개와 푸른빛">새벽녘 푸른 안개</span>
+                                        <span class="chip" data-val="네온사인이 반사되는 몽환적인 드림라이크 비주얼">몽환적 드림라이크</span>
+                                        <span class="chip" data-val="일몰 직전의 드라마틱한 명암 대비를 선사하는 골든 아워">드라마틱 골든아워</span>
+                                        <span class="chip" data-val="차갑고 쓸쓸한 비 오는 날의 그레이시 모노톤">비 오는 날 모노톤</span>
+                                        <span class="chip" data-val="미래 도시의 밤을 수놓는 화려한 홀로그램 스펙트럼 라이팅">홀로그램 스펙트럼</span>
+                                        <span class="chip" data-val="안개 낀 숲 사이로 내리쬐는 환상적인 틴달 효과 빛내림">환상적인 빛내림(God rays)</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="prompt-output-box">
+                                <div class="output-header">완성된 Firefly 프롬프트</div>
+                                <textarea id="prompt-result">안개 낀 새벽 숲, 시네마틱, 카메라가 천천히 전진하는 트래킹 샷, 따뜻하고 감성적인 주황빛 햇살, 16:9 비율</textarea>
+                                <button id="copy-prompt-btn" class="btn btn-purple btn-block">프롬프트 복사하기</button>
+                                <div class="copy-success-message" id="copy-toast">클립보드에 복사되었습니다!</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Shortcuts Section -->
+            <section id="shortcuts" class="app-section">
+                <div class="container">
+                    <div class="section-header text-center">
+                        <span class="section-tag">SHORTCUTS</span>
+                        <h2 class="section-title">자주 쓰는 핵심 단축키 사전</h2>
+                        <p class="section-subtitle">편집 속도를 3배 빠르게 만들어주는 필수 단축키 모음입니다.</p>
+                        <div class="shortcut-search">
+                            <input type="text" id="shortcut-search-input" placeholder="단축키 이름이나 키(e.g., C, V, 확대)를 검색해 보세요...">
+                        </div>
+                    </div>
+                    <div class="shortcuts-grid" id="shortcuts-container"></div>
+                </div>
+            </section>
+
+            <!-- 5. Resources Section -->
+            <section id="resources" class="app-section">
+                <div class="container">
+                    <div class="section-header text-center">
+                        <span class="section-tag">DOWNLOADS</span>
+                        <h2 class="section-title">실습 예시자료 팩 자료실</h2>
+                        <p class="section-subtitle">강의에 필요한 모든 자료와 템플릿 꾸러미를 무료로 내려받으세요.</p>
+                    </div>
+
+                    <div class="resources-grid">
+                        <div class="resource-card glass-panel">
+                            <div class="resource-icon">📁</div>
+                            <h3>실습 소스팩 A</h3>
+                            <p>여행 브이로그 클립 3종 (바다·거리·음식)</p>
+                            <span class="resource-badge">1-1 ~ 1-8 클립 사용</span>
+                            <button class="btn btn-outline download-btn-action" data-pack="소스팩 A">다운로드</button>
+                        </div>
+                        
+                        <div class="resource-card glass-panel">
+                            <div class="resource-icon">🎵</div>
+                            <h3>실습 소스팩 B</h3>
+                            <p>내레이션·스피치 녹음 파일 + 배경음악 (무료 음원)</p>
+                            <span class="resource-badge">2-1 ~ 2-6 클립 사용</span>
+                            <button class="btn btn-outline download-btn-action" data-pack="소스팩 B">다운로드</button>
+                        </div>
+
+                        <div class="resource-card glass-panel">
+                            <div class="resource-icon">📹</div>
+                            <h3>실습 소스팩 C</h3>
+                            <p>인물 워킹 클립, 어둡게 촬영된 보정용 클립</p>
+                            <span class="resource-badge">1-5, 3-3 클립 사용</span>
+                            <button class="btn btn-outline download-btn-action" data-pack="소스팩 C">다운로드</button>
+                        </div>
+
+                        <div class="resource-card glass-panel">
+                            <div class="resource-icon">📝</div>
+                            <h3>기획 템플릿 & 체크리스트</h3>
+                            <p>숏폼 기획 구성표 + 라이선스 확인 & 셀프 점검 카드</p>
+                            <span class="resource-badge">3-6, 4-5, 4-2, 4-8 사용</span>
+                            <button class="btn btn-outline download-btn-action" data-pack="기획 템플릿">다운로드</button>
+                        </div>
+
+                        <div class="resource-card glass-panel">
+                            <div class="resource-icon">💾</div>
+                            <h3>완성 프로젝트 파일 (.prproj)</h3>
+                            <p>차시별 완성 예제 4종 묶음 파일</p>
+                            <span class="resource-badge">1-8, 2-8, 3-8, 4-6 사용</span>
+                            <button class="btn btn-outline download-btn-action" data-pack="프로젝트 파일">다운로드</button>
+                        </div>
+
+                        <div class="resource-card glass-panel text-center highlight-resource">
+                            <div class="resource-icon">⌨️</div>
+                            <h3>단축키 정리표 PDF</h3>
+                            <p>강의에 등장하는 모든 단축키 한눈에 보기</p>
+                            <span class="resource-badge">전체 강의 권장</span>
+                            <button class="btn btn-purple download-btn-action" data-pack="단축키 PDF">PDF 받기</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+
+
+            <!-- 6. AI Q&A Section -->
+            <section id="ai-qna" class="app-section">
+                <div class="container">
+                    <div class="section-header text-center">
+                        <span class="section-tag">AI ASSISTANT</span>
+                        <h2 class="section-title">AI 1:1 문의게시판</h2>
+                        <p class="section-subtitle">어도비 프리미어 프로 영상편집 중 궁금한 점을 Gemini AI에게 즉시 물어보세요!</p>
+                    </div>
+
+                    <!-- API Key Setting Panel -->
+                    <div class="glass-panel api-config-card" style="margin-bottom: 24px; padding: 20px;">
+                        <div class="api-config-header" style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="toggleApiPanel()">
+                            <h4 style="margin: 0; display: flex; align-items: center; gap: 8px;">
+                                🔑 <span>Gemini API 키 설정 (선택 사항)</span>
+                                <span class="api-status-badge" id="api-status-badge" style="font-size: 0.8rem; padding: 2px 8px; border-radius: 12px; background: #fee2e2; color: #ef4444; border: 1px solid #fecaca;">미연동 (기본 응답 모드)</span>
+                            </h4>
+                            <span id="api-toggle-icon" style="font-size: 1.2rem;">▼</span>
+                        </div>
+                        <div id="api-config-body" style="margin-top: 16px; display: none;">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 12px; line-height: 1.5;">
+                                Gemini API 키를 연동하면 실시간으로 모든 프리미어 관련 질문에 답변을 받을 수 있습니다. API 키가 없으면 기본 준비된 질문 및 답변(데모 모드)으로만 동작합니다.<br>
+                                API 키는 브라우저 내부 로컬 스토리지에만 안전하게 저장되며 서버로 전송되지 않습니다.
+                                <a href="https://aistudio.google.com/" target="_blank" style="color: var(--secondary); font-weight: bold; text-decoration: underline;">Google AI Studio에서 무료 API 키 발급받기 &rarr;</a>
+                            </p>
+                            <div style="display: flex; gap: 12px; align-items: center;">
+                                <input type="password" id="gemini-api-key-input" placeholder="AI Studio에서 발급받은 API 키를 입력하세요 (AIzaSy...)" style="flex: 1; padding: 12px 16px; border: 2.5px solid var(--border-color); border-radius: var(--radius-sm); font-size: 1rem; background: var(--bg-page); color: var(--text-main); outline: none; transition: var(--transition);">
+                                <button onclick="saveApiKey()" class="btn btn-purple btn-sm" style="border-radius: var(--radius-sm); white-space: nowrap;">키 저장</button>
+                                <button onclick="deleteApiKey()" class="btn btn-outline btn-sm" style="border-radius: var(--radius-sm); white-space: nowrap; color: #ef4444; border-color: #fca5a5;">삭제</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qna-workspace-grid">
+                        <!-- Questions Suggestions Sidebar -->
+                        <div class="qna-sidebar glass-panel" style="padding: 20px;">
+                            <h4 style="margin-bottom: 16px; border-bottom: 2px solid var(--border-color); padding-bottom: 8px;">💡 자주 묻는 질문 (클릭하여 전송)</h4>
+                            <div class="quick-questions-list" style="display: flex; flex-direction: column; gap: 10px;">
+                                <button class="quick-question-btn" onclick="askQuickQuestion('프리미어에서 단축키 C와 V의 차이가 뭐야?')">
+                                    ✂️ C와 V 단축키 차이점
+                                </button>
+                                <button class="quick-question-btn" onclick="askQuickQuestion('받아쓰기 대본을 활용한 AI 컷 편집이 안 보여요.')">
+                                    💬 AI 활용 텍스트 컷 편집 방법
+                                </button>
+                                <button class="quick-question-btn" onclick="askQuickQuestion('루미트리 색보정을 적용할 때 가장 좋은 순서는?')">
+                                    🎨 루미트리 기본 색보정 순서
+                                </button>
+                                <button class="quick-question-btn" onclick="askQuickQuestion('유튜브 쇼츠용 영상으로 화면 비율(9:16)을 맞추려면 어떻게 세팅해야 해?')">
+                                    📱 쇼츠 9:16 시퀀스 설정법
+                                </button>
+                                <button class="quick-question-btn" onclick="askQuickQuestion('오디오 볼륨 조절할 때 적절한 데시벨(dB) 수준은?')">
+                                    🔊 사운드 크기 조절 기준 (dB)
+                                </button>
+                                <button class="quick-question-btn" onclick="askQuickQuestion('Adobe Firefly에서 비디오 만들 때 쓰는 꿀팁 알려줘.')">
+                                    🪄 Firefly 비디오 생성 프롬프트 팁
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Chat Console Container -->
+                        <div class="chat-console-card glass-panel">
+                            <div class="chat-header" style="padding: 16px 24px; border-bottom: 2.5px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <span style="font-size: 1.5rem;">🤖</span>
+                                    <div>
+                                        <strong style="display: block; font-size: 1.1rem;">Premiere AI 튜터</strong>
+                                        <span style="font-size: 0.8rem; color: var(--text-muted);" id="chat-mode-desc">기본 데모 모드로 작동 중</span>
+                                    </div>
+                                </div>
+                                <button onclick="clearChatHistory()" class="btn btn-outline btn-sm" style="padding: 4px 12px; font-size: 0.85rem; border-radius: var(--radius-sm);">대화 초기화</button>
+                            </div>
+
+                            <div class="chat-messages-container" id="chat-messages" style="height: 400px; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 16px; background: var(--bg-page-deep);">
+                                <!-- Welcome Message -->
+                                <div class="chat-msg ai-msg">
+                                    <div class="avatar">🤖</div>
+                                    <div class="msg-bubble-wrapper">
+                                        <div class="msg-bubble">
+                                            안녕하세요! 프리미어 기초 과정을 수강 중인 여러분을 돕기 위해 준비된 <strong>Premiere AI 튜터</strong>입니다. <br><br>
+                                            컷 편집, 단축키 사용법, AI 캡션 자막, 색보정 등 프리미어 프로 사용법에 대한 질문을 남겨주시면 정성껏 답변해 드리겠습니다.
+                                        </div>
+                                        <span class="msg-time" id="welcome-msg-time">오전 08:49</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Input Area -->
+                            <div class="chat-input-area" style="padding: 16px 24px; border-top: 2.5px solid var(--border-color); background: var(--bg-card); display: flex; gap: 12px;">
+                                <textarea id="chat-input-textarea" placeholder="질문 내용을 입력하세요... (Shift+Enter로 줄바꿈)" style="flex: 1; min-height: 50px; max-height: 120px; padding: 12px; border: 2.5px solid var(--border-color); border-radius: var(--radius-sm); outline: none; background: var(--bg-page); color: var(--text-main); font-family: var(--font-primary); font-size: 1rem; resize: none; transition: var(--transition);" onkeydown="handleChatInputKeydown(event)"></textarea>
+                                <button id="send-chat-btn" onclick="sendChatMessage()" class="btn btn-purple" style="border-radius: var(--radius-sm); padding: 12px 24px; align-self: flex-end;">질문하기</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. Plugins & Tools Section -->
+            <section id="plugins" class="app-section">
+                <div class="container">
+                    <div class="section-header text-center">
+                        <span class="section-tag">PLUGINS & TOOLS</span>
+                        <h2 class="section-title">필수 플러그인 & 확장 도구</h2>
+                        <p class="section-subtitle">프리미어 프로의 기능을 극대화하고 작업 속도를 높여주는 검증된 외부 도구 리스트입니다.</p>
+                    </div>
+
+                    <div class="resources-grid" style="margin-top: 32px;">
+                        <!-- Mister Horse Premiere Composer -->
+                        <div class="resource-card glass-panel" style="display: flex; flex-direction: column; justify-content: space-between;">
+                            <div>
+                                <div class="resource-icon" style="font-size: 2.5rem; margin-bottom: 16px;">🐴</div>
+                                <span class="badge badge-cyan" style="font-size: 0.8rem; padding: 4px 10px; margin-bottom: 12px;">자막 & 트랜지션 팩</span>
+                                <h3 style="font-size: 1.4rem; margin-bottom: 8px;">Premiere Composer</h3>
+                                <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px;">
+                                    자막 애니메이션, 사운드 효과(SFX), 화면 전환, 소셜 미디어 그래픽 등 수백 개의 무료 템플릿을 드래그 앤 드롭으로 즉시 삽입할 수 있는 필수 종합 패키지 플러그인입니다.
+                                </p>
+                            </div>
+                            <div>
+                                <a href="https://misterhorse.com/premiere-composer" target="_blank" class="btn btn-primary btn-block" style="font-size: 1rem; padding: 10px 18px; border-radius: var(--radius-sm); text-decoration: none; color: white;">공식 웹사이트 이동</a>
+                            </div>
+                        </div>
+
+                        <!-- Film Impact -->
+                        <div class="resource-card glass-panel" style="display: flex; flex-direction: column; justify-content: space-between;">
+                            <div>
+                                <div class="resource-icon" style="font-size: 2.5rem; margin-bottom: 16px;">🎬</div>
+                                <span class="badge badge-purple" style="font-size: 0.8rem; padding: 4px 10px; margin-bottom: 12px;">시네마틱 트랜지션</span>
+                                <h3 style="font-size: 1.4rem; margin-bottom: 8px;">Film Impact Transitions</h3>
+                                <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px;">
+                                    할리우드 영화 및 고급 다큐멘터리 분위기의 전문적인 글레이즈, 블러, 줌 등의 비디오 전환 효과를 연출할 수 있습니다. 1차시 1-7 실습에서 사용되는 트랜지션입니다.
+                                </p>
+                            </div>
+                            <div>
+                                <a href="https://www.filmimpact.com/" target="_blank" class="btn btn-primary btn-block" style="font-size: 1rem; padding: 10px 18px; border-radius: var(--radius-sm); text-decoration: none; color: white;">공식 웹사이트 이동</a>
+                            </div>
+                        </div>
+
+                        <!-- Adobe Firefly -->
+                        <div class="resource-card glass-panel" style="display: flex; flex-direction: column; justify-content: space-between;">
+                            <div>
+                                <div class="resource-icon" style="font-size: 2.5rem; margin-bottom: 16px;">🪄</div>
+                                <span class="badge badge-cyan" style="font-size: 0.8rem; padding: 4px 10px; margin-bottom: 12px;">생성형 AI 웹도구</span>
+                                <h3 style="font-size: 1.4rem; margin-bottom: 8px;">Adobe Firefly</h3>
+                                <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px;">
+                                    프롬프트 입력만으로 저작권 걱정 없는 상업용 고품질 이미지와 비디오 클립을 무제한으로 디자인할 수 있는 어도비의 대표적인 이미지 생성형 AI 도구입니다.
+                                </p>
+                            </div>
+                            <div>
+                                <a href="https://firefly.adobe.com/" target="_blank" class="btn btn-purple btn-block" style="font-size: 1rem; padding: 10px 18px; border-radius: var(--radius-sm); text-decoration: none; color: white;">Firefly 바로가기</a>
+                            </div>
+                        </div>
+
+                        <!-- Mixkit -->
+                        <div class="resource-card glass-panel" style="display: flex; flex-direction: column; justify-content: space-between;">
+                            <div>
+                                <div class="resource-icon" style="font-size: 2.5rem; margin-bottom: 16px;">📦</div>
+                                <span class="badge badge-purple" style="font-size: 0.8rem; padding: 4px 10px; margin-bottom: 12px;">무료 비디오 & 템플릿</span>
+                                <h3 style="font-size: 1.4rem; margin-bottom: 8px;">Mixkit</h3>
+                                <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px;">
+                                    고화질 비디오 스톡 영상, 무료 배경 음악 및 효과음, 그리고 어도비 프리미어 프로용 모션 그래픽 템플릿(.mogrt) 파일들을 회원가입 없이 무료로 내려받을 수 있는 창고 사이트입니다.
+                                </p>
+                            </div>
+                            <div>
+                                <a href="https://mixkit.co/" target="_blank" class="btn btn-primary btn-block" style="font-size: 1rem; padding: 10px 18px; border-radius: var(--radius-sm); text-decoration: none; color: white;">공식 웹사이트 이동</a>
+                            </div>
+                        </div>
+
+                        <!-- CapCut for Desktop -->
+                        <div class="resource-card glass-panel" style="display: flex; flex-direction: column; justify-content: space-between;">
+                            <div>
+                                <div class="resource-icon" style="font-size: 2.5rem; margin-bottom: 16px;">✂️</div>
+                                <span class="badge badge-cyan" style="font-size: 0.8rem; padding: 4px 10px; margin-bottom: 12px;">보조 자동 자막 툴</span>
+                                <h3 style="font-size: 1.4rem; margin-bottom: 8px;">CapCut Desktop</h3>
+                                <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px;">
+                                    스피치 자동 인식 자막 생성 기능이 대단히 뛰어난 툴로, 프리미어의 기본 AI 자막과 별개로 더 다양하고 화려한 애니메이션 자막 스타일을 연동하고자 할 때 추천하는 보조 컷편집 소프트웨어입니다.
+                                </p>
+                            </div>
+                            <div>
+                                <a href="https://www.capcut.com/" target="_blank" class="btn btn-primary btn-block" style="font-size: 1rem; padding: 10px 18px; border-radius: var(--radius-sm); text-decoration: none; color: white;">공식 웹사이트 이동</a>
+                            </div>
+                        </div>
+
+                        <!-- Adobe Creative Cloud Desktop -->
+                        <div class="resource-card glass-panel" style="display: flex; flex-direction: column; justify-content: space-between;">
+                            <div>
+                                <div class="resource-icon" style="font-size: 2.5rem; margin-bottom: 16px;">☁️</div>
+                                <span class="badge badge-purple" style="font-size: 0.8rem; padding: 4px 10px; margin-bottom: 12px;">어도비 클라우드 앱</span>
+                                <h3 style="font-size: 1.4rem; margin-bottom: 8px;">Creative Cloud Desktop</h3>
+                                <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px;">
+                                    프리미어 프로 플러그인, 확장 기능(Plugins & Extensions)의 검색, 설치 및 업데이트 상태를 한눈에 모니터링하고 어도비 정품 인증을 관리할 수 있는 공식 중앙 허브 앱입니다.
+                                </p>
+                            </div>
+                            <div>
+                                <a href="https://www.adobe.com/creativecloud/desktop-app.html" target="_blank" class="btn btn-primary btn-block" style="font-size: 1rem; padding: 10px 18px; border-radius: var(--radius-sm); text-decoration: none; color: white;">공식 웹사이트 이동</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer inside main area -->
+            <footer>
+                <div class="container footer-container">
+                    <div class="footer-left">
+                        <div class="logo">
+                            <span class="logo-icon">Pr</span>
+                            <span class="logo-text" style="line-height: 1.1;">Adobe Premiere <span class="accent-text" style="font-size: 0.95rem; font-weight: 700; display: block; margin-top: 4px;">Video Editing Basics</span></span>
+                        </div>
+                        <p>본 페이지는 어도비 프리미어 영상편집 기초 교육 과정 교육생들을 위해 제작된 학습 보조 웹사이트입니다.</p>
+                    </div>
+                    <div class="footer-right">
+                        <p>&copy; 2026 <a href="https://www.youtube.com/@myjejuisland" target="_blank" rel="noopener noreferrer">@myjejuisland</a> Hyunsook Lee. All rights reserved.</p>
+                        <p>Adobe, Premiere Pro, and Firefly are trademarks of Adobe Inc.</p>
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Toast Notification for Downloads -->
+    <div id="download-toast" class="toast"></div>
+
+    <!-- JS -->
+    <script src="app.js"></script>
+</body>
+</html>
