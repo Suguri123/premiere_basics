@@ -148,9 +148,48 @@
                             </button>
                             
                             <div id="specs-panel" style="display: none; margin-top: 16px; padding: 16px; background: var(--bg-page-deep); border-radius: var(--radius-sm); border: 1.5px solid var(--border-color); font-size: 0.95rem; line-height: 1.6; text-align: left; animation: fadeIn 0.3s ease;">
-                                <div style="margin-bottom: 12px; border-bottom: 1px dashed var(--border-color); padding-bottom: 10px;">
+                                <div style="margin-bottom: 16px; border-bottom: 1px dashed var(--border-color); padding-bottom: 16px;">
                                     <strong style="color: var(--primary); display: block; margin-bottom: 4px;">🎬 프레임 레이트 (Frame Rate)</strong>
-                                    <span style="color: var(--text-muted);">1초당 화면에 노출되는 정지 이미지(프레임)의 장수(FPS)입니다. 영화는 24fps, 일반 방송은 29.97/30fps, 부드러운 움직임의 게임이나 유튜브 콘텐츠는 60fps를 주로 활용합니다.</span>
+                                    <span style="color: var(--text-muted); display: block; margin-bottom: 12px;">1초당 화면에 노출되는 정지 이미지(프레임)의 장수(FPS)입니다. 영화는 24fps, 일반 방송은 29.97/30fps, 부드러운 움직임의 게임이나 유튜브 콘텐츠는 60fps를 주로 활용합니다.</span>
+                                    
+                                    <!-- 주요 프레임 레이트 비교 표 -->
+                                    <div style="overflow-x: auto; margin: 12px 0;">
+                                        <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left; border: 1.5px solid var(--border-color); background: var(--bg-card);">
+                                            <thead>
+                                                <tr style="background: var(--bg-page); border-bottom: 2px solid var(--border-color);">
+                                                    <th style="padding: 10px; border-right: 1.5px solid var(--border-color); font-weight: 700; width: 85px;">프레임 레이트</th>
+                                                    <th style="padding: 10px; border-right: 1.5px solid var(--border-color); font-weight: 700; width: 160px;">주요 규격 / 정밀 표준</th>
+                                                    <th style="padding: 10px; border-right: 1.5px solid var(--border-color); font-weight: 700; width: 230px;">대표 활용 분야</th>
+                                                    <th style="padding: 10px; font-weight: 700;">시각적 특징</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr style="border-bottom: 1.5px solid var(--border-color);">
+                                                    <td style="padding: 10px; border-right: 1.5px solid var(--border-color); font-weight: 700; color: var(--primary);">24 fps</td>
+                                                    <td style="padding: 10px; border-right: 1.5px solid var(--border-color);">영화 표준 규격<br><small style="color: var(--text-muted); font-size: 0.75rem;">(정밀 표준: 23.976 fps)</small></td>
+                                                    <td style="padding: 10px; border-right: 1.5px solid var(--border-color);">상업 영화, TV 드라마, 감성 뮤직비디오, 영화풍 다큐멘터리 & 인터뷰</td>
+                                                    <td style="padding: 10px; color: var(--text-muted);">클래식하고 감성적인 모션 블러(잔상)를 형성하여 영화 특유의 Cinematic Look 연출</td>
+                                                </tr>
+                                                <tr style="border-bottom: 1.5px solid var(--border-color);">
+                                                    <td style="padding: 10px; border-right: 1.5px solid var(--border-color); font-weight: 700; color: var(--primary);">30 fps</td>
+                                                    <td style="padding: 10px; border-right: 1.5px solid var(--border-color);">방송 & 웹 표준<br><small style="color: var(--text-muted); font-size: 0.75rem;">(TV 표준: 29.97 fps)</small></td>
+                                                    <td style="padding: 10px; border-right: 1.5px solid var(--border-color);">TV 뉴스, 예능 프로그램, 유튜브 비디오, VLOG, 기업 홍보 영상</td>
+                                                    <td style="padding: 10px; color: var(--text-muted);">눈에 가장 익숙하고 자연스러운 가독성을 제공하며 범용성이 가장 높은 표준 규격</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding: 10px; border-right: 1.5px solid var(--border-color); font-weight: 700; color: var(--primary);">60 fps</td>
+                                                    <td style="padding: 10px; border-right: 1.5px solid var(--border-color);">고프레임 표준<br><small style="color: var(--text-muted); font-size: 0.75rem;">(고주파수 표준: 59.94 / 60 fps)</small></td>
+                                                    <td style="padding: 10px; border-right: 1.5px solid var(--border-color);">스포츠 중계, 게임 플레이, 액션 영상, 2배속 슬로우 모션 연출 소스</td>
+                                                    <td style="padding: 10px; color: var(--text-muted);">끊김 없이 극도로 매끄럽고 현장감이 뛰어나며 역동적인 움직임을 선명하게 전달</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
+                                    <!-- 실무 Tip -->
+                                    <div style="background: var(--bg-page); border-left: 4px solid var(--secondary); padding: 12px; margin-top: 10px; border-radius: var(--radius-sm); border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); font-size: 0.9rem;">
+                                        <strong>💡 프리미어 프로 실무 Tip:</strong> 60fps로 촬영한 소스를 30fps 시퀀스 타임라인에 배치한 뒤 속도를 50%로 감속하면, 잔상 없이 완벽하고 부드러운 고화질 슬로우 모션을 제작할 수 있습니다.
+                                    </div>
                                 </div>
                                 <div style="margin-bottom: 12px; border-bottom: 1px dashed var(--border-color); padding-bottom: 10px;">
                                     <strong style="color: var(--primary); display: block; margin-bottom: 4px;">📐 해상도 (Resolution)</strong>
