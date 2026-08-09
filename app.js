@@ -684,3 +684,31 @@ window.toggleSpecsPanel = function() {
     }
 };
 
+window.openResolutionVisualizer = function() {
+    const modal = document.getElementById("res-modal");
+    if (!modal) return;
+    modal.style.display = "flex";
+    setTimeout(() => {
+        modal.style.opacity = "1";
+    }, 10);
+};
+
+window.closeResolutionVisualizer = function() {
+    const modal = document.getElementById("res-modal");
+    if (!modal) return;
+    modal.style.opacity = "0";
+    setTimeout(() => {
+        modal.style.display = "none";
+    }, 300);
+};
+
+window.toggleRealSizeOverlay = function() {
+    const overlay = document.getElementById("real-size-overlay");
+    if (!overlay) return;
+    if (overlay.style.display === "none" || !overlay.style.display) {
+        overlay.style.display = "block";
+    } else {
+        overlay.style.display = "none";
+    }
+};
+
