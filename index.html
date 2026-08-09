@@ -138,34 +138,29 @@
             <!-- 2. Curriculum Section - Chapter 1 -->
             <section id="ch1" class="app-section">
                 <div class="container">
-                    <div class="chapter-overview-card glass-panel" style="display: flex; gap: 24px; align-items: center; flex-wrap: wrap;">
-                        <div style="flex: 1; min-width: 280px;">
-                            <div class="overview-badge">1차시 개요</div>
-                            <h3>프리미어 영상편집 기초 이해 (8클립)</h3>
-                            <p>프리미어 인터페이스와 기본 컷 편집을 익혀 30초 영상을 완성합니다.</p>
-                            <div class="overview-meta" style="margin-top: 16px;">
-                                <button onclick="toggleSpecsPanel()" class="btn btn-outline btn-sm" style="display: inline-flex; align-items: center; gap: 8px; border-radius: var(--radius-sm); font-size: 0.9rem; padding: 8px 16px; cursor: pointer;">
-                                    📝 <span>영상 기초 개념 (프레임 레이트, 해상도, 시퀀스)</span> <span id="specs-toggle-icon" style="transition: var(--transition); display: inline-block;">▼</span>
-                                </button>
-                                
-                                <div id="specs-panel" style="display: none; margin-top: 16px; padding: 16px; background: var(--bg-page-deep); border-radius: var(--radius-sm); border: 1.5px solid var(--border-color); font-size: 0.95rem; line-height: 1.6; text-align: left; animation: fadeIn 0.3s ease;">
-                                    <div style="margin-bottom: 12px; border-bottom: 1px dashed var(--border-color); padding-bottom: 10px;">
-                                        <strong style="color: var(--primary); display: block; margin-bottom: 4px;">🎬 프레임 레이트 (Frame Rate)</strong>
-                                        <span style="color: var(--text-muted);">1초당 화면에 노출되는 정지 이미지(프레임)의 장수(FPS)입니다. 영화는 24fps, 일반 방송은 29.97/30fps, 부드러운 움직임의 게임이나 유튜브 콘텐츠는 60fps를 주로 활용합니다.</span>
-                                    </div>
-                                    <div style="margin-bottom: 12px; border-bottom: 1px dashed var(--border-color); padding-bottom: 10px;">
-                                        <strong style="color: var(--primary); display: block; margin-bottom: 4px;">📐 해상도 (Resolution)</strong>
-                                        <span style="color: var(--text-muted);">화면의 정밀함을 정의하는 가로·세로 픽셀 격자 크기입니다. 기본 FHD(1920x1080), 고품질 4K UHD(3840x2160)가 있으며, 유튜브 쇼츠나 인스타그램 릴스는 가로세로를 돌린 9:16 비율(1080x1920)을 씁니다.</span>
-                                    </div>
-                                    <div>
-                                        <strong style="color: var(--primary); display: block; margin-bottom: 4px;">⚙️ 시퀀스 (Sequence)</strong>
-                                        <span style="color: var(--text-muted);">프리미어 프로 타임라인에서 영상 클립들을 올리고 조립하는 '설계 도면 도화지'입니다. 프로젝트 내부에서 출력할 최종 비디오의 해상도, 화면비율, 프레임 레이트 정보를 종합 규정합니다.</span>
-                                    </div>
+                    <div class="chapter-overview-card glass-panel">
+                        <div class="overview-badge">1차시 개요</div>
+                        <h3>프리미어 영상편집 기초 이해 (8클립)</h3>
+                        <p>프리미어 인터페이스와 기본 컷 편집을 익혀 30초 영상을 완성합니다.</p>
+                        <div class="overview-meta" style="margin-top: 16px;">
+                            <button onclick="toggleSpecsPanel()" class="btn btn-outline btn-sm" style="display: inline-flex; align-items: center; gap: 8px; border-radius: var(--radius-sm); font-size: 0.9rem; padding: 8px 16px; cursor: pointer;">
+                                📝 <span>영상 기초 개념 (프레임 레이트, 해상도, 시퀀스)</span> <span id="specs-toggle-icon" style="transition: var(--transition); display: inline-block;">▼</span>
+                            </button>
+                            
+                            <div id="specs-panel" style="display: none; margin-top: 16px; padding: 16px; background: var(--bg-page-deep); border-radius: var(--radius-sm); border: 1.5px solid var(--border-color); font-size: 0.95rem; line-height: 1.6; text-align: left; animation: fadeIn 0.3s ease;">
+                                <div style="margin-bottom: 12px; border-bottom: 1px dashed var(--border-color); padding-bottom: 10px;">
+                                    <strong style="color: var(--primary); display: block; margin-bottom: 4px;">🎬 프레임 레이트 (Frame Rate)</strong>
+                                    <span style="color: var(--text-muted);">1초당 화면에 노출되는 정지 이미지(프레임)의 장수(FPS)입니다. 영화는 24fps, 일반 방송은 29.97/30fps, 부드러운 움직임의 게임이나 유튜브 콘텐츠는 60fps를 주로 활용합니다.</span>
+                                </div>
+                                <div style="margin-bottom: 12px; border-bottom: 1px dashed var(--border-color); padding-bottom: 10px;">
+                                    <strong style="color: var(--primary); display: block; margin-bottom: 4px;">📐 해상도 (Resolution)</strong>
+                                    <span style="color: var(--text-muted);">화면의 정밀함을 정의하는 가로·세로 픽셀 격자 크기입니다. 기본 FHD(1920x1080), 고품질 4K UHD(3840x2160)가 있으며, 유튜브 쇼츠나 인스타그램 릴스는 가로세로를 돌린 9:16 비율(1080x1920)을 씁니다.</span>
+                                </div>
+                                <div>
+                                    <strong style="color: var(--primary); display: block; margin-bottom: 4px;">⚙️ 시퀀스 (Sequence)</strong>
+                                    <span style="color: var(--text-muted);">프리미어 프로 타임라인에서 영상 클립들을 올리고 조립하는 '설계 도면 도화지'입니다. 프로젝트 내부에서 출력할 최종 비디오의 해상도, 화면비율, 프레임 레이트 정보를 종합 규정합니다.</span>
                                 </div>
                             </div>
-                        </div>
-                        <div class="overview-screenshot-wrapper" style="flex: 1; min-width: 280px; max-width: 400px; border: 2.5px solid var(--border-color); border-radius: var(--radius-sm); overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); transition: var(--transition);">
-                            <img src="screenshot1.png" alt="1차시 실습 스크린샷" style="width: 100%; height: auto; display: block; object-fit: cover;">
                         </div>
                     </div>
                     <div class="clips-grid" id="ch1-clips"></div>
