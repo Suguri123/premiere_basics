@@ -668,3 +668,19 @@ function formatMarkdown(text) {
     return formatted;
 }
 
+window.toggleSpecsPanel = function() {
+    const panel = document.getElementById("specs-panel");
+    const icon = document.getElementById("specs-toggle-icon");
+    if (!panel || !icon) return;
+    
+    if (panel.style.display === "none" || !panel.style.display) {
+        panel.style.display = "block";
+        icon.innerText = "▲";
+        icon.style.transform = "rotate(180deg)";
+    } else {
+        panel.style.display = "none";
+        icon.innerText = "▼";
+        icon.style.transform = "rotate(0deg)";
+    }
+};
+
