@@ -140,7 +140,7 @@
                 <div class="container">
                     <div class="chapter-overview-card glass-panel">
                         <div class="overview-badge">1차시 개요</div>
-                        <h3>프리미어 영상편집 기초 이해 (8클립)</h3>
+                        <h3>프리미어 영상편집 기초 이해</h3>
                         <p>프리미어 인터페이스와 기본 컷 편집을 익혀 30초 영상을 완성합니다.</p>
                         <div class="overview-meta" style="margin-top: 16px;">
                             <button onclick="toggleSpecsPanel()" class="btn btn-outline btn-sm" style="display: inline-flex; align-items: center; gap: 8px; border-radius: var(--radius-sm); font-size: 0.9rem; padding: 8px 16px; cursor: pointer;">
@@ -274,76 +274,144 @@
                         <div class="prompt-builder-header">
                             <span class="badge badge-cyan">Adobe Firefly 연동 팁</span>
                             <h2>AI 이미지 & 비디오 프롬프트 메이커</h2>
-                            <p class="section-subtitle">버튼 클릭 몇 번으로 비주얼 생성에 최적화된 프롬프트를 조합해 보세요!</p>
+                            <p class="section-subtitle">버튼 클릭 몇 번으로 비주얼 생성에 최적화된 프롬프트를 조합하거나, 전체 시나리오 스토리를 작성해 보세요!</p>
+                        </div>
+
+                        <!-- 탭 버튼 영역 -->
+                        <div class="builder-tabs" style="display: flex; gap: 12px; margin-bottom: 24px; border-bottom: 2px solid var(--border-color); padding-bottom: 12px;">
+                            <button class="tab-btn active" data-tab="single-scene" onclick="switchBuilderTab('single-scene')" style="background: none; border: none; font-size: 1.1rem; font-weight: 700; color: var(--secondary); cursor: pointer; padding: 8px 16px; position: relative;">🎬 단일 장면 프롬프트</button>
+                            <button class="tab-btn" data-tab="storyline" onclick="switchBuilderTab('storyline')" style="background: none; border: none; font-size: 1.1rem; font-weight: 700; color: var(--text-muted); cursor: pointer; padding: 8px 16px; position: relative;">📖 스토리 & 시나리오 생성기</button>
                         </div>
                         
-                        <div class="prompt-grid">
-                            <div class="prompt-controls">
-                                <div class="control-group">
-                                    <label>1. 피사체/주제 (Subject)</label>
-                                    <select id="prompt-subject">
-                                        <option value="안개 낀 새벽 숲 속의 오솔길">🌲 안개 낀 새벽 숲 속의 오솔길 (신비로움)</option>
-                                        <option value="해질녘 네온사인이 하나둘 켜지는 사이버펑크 도시 거리">🌆 해질녘 네온사인 도시 거리 (시티팝/사이버펑크)</option>
-                                        <option value="드넓은 우주 공간 속에서 천천히 자전하며 빛나는 푸른 지구">🌍 우주 속 자전하는 지구 (SF/장엄)</option>
-                                        <option value="은은한 스탠드 조명이 켜진 유럽풍 서재와 흔들의자">📚 아늑한 서재 (학습/평화)</option>
-                                        <option value="거대한 폭포가 쏟아져 내리는 에메랄드빛 깊은 계곡">🌊 폭포와 계곡 (대자연)</option>
-                                        <option value="끝없는 모래사막 위로 붉은 태양이 떠오르는 장엄한 풍경">🏜️ 모래사막과 일출 (장엄/황량)</option>
-                                        <option value="미래 도시의 마천루 사이를 소리 없이 가르는 하이테크 플라잉 카">🛸 미래 도시 비행 (SF/하이테크)</option>
-                                        <option value="비 내리는 날 유리창 너머로 김이 피어오르는 머그잔과 고요한 카페 내부">☕ 비 오는 날 카페 (감성/힐링)</option>
-                                        <option value="네온 조명 아래 헤드폰을 쓰고 리듬을 타며 미소 짓는 DJ">🎧 리듬 타는 DJ (인물/사이버펑크)</option>
-                                        <option value="따스한 햇살이 내리쬐는 창가에서 평화롭게 낮잠을 자는 아기 고양이">🐱 창가에서 낮잠 자는 아기 고양이 (동물/감성)</option>
-                                        <option value="안개 자욱한 숲속을 고요하고 우아하게 걸어가는 신비로운 하얀 사슴">🦌 안개 숲 속의 신비로운 흰 사슴 (동물/신비)</option>
-                                        <option value="우주복을 입고 거친 달 표면을 천천히 도보하는 우주비행사의 뒷모습">🧑‍🚀 달 표면을 걷는 우주비행사 (인물/SF)</option>
-                                        <option value="바람에 휘날리는 머리카락을 매만지며 카메라를 향해 환하게 미소 짓는 여성">👤 미소 짓는 여성 프로필 (인물/포트레이트)</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="control-group">
-                                    <label>2. 스타일 (Style)</label>
-                                    <div class="option-chips" id="prompt-style-chips">
-                                        <span class="chip active" data-val="영화 스틸컷 (시네마틱 아나모픽 렌즈)">영화 스틸컷 (시네마틱)</span>
-                                        <span class="chip" data-val="3D 옥테인 렌더링 일러스트 (Octane render 3D)">3D 옥테인 렌더</span>
-                                        <span class="chip" data-val="사이버펑크 미래 지향적 네온 아트">사이버펑크 아트</span>
-                                        <span class="chip" data-val="부드러운 파스텔 수채화 감성">파스텔 수채화</span>
-                                        <span class="chip" data-val="하이퍼 리얼리스틱 포토그래픽 실사">포토그래픽 실사</span>
-                                        <span class="chip" data-val="레트로 80년대 필름 카메라 질감 (Vintage 85mm film)">빈티지 필름 질감</span>
-                                        <span class="chip" data-val="판타지 컨셉 아트 일러스트">판타지 컨셉아트</span>
-                                        <span class="chip" data-val="미니멀 일러스트 및 벡터 아트">미니멀 벡터아트</span>
+                        <!-- 단일 장면 프롬프트 탭 -->
+                        <div id="single-scene-tab" class="tab-content active">
+                            <div class="prompt-grid">
+                                <div class="prompt-controls">
+                                    <div class="control-group">
+                                        <label>1. 피사체/주제 (Subject)</label>
+                                        <select id="prompt-subject">
+                                            <option value="안개 낀 새벽 숲 속의 오솔길">🌲 안개 낀 새벽 숲 속의 오솔길 (신비로움)</option>
+                                            <option value="해질녘 네온사인이 하나둘 켜지는 사이버펑크 도시 거리">🌆 해질녘 네온사인 도시 거리 (시티팝/사이버펑크)</option>
+                                            <option value="드넓은 우주 공간 속에서 천천히 자전하며 빛나는 푸른 지구">🌍 우주 속 자전하는 지구 (SF/장엄)</option>
+                                            <option value="은은한 스탠드 조명이 켜진 유럽풍 서재와 흔들의자">📚 아늑한 서재 (학습/평화)</option>
+                                            <option value="거대한 폭포가 쏟아져 내리는 에메랄드빛 깊은 계곡">🌊 폭포와 계곡 (대자연)</option>
+                                            <option value="끝없는 모래사막 위로 붉은 태양이 떠오르는 장엄한 풍경">🏜️ 모래사막과 일출 (장엄/황량)</option>
+                                            <option value="미래 도시의 마천루 사이를 소리 없이 가르는 하이테크 플라잉 카">🛸 미래 도시 비행 (SF/하이테크)</option>
+                                            <option value="비 내리는 날 유리창 너머로 김이 피어오르는 머그잔 and 고요한 카페 내부">☕ 비 오는 날 카페 (감성/힐링)</option>
+                                            <option value="네온 조명 아래 헤드폰을 쓰고 리듬을 타며 미소 짓는 DJ">🎧 리듬 타는 DJ (인물/사이버펑크)</option>
+                                            <option value="따스한 햇살이 내리쬐는 창가에서 평화롭게 낮잠을 자는 아기 고양이">🐱 창가에서 낮잠 자는 아기 고양이 (동물/감성)</option>
+                                            <option value="안개 자욱한 숲속을 고요하고 우아하게 걸어가는 신비로운 하얀 사슴">🦌 안개 숲 속의 신비로운 흰 사슴 (동물/신비)</option>
+                                            <option value="우주복을 입고 거친 달 표면을 천천히 도보하는 우주비행사의 뒷모습">🧑‍🚀 달 표면을 걷는 우주비행사 (인물/SF)</option>
+                                            <option value="바람에 휘날리는 머리카락을 매만지며 카메라를 향해 환하게 미소 짓는 여성">👤 미소 짓는 여성 프로필 (인물/포트레이트)</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="control-group">
+                                        <label>2. 스타일 (Style)</label>
+                                        <div class="option-chips" id="prompt-style-chips">
+                                            <span class="chip active" data-val="영화 스틸컷 (시네마틱 아나모픽 렌즈)">영화 스틸컷 (시네마틱)</span>
+                                            <span class="chip" data-val="3D 옥테인 렌더링 일러스트 (Octane render 3D)">3D 옥테인 렌더</span>
+                                            <span class="chip" data-val="사이버펑크 미래 지향적 네온 아트">사이버펑크 아트</span>
+                                            <span class="chip" data-val="부드러운 파스텔 수채화 감성">파스텔 수채화</span>
+                                            <span class="chip" data-val="하이퍼 리얼리스틱 포토그래픽 실사">포토그래픽 실사</span>
+                                            <span class="chip" data-val="레트로 80년대 필름 카메라 질감 (Vintage 85mm film)">빈티지 필름 질감</span>
+                                            <span class="chip" data-val="판타지 컨셉 아트 일러스트">판타지 컨셉아트</span>
+                                            <span class="chip" data-val="미니멀 일러스트 및 벡터 아트">미니멀 벡터아트</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label>3. 카메라 무브먼트/구도 (Camera)</label>
+                                        <div class="option-chips" id="prompt-camera-chips">
+                                            <span class="chip active" data-val="카메라가 천천히 전진하는 피사체 밀착 트래킹 슬로우 줌인">밀착 트래킹 줌인</span>
+                                            <span class="chip" data-val="하늘 높이 비행하며 시야가 넓어지는 초고화질 드론 항공 촬영 뷰">초고화질 드론 항공뷰</span>
+                                            <span class="chip" data-val="바닥에서 위를 올려다보며 웅장함을 극대화하는 로우 앵글 웜즈 아이 뷰">웜즈아이 로우앵글</span>
+                                            <span class="chip" data-val="좌에서 우로 시선이 자연스럽게 쓸고 지나가는 수평 180도 패닝 샷">수평 180도 패닝</span>
+                                            <span class="chip" data-val="역동적인 피사체 추적 핸드헬드 쉐이키 캠 효과">핸드헬드 쉐이키캠</span>
+                                            <span class="chip" data-val="피사체를 정중앙에 둔 시네마틱 시메트리 대칭 구도">시네마틱 대칭구도</span>
+                                            <span class="chip" data-val="깊은 아웃포커싱이 적용된 극도의 초근접 매크로 클로즈업">초근접 매크로 렌즈</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label>4. 분위기 & 색감 (Mood)</label>
+                                        <div class="option-chips" id="prompt-mood-chips">
+                                            <span class="chip active" data-val="따뜻하고 감성적인 주황빛 햇살이 내리쬐는 웜톤">따뜻한 석양 빛</span>
+                                            <span class="chip" data-val="차갑고 신비로운 새벽녘의 짙은 안개와 푸른빛">새벽녘 푸른 안개</span>
+                                            <span class="chip" data-val="네온사인이 반사되는 몽환적인 드림라이크 비주얼">몽환적 드림라이크</span>
+                                            <span class="chip" data-val="일몰 직전의 드라마틱한 명암 대비를 선사하는 골든 아워">드라마틱 골든아워</span>
+                                            <span class="chip" data-val="차갑고 쓸쓸한 비 오는 날의 그레이시 모노톤">비 오는 날 모노톤</span>
+                                            <span class="chip" data-val="미래 도시의 밤을 수놓는 화려한 홀로그램 스펙트럼 라이팅">홀로그램 스펙트럼</span>
+                                            <span class="chip" data-val="안개 낀 숲 사이로 내리쬐는 환상적인 틴달 효과 빛내림">환상적인 빛내림(God rays)</span>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="control-group">
-                                    <label>3. 카메라 무브먼트/구도 (Camera)</label>
-                                    <div class="option-chips" id="prompt-camera-chips">
-                                        <span class="chip active" data-val="카메라가 천천히 전진하는 피사체 밀착 트래킹 슬로우 줌인">밀착 트래킹 줌인</span>
-                                        <span class="chip" data-val="하늘 높이 비행하며 시야가 넓어지는 초고화질 드론 항공 촬영 뷰">초고화질 드론 항공뷰</span>
-                                        <span class="chip" data-val="바닥에서 위를 올려다보며 웅장함을 극대화하는 로우 앵글 웜즈 아이 뷰">웜즈아이 로우앵글</span>
-                                        <span class="chip" data-val="좌에서 우로 시선이 자연스럽게 쓸고 지나가는 수평 180도 패닝 샷">수평 180도 패닝</span>
-                                        <span class="chip" data-val="역동적인 피사체 추적 핸드헬드 쉐이키 캠 효과">핸드헬드 쉐이키캠</span>
-                                        <span class="chip" data-val="피사체를 정중앙에 둔 시네마틱 시메트리 대칭 구도">시네마틱 대칭구도</span>
-                                        <span class="chip" data-val="깊은 아웃포커싱이 적용된 극도의 초근접 매크로 클로즈업">초근접 매크로 렌즈</span>
-                                    </div>
-                                </div>
-
-                                <div class="control-group">
-                                    <label>4. 분위기 & 색감 (Mood)</label>
-                                    <div class="option-chips" id="prompt-mood-chips">
-                                        <span class="chip active" data-val="따뜻하고 감성적인 주황빛 햇살이 내리쬐는 웜톤">따뜻한 석양 빛</span>
-                                        <span class="chip" data-val="차갑고 신비로운 새벽녘의 짙은 안개와 푸른빛">새벽녘 푸른 안개</span>
-                                        <span class="chip" data-val="네온사인이 반사되는 몽환적인 드림라이크 비주얼">몽환적 드림라이크</span>
-                                        <span class="chip" data-val="일몰 직전의 드라마틱한 명암 대비를 선사하는 골든 아워">드라마틱 골든아워</span>
-                                        <span class="chip" data-val="차갑고 쓸쓸한 비 오는 날의 그레이시 모노톤">비 오는 날 모노톤</span>
-                                        <span class="chip" data-val="미래 도시의 밤을 수놓는 화려한 홀로그램 스펙트럼 라이팅">홀로그램 스펙트럼</span>
-                                        <span class="chip" data-val="안개 낀 숲 사이로 내리쬐는 환상적인 틴달 효과 빛내림">환상적인 빛내림(God rays)</span>
-                                    </div>
+                                <div class="prompt-output-box">
+                                    <div class="output-header">완성된 Firefly 프롬프트</div>
+                                    <textarea id="prompt-result">안개 낀 새벽 숲, 시네마틱, 카메라가 천천히 전진하는 트래킹 샷, 따뜻하고 감성적인 주황빛 햇살, 16:9 비율</textarea>
+                                    <button id="copy-prompt-btn" class="btn btn-purple btn-block">프롬프트 복사하기</button>
+                                    <div class="copy-success-message" id="copy-toast">클립보드에 복사되었습니다!</div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="prompt-output-box">
-                                <div class="output-header">완성된 Firefly 프롬프트</div>
-                                <textarea id="prompt-result">안개 낀 새벽 숲, 시네마틱, 카메라가 천천히 전진하는 트래킹 샷, 따뜻하고 감성적인 주황빛 햇살, 16:9 비율</textarea>
-                                <button id="copy-prompt-btn" class="btn btn-purple btn-block">프롬프트 복사하기</button>
-                                <div class="copy-success-message" id="copy-toast">클립보드에 복사되었습니다!</div>
+                        <!-- 스토리 & 시나리오 탭 콘텐츠 -->
+                        <div id="storyline-tab" class="tab-content" style="display: none; animation: fadeIn 0.4s ease;">
+                            <div class="story-controls-grid">
+                                <div class="story-inputs" style="display: flex; flex-direction: column; gap: 20px;">
+                                    <div class="control-group">
+                                        <label>1. 영상 주제 선택 또는 직접 입력 (Topic)</label>
+                                        <select id="story-topic-preset" style="margin-bottom: 12px;">
+                                            <option value="신비로운 새벽 안개 숲속에서 길을 잃은 하얀 사슴">🦌 신비로운 안개 숲 속의 하얀 사슴 (판타지)</option>
+                                            <option value="화려한 네온사인 아래 미래 도시를 가르는 추격전">🏎️ 사이버펑크 미래 도시 추격전 (SF/액션)</option>
+                                            <option value="바쁜 도시를 떠나 조용한 숲속에서 즐기는 모닥불과 커피 한 잔">☕ 숲속 캠핑과 모닥불 힐링 (VLOG/감성)</option>
+                                            <option value="우주 정거장에서 바라보는 푸른 지구와 우주비행사의 하루">👨‍🚀 우주 정거장과 지구 (SF/장엄)</option>
+                                            <option value="비 내리는 창가의 카페에서 책을 읽는 평화로운 오후">📖 비 내리는 날 카페에서의 독서 (감성/ASMR)</option>
+                                            <option value="직접 입력">✍️ 직접 입력하기...</option>
+                                        </select>
+                                        <input type="text" id="story-topic-custom" placeholder="만들고 싶은 비디오 주제를 입력하세요 (예: 빗속을 달리는 빨간 스포츠카)" style="width: 100%; padding: 12px; border: 3px solid var(--border-color); background: var(--bg-page-deep); color: var(--text-main); border-radius: 12px; outline: none; display: none; font-family: inherit; font-size: 1rem; font-weight: 700;">
+                                    </div>
+                                    
+                                    <div class="control-group">
+                                        <label>2. 구성/장면 개수 (Length)</label>
+                                        <div class="option-chips" id="story-scenes-chips">
+                                            <span class="chip active" data-val="3">3씬 (숏폼/15초)</span>
+                                            <span class="chip" data-val="5">5씬 (기본/30초)</span>
+                                            <span class="chip" data-val="10">10씬 (심화/60초+)</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label>3. 전체 스타일/비주얼 톤 (Visual Tone)</label>
+                                        <div class="option-chips" id="story-tone-chips">
+                                            <span class="chip active" data-val="영화 스틸컷, 시네마틱 85mm 아나모픽 렌즈, 고도의 명암 대비">영화풍 시네마틱</span>
+                                            <span class="chip" data-val="미래지향적 사이버펑크 네온 아트, 몽환적 드림라이크">사이버펑크 아트</span>
+                                            <span class="chip" data-val="3D 옥테인 렌더링 일러스트, 선명한 고품질 일러스트">3D 옥테인 렌더</span>
+                                            <span class="chip" data-val="레트로 80년대 필름 비디오 카메라 감성, 입자감 있는 빈티지 필름 룩">빈티지 필름</span>
+                                        </div>
+                                    </div>
+
+                                    <button id="generate-story-btn" class="btn btn-purple btn-block btn-lg" style="margin-top: 10px; font-size: 1.1rem; padding: 14px 28px; border-radius: 12px; font-weight: 800; cursor: pointer; transition: all 0.3s;">
+                                        ✨ 시나리오 & 프롬프트 생성하기
+                                    </button>
+                                </div>
+
+                                <div class="story-preview-container" style="display: flex; flex-direction: column; gap: 16px;">
+                                    <div class="output-header" style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span>🎬 생성된 스토리보드 시나리오</span>
+                                        <button id="copy-all-story-btn" class="btn btn-purple btn-sm" style="display: none; padding: 6px 12px; font-size: 0.85rem; font-weight: 700; border-radius: var(--radius-sm);">전체 복사</button>
+                                    </div>
+                                    <div id="story-output-placeholder" class="glass-panel" style="padding: 40px 20px; text-align: center; color: var(--text-muted); border: 2px dashed var(--border-color); border-radius: var(--radius-md); display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 300px;">
+                                        <span style="font-size: 3rem; margin-bottom: 16px;">💡</span>
+                                        <p style="font-weight: 700; margin-bottom: 8px;">원하는 주제와 길이를 설정하고</p>
+                                        <p style="font-size: 0.9rem;">[시나리오 & 프롬프트 생성하기] 버튼을 눌러보세요.</p>
+                                    </div>
+                                    <div id="story-output-list" style="display: none; flex-direction: column; gap: 16px; max-height: 500px; overflow-y: auto; padding-right: 8px;">
+                                        <!-- 스토리가 여기에 동적으로 렌더링됨 -->
+                                    </div>
+                                    <div class="copy-success-message" id="story-toast">클립보드에 전체 복사되었습니다!</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -747,6 +815,11 @@
         </div>
     </div>
         </div>
+    </div>
+
+    <!-- Image Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" onclick="closeLightbox()">
+        <img id="lightbox-img" class="lightbox-content" src="" alt="확대 이미지" />
     </div>
 
     <!-- JS -->
