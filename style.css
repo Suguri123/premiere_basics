@@ -1447,3 +1447,61 @@ body.dark-theme .user-msg .msg-bubble {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
+/* Tool Table Styles */
+.tool-table-container {
+    margin-top: 16px;
+    overflow-x: auto;
+    font-size: 0.8rem;
+    cursor: zoom-in;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    position: relative;
+}
+.tool-table-container.expanded {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90vw;
+    max-width: 1000px;
+    max-height: 90vh;
+    z-index: 9999;
+    padding: 32px;
+    font-size: 1rem;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+    cursor: zoom-out;
+    border-radius: var(--radius-lg);
+}
+.tool-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+.tool-table th, .tool-table td {
+    border: 1px solid var(--border-color);
+    padding: 10px 14px;
+}
+.tool-table th {
+    background: var(--bg-page-deep);
+    font-weight: 700;
+    color: var(--secondary);
+}
+.tool-table tbody tr:nth-child(even) {
+    background: var(--bg-card-soft);
+}
+.table-hint {
+    text-align: center;
+    padding: 8px;
+    font-size: 0.85rem;
+    color: var(--primary);
+    font-weight: 700;
+    background: var(--bg-card-soft);
+    border-bottom: 1px solid var(--border-color);
+}
+.tool-table-container.expanded .table-hint {
+    display: none;
+}
+
+.tool-table-container:not(.expanded) .tool-table tbody tr:nth-child(n+4) { display: none; }

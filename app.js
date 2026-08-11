@@ -5,13 +5,18 @@ const courseData = {
     ch1: [
         { id: "1-1", title: "프로젝트의 저장 위치와 이름 지정", duration: "5분", desc: "Creative Cloud에서 설치 → 새 프로젝트 → 위치 / 찾아보기  → 만들기", caption: "프로젝트 = 작업 파일, 시퀀스 = 편집 도화지", resource: "", image: "project_save_path.png" },
         { id: "1-2", title: "패널 위치 및 변경", duration: "5분", desc: "소스 모니터·프로그램 모니터·프로젝트 패널·타임라인 패널 역할 소개, 작업 영역을 '편집(Editing)'으로 전환, 패널 크기 조절·초기화", caption: "화면이 꼬이면 → 작업 영역 재설정", resource: "", image: "panel_layout_reset.png" },
-        { id: "1-3", title: "키보드 단축키 편집", duration: "5분", desc: "편집(Edit) → 키보드 단축키(Keyboard Shortcuts) 실행, 원하는 단축키 기능 사용자 정의 및 프리셋 저장 방법", caption: "자주 쓰는 기능은 편리한 단축키로 설정", resource: "", image: "keyboard_shortcuts.png" },
-        { id: "1-4", title: "타임라인 구조 파헤치기", duration: "5분", desc: "트랙 헤드·시퀀스 헤드·시간 눈금자 영역 구분, V트랙/A트랙 개념, 스케일 슬라이더로 확대·축소", caption: "+/- 키로 타임라인 확대·축소", resource: "실습 소스팩 A" },
-        { id: "1-5", title: "선택 도구와 자르기 도구로 컷 편집", duration: "6분", desc: "선택 도구(V)로 클립 이동·트리밍, 자르기 도구(C)로 컷 분할, 잔물결 삭제로 빈 공간 없애기", caption: "V=선택, C=자르기, 지우고 나면 잔물결 삭제", resource: "실습 소스팩 A" },
-        { id: "1-6", title: "루미트리 기본 교정으로 색 살리기", duration: "5분", desc: "Lumetri Color → 기본 교정에서 노출·대비·색온도 조정, 전/후 비교 토글", caption: "노출 → 대비 → 색온도 순서로", resource: "실습 소스팩 C" },
-        { id: "1-7", title: "루미트리 프리셋으로 영화 색감 만들기", duration: "4분", desc: "크리에이티브 탭의 Look 프리셋 적용, 강도 슬라이더 조절, 프리셋 3종 비교", caption: "프리셋은 100%가 아니라 50~70%만", resource: "실습 소스팩 C" },
-        { id: "1-8", title: "Film Impact 전환 효과 적용하기", duration: "5분", desc: "Film Impact 무료 체험판 설치, 효과 패널에서 검색, 클립 사이에 드래그 적용, 지속 시간 조절", caption: "전환은 장면이 바뀔 때만, 남발 금지", resource: "실습 소스팩 A" },
-        { id: "1-9", title: "문자 도구로 자막 넣고 30초 영상 완성", duration: "6분", desc: "문자 도구(T)로 제목 자막 입력, 속성 패널에서 글꼴·크기·색·위치 지정, 1차시 배운 것 총동원해 30초 영상 완성", caption: "T키 → 화면 클릭 → 바로 입력", resource: "완성 프로젝트 A" }
+        { id: "1-3", title: "작업 영역 설정", duration: "5분", desc: "• (메뉴) 창>작업영역>편집, 새 작업영역으로 저장, 저장된 레이아웃으로 재설정<br>• 우측 상단 편집 아이콘에서 설정", caption: "패널이 닫히거나 위치가 꼬였을 때 저장된 초기 상태로 복구 → 작업영역 초기화", resource: "", image: "workspace_setting.png" },
+        { id: "1-4", title: "키보드 단축키 편집", duration: "5분", desc: "편집(Edit) → 키보드 단축키(Keyboard Shortcuts) 실행, 원하는 단축키 기능 사용자 정의 및 프리셋 저장 방법", caption: "자주 쓰는 기능은 편리한 단축키로 설정", resource: "", image: "keyboard_shortcuts.png" },
+        { id: "1-5", title: "한글-영문버전 메뉴 언어설정 바꾸기", duration: "5분", desc: "편집창에서→Ctrl+F12 같이 클릭(→콘솔창<br>三 → Debug Database View → Application Language → 한글 ko_KR, 영어 en_US 입력 콘솔창 닫기, 재실행", caption: "윈도우 Ctrl+F12, 맥 Command+F12 눌러서 콘솔창 열기", resource: "", image: "language_setting.png" },
+        { id: "1-6", title: "파일/폴더 가져오기", duration: "5분", desc: "• 메뉴 > 파일 > 가져오기(Ctrl+I)<br>• 프로젝트 패널에서 더블 클릭<br>• 프로젝트 패널에서 우클릭 선택<br>• 프로젝트 패널에 드래그해서 가져오기", caption: "가져오기 단축키는 Ctrl+I", resource: "", image: "import_methods.png" },
+        { id: "1-7", title: "소스 영상의 속성 확인하기", duration: "5분", desc: "• 영상 선택 후, 마우스 우클릭 해서 미디어파일 속성 선택<br>• 프로젝트 패널에서 오른쪽으로 스크롤 또는 확장해서 확인", caption: "소스 영상의 속성 확인하기", resource: "" },
+        { id: "1-8", title: "타임코드 : 영상의 시간 표시 방식", duration: "5분", desc: "• 영상의 시간 표시 방식, 인디게이터의 위치를 표시<br>• 0프레임, 0초 제일 첫 프레임, 처음으로 : ‘0’ 입력 후 Enter<br>• 1초 : ‘1.’ 입력 후 Enter, 1분 : ‘1..’ 입력 후 Enter", caption: "타임코드 활용하기", resource: "", image: "timecode_setting.png" },
+        { id: "1-9", title: "영상 속도 조절하기 / 역재생", duration: "5분", desc: "• 메인메뉴 클립(C ) → 속도/지속지간(S) 설정<br>• 비디오 속성패널 → 속도 조정 버튼 클릭 후 설정<br>• 타임라인 클립 선택후 마우스 우클릭 → 속도/지속지간(S) 설정", caption: "속도/지속지간(S) 설정", resource: "", image: "speed_duration.png" },
+        { id: "1-10", title: "도구(Tools) 패널", duration: "5분", desc: "<div style=\"text-align: center; margin-bottom: 12px;\"><img src=\"tool_panel.png\" onclick=\"openLightbox('tool_panel.png')\" style=\"max-width: 100%; border-radius: var(--radius-sm); border: 1.5px solid var(--border-color); cursor: zoom-in;\" alt=\"도구 패널\" /></div><div class=\"tool-table-container\" onclick=\"window.open('tool_table.html', '_blank')\" style=\"cursor: pointer;\"><table class=\"tool-table\"><thead><tr><th>구분</th><th>기본 도구 (단축키)</th><th>하위/세부 도구</th><th>주요 역할 및 특징</th></tr></thead><tbody><tr><td>1. 선택</td><td>선택 도구 (V)</td><td>-</td><td>클립 선택, 이동 및 기본 길이 조절</td></tr><tr><td>2. 트랙 선택</td><td>앞으로 트랙 선택 (A)</td><td>뒤로 트랙 선택 (Shift + A)</td><td>클릭 지점 기준 트랙 일괄 선택</td></tr><tr><td>3. 편집/오디오</td><td>잔물결 편집 (B)</td><td>롤링 편집 (N) / 속도 조정 (R) / 리믹스 도구</td><td>컷 편집, 배속 조절 및 음악 길이 자동 리믹스</td></tr><tr><td>4. 자르기</td><td>자르기 도구 (C)</td><td>-</td><td>클립 분할 (이미지 라벨 누락 부분)</td></tr><tr><td>5. 위치 조정</td><td>밀어넣기 도구 (Y)</td><td>밀기 도구 (U)</td><td>전체 길이 유지하며 내부 장면/위치 이동</td></tr><tr><td>6. 드로잉</td><td>펜 도구 (P)</td><td>-</td><td>키프레임 및 자유 곡선 마스크 생성</td></tr><tr><td>7. 도형</td><td>사각형 도구</td><td>타원 도구 / 다각형 도구</td><td>화면에 사각형/원형/다각형 그래픽 생성</td></tr><tr><td>8. AI 마스크</td><td>오브젝트 마스크</td><td>원형 마스크 / 사각형 마스크 / 펜 마스크</td><td>피사체 자동 인식 및 정밀 영역 선택</td></tr><tr><td>9. 화면 이동</td><td>손 도구 (H)</td><td>확대/축소 도구 (Z)</td><td>타임라인/화면 이동 및 확대/축소</td></tr><tr><td>10. 텍스트</td><td>문자 도구 (T)</td><td>세로 문자 도구</td><td>화면에 가로/세로 자막 입력</td></tr><tr><td>11. AI 생성</td><td>생성형 확장 도구</td><td>-</td><td>AI로 영상(2초) / 오디오(10초) 길이 연장</td></tr></tbody></table><div class=\"table-hint\">🔍 클릭해서 새 탭으로 전체 보기</div></div>", caption: "", resource: "" },
+        { id: "1-11", title: "타임라인 보기", duration: "5분", desc: "• 타임라인 패널 하단, 우측 스크롤바 드래그<br>• 키보드 +, - 키 클릭<br>• Alt 키 누른 상태에서 마우스 휠 스크롤<br>• 트랙 두 번 클릭해서 트랙 높이 확대", caption: "+/- 키로 타임라인 확대·축소", resource: "" },
+        { id: "1-12", title: "선택 도구와 자르기 도구로 컷 편집", duration: "6분", desc: "선택 도구(V)로 클립 이동·트리밍, 자르기 도구(C)로 컷 분할, 잔물결 삭제로 빈 공간 없애기", caption: "V=선택, C=자르기, 지우고 나면 잔물결 삭제", resource: "실습 소스팩 A" },
+        { id: "1-13", title: "루미트리 기본 교정으로 색 살리기", duration: "5분", desc: "Lumetri Color → 기본 교정에서 노출·대비·색온도 조정, 전/후 비교 토글", caption: "노출 → 대비 → 색온도 순서로", resource: "" },
+        { id: "1-14", title: "비디오 효과 vs 효과 필름 이펙트 대시보드(Film Impact Dashboard)", duration: "5분", desc: "• 전환 효과(Transition)와 이펙트(Effect)를 빠르게 적용하고 관리할 수 있는 패널 (비디오, 텍스트)<br>• (메뉴) 창> 확장명 > Film Impack Dashboard 또는 효과패널>비디오 전환/효과", caption: "", resource: "", image: "film_impact_dashboard.png" }
     ],
     ch2: [
         { id: "2-1", title: "오디오 트랙과 볼륨 조절 기본기", duration: "5분", desc: "A트랙 구조, 클립 볼륨 선 드래그로 조절, 오디오 미터로 적정 레벨(-6dB 내외) 확인", caption: "내레이션이 주인공, 음악은 -20dB 아래로", resource: "실습 소스팩 B" },
@@ -188,12 +193,11 @@ function initCurriculum() {
                 </div>
                 <p class="clip-desc">${clip.desc}</p>
                 ${imageHtml}
-                <div class="clip-caption-box">
-                    ${clip.caption}
-                </div>
+                ${clip.caption ? `<div class="clip-caption-box">${clip.caption}</div>` : ''}
+                ${clip.resource ? `
                 <div class="clip-footer">
                     <span class="clip-meta-resource">📦 리소스: ${clip.resource}</span>
-                </div>
+                </div>` : ''}
             `;
             container.appendChild(card);
         });
