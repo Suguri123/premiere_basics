@@ -182,7 +182,7 @@ function initCurriculum() {
             card.innerHTML = `
                 <div class="clip-card-header">
                     <div class="clip-label-area">
-                        <span class="clip-number">클립 ${clip.id}</span>
+                        <span class="clip-number">${clip.id}</span>
                         <h4 class="clip-title">${clip.title}</h4>
                     </div>
                 </div>
@@ -266,6 +266,41 @@ function initPromptBuilder() {
         });
     });
 
+    // Audio Prompt Builder Logic
+    const audioGenre = document.getElementById("audio-genre");
+    const audioInstChips = document.querySelectorAll("#audio-instrument-chips .chip");
+    const audioVocalChips = document.querySelectorAll("#audio-vocal-chips .chip");
+    const audioResultArea = document.getElementById("audio-prompt-result");
+
+    let activeAudioInst = "부드러운 피아노와 첼로, 느린 템포 (Slow tempo)";
+    let activeAudioVocal = "보컬 없음 (Instrumental only)";
+
+    const updateAudioPrompt = () => {
+        const genre = audioGenre.value;
+        const prompt = `${genre}, ${activeAudioInst}, ${activeAudioVocal}`;
+        audioResultArea.value = prompt;
+    };
+
+    audioGenre?.addEventListener("change", updateAudioPrompt);
+
+    audioInstChips.forEach(chip => {
+        chip.addEventListener("click", () => {
+            audioInstChips.forEach(c => c.classList.remove("active"));
+            chip.classList.add("active");
+            activeAudioInst = chip.dataset.val;
+            updateAudioPrompt();
+        });
+    });
+
+    audioVocalChips.forEach(chip => {
+        chip.addEventListener("click", () => {
+            audioVocalChips.forEach(c => c.classList.remove("active"));
+            chip.classList.add("active");
+            activeAudioVocal = chip.dataset.val;
+            updateAudioPrompt();
+        });
+    });
+
     // Subject select change
     subjectSelect.addEventListener("change", updatePrompt);
 
@@ -282,6 +317,22 @@ function initPromptBuilder() {
                 alert("복사 실패. 브라우저 설정을 확인해 주세요.");
             });
     });
+    // Copy Audio Prompt to clipboard
+    const audioCopyBtn = document.getElementById("copy-audio-prompt-btn");
+    if(audioCopyBtn) {
+        audioCopyBtn.addEventListener("click", () => {
+            audioResultArea.select();
+            navigator.clipboard.writeText(audioResultArea.value)
+                .then(() => {
+                    const toast = document.getElementById("audio-copy-toast");
+                    toast.classList.add("show");
+                    setTimeout(() => toast.classList.remove("show"), 2000);
+                })
+                .catch(err => {
+                    alert("복사 실패. 브라우저 설정을 확인해 주세요.");
+                });
+        });
+    }
 }
 
 // 6. Shortcuts Search & Render

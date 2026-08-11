@@ -435,7 +435,7 @@ body.dark-theme .btn-outline:hover {
 }
 .hero-visual {
     width: 100%;
-    max-width: 900px;
+    max-width: 700px;
     margin: 0 auto;
 }
 
@@ -467,7 +467,8 @@ body.dark-theme .btn-outline:hover {
 }
 .video-screen {
     position: relative;
-    height: 240px;
+    width: 100%;
+    aspect-ratio: 16 / 9;
     background: var(--bg-page-deep);
     display: flex;
     align-items: center;

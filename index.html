@@ -39,9 +39,9 @@
                         <!-- Submenu for Chapters -->
                         <ul class="sub-nav">
                             <li><button class="sub-nav-item" onclick="switchChapter('ch1')">1차시: 프리미어 기초 이해</button></li>
-                            <li><button class="sub-nav-item" onclick="switchChapter('ch2')">2차시: AI 활용 영상 제작</button></li>
-                            <li><button class="sub-nav-item" onclick="switchChapter('ch3')">3차시: AI 활용 편집 실습</button></li>
-                            <li><button class="sub-nav-item" onclick="switchChapter('ch4')">4차시: 영상 제작 & 피드백</button></li>
+                            <li><button class="sub-nav-item" disabled style="opacity: 0.5; cursor: not-allowed;">2차시: AI 활용 영상 제작</button></li>
+                            <li><button class="sub-nav-item" disabled style="opacity: 0.5; cursor: not-allowed;">3차시: AI 활용 편집 실습</button></li>
+                            <li><button class="sub-nav-item" disabled style="opacity: 0.5; cursor: not-allowed;">4차시: 영상 제작 & 피드백</button></li>
                         </ul>
                     </li>
                     <li>
@@ -104,7 +104,7 @@
                                 왼쪽 메뉴에서 학습 단계를 클릭해 시작해보세요!
                             </p>
                             <div class="hero-cta">
-                                <button class="btn btn-primary btn-lg" onclick="switchSection('curriculum')">강의 커리큘럼 보기</button>
+                                <button class="btn btn-primary btn-lg" onclick="switchChapter('ch1')">강의 커리큘럼 보기</button>
                                 <button class="btn btn-outline btn-lg" onclick="switchSection('resources')">자료실 바로가기</button>
                             </div>
                         </div>
@@ -114,18 +114,10 @@
                                     <span class="dot red"></span>
                                     <span class="dot yellow"></span>
                                     <span class="dot green"></span>
-                                    <span class="video-title">Project: 나의 하루 30초.prproj</span>
+                                    <span class="video-title">Project : 1차시 실습</span>
                                 </div>
                                 <div class="video-screen">
-                                    <div class="play-overlay">
-                                        <span class="play-btn"></span>
-                                    </div>
-                                    <div class="preview-caption">"T키 → 화면 클릭 → 바로 입력"</div>
-                                </div>
-                                <div class="timeline-visual">
-                                    <div class="track v-track">V1 | 🎬 바다.mp4 [루미트리 색보정 적용]</div>
-                                    <div class="track v-track2">V2 | 💬 자막: 나의 하루</div>
-                                    <div class="track a-track">A1 | 🎵 배경음악.mp3 [-20dB]</div>
+                                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/q781CJcfAhA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                                 </div>
                             </div>
                         </div>
@@ -281,6 +273,7 @@
                         <div class="builder-tabs" style="display: flex; gap: 12px; margin-bottom: 24px; border-bottom: 2px solid var(--border-color); padding-bottom: 12px;">
                             <button class="tab-btn active" data-tab="single-scene" onclick="switchBuilderTab('single-scene')" style="background: none; border: none; font-size: 1.1rem; font-weight: 700; color: var(--secondary); cursor: pointer; padding: 8px 16px; position: relative;">🎬 단일 장면 프롬프트</button>
                             <button class="tab-btn" data-tab="storyline" onclick="switchBuilderTab('storyline')" style="background: none; border: none; font-size: 1.1rem; font-weight: 700; color: var(--text-muted); cursor: pointer; padding: 8px 16px; position: relative;">📖 스토리 & 시나리오 생성기</button>
+                            <button class="tab-btn" data-tab="audio-prompt" onclick="switchBuilderTab('audio-prompt')" style="background: none; border: none; font-size: 1.1rem; font-weight: 700; color: var(--text-muted); cursor: pointer; padding: 8px 16px; position: relative;">🎵 오디오 & BGM 생성기</button>
                         </div>
                         
                         <!-- 단일 장면 프롬프트 탭 -->
@@ -414,6 +407,57 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- 오디오 & BGM 프롬프트 탭 콘텐츠 -->
+                        <div id="audio-prompt-tab" class="tab-content" style="display: none; animation: fadeIn 0.4s ease;">
+                            <div class="prompt-grid">
+                                <div class="prompt-controls">
+                                    <div class="control-group">
+                                        <label>1. 분위기 및 장르 (Genre & Mood)</label>
+                                        <select id="audio-genre" style="width: 100%; padding: 10px; border-radius: var(--radius-sm); border: 2px solid var(--border-color); background: var(--bg-card-soft); color: var(--text-main); font-family: inherit;">
+                                            <option value="신비롭고 몽환적인 앰비언트 (Ambient)">🌌 신비롭고 몽환적인 앰비언트</option>
+                                            <option value="긴장감 넘치는 오케스트라 시네마틱 (Cinematic Orchestral)">🎻 긴장감 넘치는 시네마틱 오케스트라</option>
+                                            <option value="경쾌하고 밝은 브이로그 팝 (Vlog Pop/Acoustic)">☀️ 경쾌하고 밝은 브이로그 팝</option>
+                                            <option value="레트로 신스웨이브 사이버펑크 (Synthwave)">🎮 레트로 신스웨이브 사이버펑크</option>
+                                            <option value="잔잔하고 차분한 로파이 비트 (Lo-fi Hip Hop)">☕ 차분한 로파이 힙합 비트</option>
+                                            <option value="강렬하고 에너제틱한 록/메탈 (Energetic Rock/Metal)">🎸 강렬하고 에너제틱한 록/메탈</option>
+                                            <option value="부드럽고 그루비한 무드의 재즈 (Smooth Groovy Jazz)">🎷 부드럽고 그루비한 재즈</option>
+                                            <option value="오싹하고 기괴한 긴장감을 주는 호러 (Creepy Horror)">👻 오싹하고 기괴한 호러</option>
+                                            <option value="빠르고 신나는 일렉트로닉 댄스 (Upbeat EDM)">🕺 신나는 일렉트로닉 댄스 (EDM)</option>
+                                        </select>
+                                    </div>
+                                    <div class="control-group">
+                                        <label>2. 사용 악기 및 템포 (Instruments & Tempo)</label>
+                                        <div class="option-chips" id="audio-instrument-chips">
+                                            <span class="chip active" data-val="부드러운 피아노와 첼로, 느린 템포 (Slow tempo)">피아노 & 첼로 (느리게)</span>
+                                            <span class="chip" data-val="강렬한 드럼과 신디사이저, 빠른 템포 (Fast tempo)">신스 & 드럼 (빠르게)</span>
+                                            <span class="chip" data-val="통기타와 가벼운 타악기, 중간 템포 (Mid tempo)">통기타 & 타악기 (중간)</span>
+                                            <span class="chip" data-val="오케스트라 현악기 웅장함, 빌드업 (Build-up)">웅장한 현악기 빌드업</span>
+                                            <span class="chip" data-val="거친 디스토션 기타와 묵직한 베이스, 빠른 템포 (Fast and Heavy)">디스토션 기타 & 베이스 (강하게)</span>
+                                            <span class="chip" data-val="감미로운 색소폰과 콘트라베이스, 리드미컬한 그루브 (Rhythmical groove)">색소폰 & 콘트라베이스 (그루비)</span>
+                                            <span class="chip" data-val="기괴한 오르골 소리와 스산한 앰비언트, 불규칙한 템포 (Irregular tempo)">오르골 & 스산한 효과음 (기괴하게)</span>
+                                            <span class="chip" data-val="통통 튀는 플럭 신스와 강력한 808 베이스, 빠른 댄스 템포 (Upbeat tempo)">플럭 신스 & 808 베이스 (신나게)</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label>3. 보컬 및 가사 (Vocals & Lyrics)</label>
+                                        <div class="option-chips" id="audio-vocal-chips">
+                                            <span class="chip active" data-val="보컬 없음 (Instrumental only)">보컬 없음 (악기만)</span>
+                                            <span class="chip" data-val="한국어 가사와 보컬 (Korean vocals)">한국어 가사</span>
+                                            <span class="chip" data-val="영어 가사와 보컬 (English vocals)">영어 가사</span>
+                                            <span class="chip" data-val="알 수 없는 몽환적인 외국어 코러스 (Ethereal choir/Foreign vocals)">몽환적인 외국어 코러스</span>
+                                            <span class="chip" data-val="가사 없는 잔잔한 허밍 (Soft humming, no words)">잔잔한 허밍 (가사 없음)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="prompt-output-box">
+                                    <div class="output-header">완성된 AI 오디오 프롬프트</div>
+                                    <textarea id="audio-prompt-result">신비롭고 몽환적인 앰비언트, 부드러운 피아노와 첼로, 느린 템포 (Slow tempo), 보컬 없음 (Instrumental only)</textarea>
+                                    <button id="copy-audio-prompt-btn" class="btn btn-purple btn-block">프롬프트 복사하기</button>
+                                    <div class="copy-success-message" id="audio-copy-toast">클립보드에 복사되었습니다!</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -438,7 +482,7 @@
                 <div class="container">
                     <div class="section-header text-center">
                         <span class="section-tag">DOWNLOADS</span>
-                        <h2 class="section-title">실습 예시자료 팩 자료실</h2>
+                        <h2 class="section-title">실습 자료실</h2>
                         <p class="section-subtitle">강의에 필요한 모든 자료와 템플릿 꾸러미를 무료로 내려받으세요.</p>
                     </div>
 
@@ -446,41 +490,9 @@
                         <div class="resource-card glass-panel">
                             <div class="resource-icon">📁</div>
                             <h3>실습 소스팩 A</h3>
-                            <p>여행 브이로그 클립 3종 (바다·거리·음식)</p>
+                            <p>청귤청 만들기 영상, 배경음악(오디오)</p>
                             <span class="resource-badge">1-1 ~ 1-8 클립 사용</span>
-                            <button class="btn btn-outline download-btn-action" data-pack="소스팩 A">다운로드</button>
-                        </div>
-                        
-                        <div class="resource-card glass-panel">
-                            <div class="resource-icon">🎵</div>
-                            <h3>실습 소스팩 B</h3>
-                            <p>내레이션·스피치 녹음 파일 + 배경음악 (무료 음원)</p>
-                            <span class="resource-badge">2-1 ~ 2-6 클립 사용</span>
-                            <button class="btn btn-outline download-btn-action" data-pack="소스팩 B">다운로드</button>
-                        </div>
-
-                        <div class="resource-card glass-panel">
-                            <div class="resource-icon">📹</div>
-                            <h3>실습 소스팩 C</h3>
-                            <p>인물 워킹 클립, 어둡게 촬영된 보정용 클립</p>
-                            <span class="resource-badge">1-5, 3-3 클립 사용</span>
-                            <button class="btn btn-outline download-btn-action" data-pack="소스팩 C">다운로드</button>
-                        </div>
-
-                        <div class="resource-card glass-panel">
-                            <div class="resource-icon">📝</div>
-                            <h3>기획 템플릿 & 체크리스트</h3>
-                            <p>숏폼 기획 구성표 + 라이선스 확인 & 셀프 점검 카드</p>
-                            <span class="resource-badge">3-6, 4-5, 4-2, 4-8 사용</span>
-                            <button class="btn btn-outline download-btn-action" data-pack="기획 템플릿">다운로드</button>
-                        </div>
-
-                        <div class="resource-card glass-panel">
-                            <div class="resource-icon">💾</div>
-                            <h3>완성 프로젝트 파일 (.prproj)</h3>
-                            <p>차시별 완성 예제 4종 묶음 파일</p>
-                            <span class="resource-badge">1-8, 2-8, 3-8, 4-6 사용</span>
-                            <button class="btn btn-outline download-btn-action" data-pack="프로젝트 파일">다운로드</button>
+                            <a href="files/청귤청 만들기_기본컷편집.zip" download class="btn btn-outline download-btn-action" data-pack="소스팩 A" style="text-decoration: none; text-align: center;">다운로드</a>
                         </div>
 
                         <div class="resource-card glass-panel text-center highlight-resource">
@@ -488,7 +500,7 @@
                             <h3>단축키 정리표 PDF</h3>
                             <p>강의에 등장하는 모든 단축키 한눈에 보기</p>
                             <span class="resource-badge">전체 강의 권장</span>
-                            <button class="btn btn-purple download-btn-action" data-pack="단축키 PDF">PDF 받기</button>
+                            <a href="files/단축키_정리표.html" target="_blank" class="btn btn-purple" style="text-decoration: none; display: inline-block;">PDF 보기 및 저장</a>
                         </div>
                     </div>
                 </div>
