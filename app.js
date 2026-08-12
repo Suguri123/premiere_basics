@@ -558,10 +558,9 @@ function getPresetAnswer(userInput) {
     }
     
     const text = userInput.toLowerCase().replace(/\s+/g, '').replace(/랜/g, '렌').replace(/넵/g, '냅');
-    let bestMatch = null;
-    let highestScore = 0;
-
-    for (const item of PRESET_QNA) {
+    
+    // Map each item to its score
+    const matches = PRESET_QNA.map(item => {
         let score = 0;
         
         // 1. Exact or partial question match
@@ -579,19 +578,38 @@ function getPresetAnswer(userInput) {
                 }
             }
         }
+        
+        return { item, score };
+    })
+    .filter(m => m.score >= 10) // Minimum threshold
+    .sort((a, b) => b.score - a.score); // Sort by score descending
 
-        if (score > highestScore) {
-            highestScore = score;
-            bestMatch = item;
+    if (matches.length === 0) {
+        return null;
+    }
+
+    // If we have multiple high-scoring matches, return up to 3 close matches
+    if (matches.length > 1) {
+        const topScore = matches[0].score;
+        // Find matches that are very close to the top score (within 10 points or at least 80% of topScore)
+        const closeMatches = matches.filter(m => m.score >= topScore - 10 || m.score >= topScore * 0.8).slice(0, 3);
+        
+        if (closeMatches.length > 1) {
+            // Return multiple answers combined
+            let response = `💡 관련 있는 답변을 **${closeMatches.length}개** 찾았습니다:\n\n`;
+            closeMatches.forEach((m, index) => {
+                response += `### 🙋‍♂️ Q${String(m.item.num).padStart(2, '0')}. ${m.item.q}\n\n💡 **답변**:\n${m.item.a}\n\n`;
+                if (index < closeMatches.length - 1) {
+                    response += `---\n\n`;
+                }
+            });
+            return response;
         }
     }
 
-    // Return the answer if the score is high enough (at least one keyword match or partial question match)
-    if (highestScore >= 10 && bestMatch) {
-        return `🙋‍♂️ **질문 Q${String(bestMatch.num).padStart(2, '0')}. ${bestMatch.q}**\n\n💡 **답변**:\n${bestMatch.a}`;
-    }
-    
-    return null;
+    // Default to single best match
+    const best = matches[0].item;
+    return `🙋‍♂️ **질문 Q${String(best.num).padStart(2, '0')}. ${best.q}**\n\n💡 **답변**:\n${best.a}`;
 }
 
 function renderMessageBubble(sender, text, time) {
