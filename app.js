@@ -676,11 +676,16 @@ function saveChatHistory() {
 function formatMarkdown(text) {
     if (!text) return "";
     
-    // Protect HTML tags
-    let formatted = text
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;");
+    // If the text is already HTML (starts with <div or similar structure), skip escaping
+    const isHtml = text.trim().startsWith('<div') || text.trim().startsWith('<span');
+    
+    let formatted = text;
+    if (!isHtml) {
+        formatted = text
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;");
+    }
 
     // Code blocks `\`\`\`javascript ... \`\`\``
     formatted = formatted.replace(/```([\s\S]*?)```/g, (match, code) => {
@@ -694,15 +699,17 @@ function formatMarkdown(text) {
     formatted = formatted.replace(/\*\*([^*]+)\*\*/g, '<strong style="font-weight: 700; color: var(--primary);">$1</strong>');
 
     // Bullet points (simple starting with - or * followed by space)
-    formatted = formatted.split('\n').map(line => {
-        if (line.startsWith('* ') || line.startsWith('- ')) {
-            return `<li style="margin-left: 16px; margin-top: 4px; margin-bottom: 4px;">${line.substring(2)}</li>`;
-        }
-        return line;
-    }).join('\n');
-
-    // Line breaks
-    formatted = formatted.replace(/\n/g, '<br>');
+    if (!isHtml) {
+        formatted = formatted.split('\n').map(line => {
+            if (line.startsWith('* ') || line.startsWith('- ')) {
+                return `<li style="margin-left: 16px; margin-top: 4px; margin-bottom: 4px;">${line.substring(2)}</li>`;
+            }
+            return line;
+        }).join('\n');
+        
+        // Line breaks
+        formatted = formatted.replace(/\n/g, '<br>');
+    }
 
     return formatted;
 }
