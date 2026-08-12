@@ -596,12 +596,13 @@ function getPresetAnswer(userInput) {
         
         if (closeMatches.length > 1) {
             // Return multiple answers combined
-            let response = `💡 관련 있는 답변을 **${closeMatches.length}개** 찾았습니다:\n\n`;
+            let response = `<div style="font-size: 0.9rem; margin-bottom: 6px; color: var(--text-muted);">💡 관련 있는 답변을 <strong>${closeMatches.length}개</strong> 찾았습니다:</div>`;
             closeMatches.forEach((m, index) => {
-                response += `### 🙋‍♂️ Q${String(m.item.num).padStart(2, '0')}. ${m.item.q}\n\n💡 **답변**:\n${m.item.a}\n\n`;
-                if (index < closeMatches.length - 1) {
-                    response += `---\n\n`;
-                }
+                response += `
+<div style="margin-top: 6px; margin-bottom: 6px; padding-top: 6px; ${index > 0 ? 'border-top: 1px dashed var(--border-color);' : ''}">
+    <div style="font-weight: 700; color: var(--text-main); margin-bottom: 2px; font-size: 0.95rem;">🙋‍♂️ ${m.item.q}</div>
+    <div style="color: var(--primary); font-size: 0.9rem; line-height: 1.4;">${m.item.a}</div>
+</div>`;
             });
             return response;
         }
@@ -609,7 +610,11 @@ function getPresetAnswer(userInput) {
 
     // Default to single best match
     const best = matches[0].item;
-    return `🙋‍♂️ **질문 Q${String(best.num).padStart(2, '0')}. ${best.q}**\n\n💡 **답변**:\n${best.a}`;
+    return `
+<div style="margin: 0;">
+    <div style="font-weight: 700; color: var(--text-main); margin-bottom: 2px; font-size: 0.95rem;">🙋‍♂️ ${best.q}</div>
+    <div style="color: var(--primary); font-size: 0.9rem; line-height: 1.4;">${best.a}</div>
+</div>`;
 }
 
 function renderMessageBubble(sender, text, time) {
