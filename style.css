@@ -1286,6 +1286,25 @@ footer {
     transform: translateX(4px);
 }
 
+/* Quick Question Texts */
+.quick-question-text {
+    font-size: 0.88rem;
+    padding: 5px 0;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    line-height: 1.4;
+    font-weight: 500;
+    border-bottom: 1px dashed transparent;
+}
+.quick-question-text:hover {
+    color: var(--primary);
+    transform: translateX(4px);
+}
+
 /* Chat Console Card */
 .chat-console-card {
     display: flex;
