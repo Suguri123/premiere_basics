@@ -588,26 +588,6 @@ function getPresetAnswer(userInput) {
         return null;
     }
 
-    // If we have multiple high-scoring matches, return up to 3 close matches
-    if (matches.length > 1) {
-        const topScore = matches[0].score;
-        // Find matches that are very close to the top score (within 10 points or at least 80% of topScore)
-        const closeMatches = matches.filter(m => m.score >= topScore - 10 || m.score >= topScore * 0.8).slice(0, 3);
-        
-        if (closeMatches.length > 1) {
-            // Return multiple answers combined
-            let response = `<div style="font-size: 0.9rem; margin-bottom: 6px; color: var(--text-muted);">💡 관련 있는 답변을 <strong>${closeMatches.length}개</strong> 찾았습니다:</div>`;
-            closeMatches.forEach((m, index) => {
-                response += `
-<div style="margin-top: 6px; margin-bottom: 6px; padding-top: 6px; ${index > 0 ? 'border-top: 1px dashed var(--border-color);' : ''}">
-    <div style="font-weight: 700; color: var(--text-main); margin-bottom: 2px; font-size: 0.95rem;">🙋‍♂️ ${m.item.q}</div>
-    <div style="color: var(--primary); font-size: 0.9rem; line-height: 1.4;">${m.item.a}</div>
-</div>`;
-            });
-            return response;
-        }
-    }
-
     // Default to single best match
     const best = matches[0].item;
     return `
