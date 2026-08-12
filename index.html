@@ -39,7 +39,7 @@
                         <!-- Submenu for Chapters -->
                         <ul class="sub-nav">
                             <li><button class="sub-nav-item" onclick="switchChapter('ch1')">1차시: 프리미어 기초 이해</button></li>
-                            <li><button class="sub-nav-item" disabled style="opacity: 0.5; cursor: not-allowed;">2차시: AI 활용 영상 제작</button></li>
+                            <li><button class="sub-nav-item" onclick="switchChapter('ch2')">2차시: AI 활용 영상 제작</button></li>
                             <li><button class="sub-nav-item" disabled style="opacity: 0.5; cursor: not-allowed;">3차시: AI 활용 편집 실습</button></li>
                             <li><button class="sub-nav-item" disabled style="opacity: 0.5; cursor: not-allowed;">4차시: 영상 제작 & 피드백</button></li>
                         </ul>
@@ -65,7 +65,7 @@
                         </button>
                     </li>
                     <li>
-                        <button class="nav-item" data-target="ai-qna" disabled style="opacity: 0.5; cursor: not-allowed;">
+                        <button class="nav-item" data-target="ai-qna">
                             <span class="nav-icon">🤖</span> AI 1:1 문의게시판
                         </button>
                     </li>
@@ -117,7 +117,7 @@
                                     <span class="video-title">Project : 1차시 실습</span>
                                 </div>
                                 <div class="video-screen">
-                                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/q781CJcfAhA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                    <iframe id="main-yt-video" width="100%" height="100%" src="https://www.youtube.com/embed/q781CJcfAhA?enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                                 </div>
                             </div>
                         </div>
@@ -195,13 +195,56 @@
                                         <img src="resolution_guide.png" alt="해상도 설명 자료" style="width: 100%; height: auto; display: block;">
                                     </div>
                                 </div>
-                                <div>
+                                <div style="margin-bottom: 16px; border-bottom: 1px dashed var(--border-color); padding-bottom: 16px;">
                                     <strong style="color: var(--primary); display: block; margin-bottom: 4px;">⚙️ 시퀀스 (Sequence)</strong>
                                     <span style="color: var(--text-muted); display: block; margin-bottom: 8px;">프리미어 프로 타임라인에서 영상 클립들을 올리고 조립하는 '설계 도면이자 작업 캔버스'입니다. 프로젝트 내부에서 출력할 최종 비디오의 해상도, 화면비율, 프레임 레이트 정보를 종합 규정합니다.</span>
                                     
                                     <!-- 시퀀스 설명 이미지 자료 -->
                                     <div style="margin: 12px 0; border: 1.5px solid var(--border-color); border-radius: var(--radius-sm); overflow: hidden; max-width: 576px; background: var(--bg-card);">
                                         <img src="sequence_guide.png" alt="시퀀스 설명 자료" style="width: 100%; height: auto; display: block;">
+                                    </div>
+                                </div>
+                                <div>
+                                    <strong style="color: var(--primary); display: block; margin-bottom: 4px;">🎞️ 디지털 비디오 기본 개념 & 주요 포맷</strong>
+                                    <span style="color: var(--text-muted); display: block; margin-bottom: 12px;">비디오 파일은 영상과 소리를 담는 ‘상자(Container)’와, 영상과 소리의 용량을 줄이고 다시 재생할 수 있게 만드는 ‘압축 방식(Codec)’이 합쳐진 것입니다.</span>
+                                    
+                                    <strong style="font-size: 0.9rem; display: block; margin-bottom: 4px;">주요 비디오 컨테이너 & 코덱 포맷</strong>
+                                    <div style="overflow-x: auto; margin: 12px 0;">
+                                        <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left; border: 1.5px solid var(--border-color); background: var(--bg-card);">
+                                            <thead>
+                                                <tr style="background: var(--bg-page); border-bottom: 2px solid var(--border-color);">
+                                                    <th style="padding: 10px; border-right: 1.5px solid var(--border-color); font-weight: 700; width: 120px;">포맷 (확장자)</th>
+                                                    <th style="padding: 10px; border-right: 1.5px solid var(--border-color); font-weight: 700; width: 180px;">대표 코덱</th>
+                                                    <th style="padding: 10px; font-weight: 700;">특징 및 용도</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr style="border-bottom: 1.5px solid var(--border-color);">
+                                                    <td style="padding: 10px; border-right: 1.5px solid var(--border-color); font-weight: 700; color: var(--primary);">MP4</td>
+                                                    <td style="padding: 10px; border-right: 1.5px solid var(--border-color);">H.264 / HEVC(H.265)</td>
+                                                    <td style="padding: 10px; color: var(--text-muted);">뛰어난 압축률과 범용성. 유튜브, 웹 업로드, SNS, 표준 마스터링용 필수 포맷.</td>
+                                                </tr>
+                                                <tr style="border-bottom: 1.5px solid var(--border-color);">
+                                                    <td style="padding: 10px; border-right: 1.5px solid var(--border-color); font-weight: 700; color: var(--primary);">MOV</td>
+                                                    <td style="padding: 10px; border-right: 1.5px solid var(--border-color);">Apple ProRes / H.264</td>
+                                                    <td style="padding: 10px; color: var(--text-muted);">애플(Apple) 표준 포맷. ProRes 사용 시 고품질 비압축/최소압축으로 영상 편집/색보정용에 최적화.</td>
+                                                </tr>
+                                                <tr style="border-bottom: 1.5px solid var(--border-color);">
+                                                    <td style="padding: 10px; border-right: 1.5px solid var(--border-color); font-weight: 700; color: var(--primary);">MKV</td>
+                                                    <td style="padding: 10px; border-right: 1.5px solid var(--border-color);">다양한 코덱 지원</td>
+                                                    <td style="padding: 10px; color: var(--text-muted);">여러 오디오 트랙과 자막을 포함하기 용이함. 웹 스트리밍 및 보관용(편집용으로는 비추천).</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding: 10px; border-right: 1.5px solid var(--border-color); font-weight: 700; color: var(--primary);">AVI</td>
+                                                    <td style="padding: 10px; border-right: 1.5px solid var(--border-color);">Uncompressed / Motion JPEG</td>
+                                                    <td style="padding: 10px; color: var(--text-muted);">구형 윈도우 표준 포맷. 압축률이 낮아 용량이 매우 크며, 현재는 제한적으로 사용됨.</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
+                                    <div style="background: var(--bg-page); border-left: 4px solid var(--secondary); padding: 12px; margin-top: 10px; border-radius: var(--radius-sm); border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); font-size: 0.9rem;">
+                                        <strong>💡 Tip:</strong> 프리미어 프로에서 편집할 때는 MOV(ProRes) 형식 클립이 컴퓨터 연산 부하가 적어 가장 원활하며, 최종 출력(Export) 시에는 <strong>MP4(H.264)</strong>를 사용하는 것이 표준적입니다.
                                     </div>
                                 </div>
                             </div>
@@ -216,11 +259,126 @@
                 <div class="container">
                     <div class="chapter-overview-card glass-panel">
                         <div class="overview-badge">2차시 개요</div>
-                        <h3>AI 활용 기초 영상 제작 실습 (8클립)</h3>
+                        <h3>AI 활용 기초 영상 제작 실습</h3>
                         <p>AI 음성 인식과 자동 자막 기능으로 영상 편집을 빠르게 완성합니다.</p>
-                        <div class="overview-meta">
-                            <span>🔑 핵심 결과물: <strong>"AI 배경 자기소개 영상"</strong></span>
-                            <span>📦 사용 실습 소스: <strong>실습 소스팩 B (내레이션/스피치 녹음 + 배경음악)</strong></span>
+
+                        <div class="overview-meta" style="margin-top: 16px;">
+                            <button onclick="toggleAudioSpecsPanel()" class="btn btn-outline btn-sm" style="display: inline-flex; align-items: center; gap: 8px; border-radius: var(--radius-sm); font-size: 0.9rem; padding: 8px 16px; cursor: pointer;">
+                                🎧 <span>디지털 오디오 기초 개념(포맷, 오디오 트랙)</span> <span id="audio-specs-toggle-icon" style="transition: var(--transition); display: inline-block;">▼</span>
+                            </button>
+                            
+                            <div id="audio-specs-panel" style="display: none; margin-top: 16px; padding: 16px; background: var(--bg-page-deep); border-radius: var(--radius-sm); border: 1.5px solid var(--border-color); font-size: 0.95rem; line-height: 1.6; text-align: left; animation: fadeIn 0.3s ease;">
+                                <div style="margin-bottom: 16px; border-bottom: 1px dashed var(--border-color); padding-bottom: 16px;">
+                                    <strong style="color: var(--primary); display: block; margin-bottom: 4px;">🎵 1. 디지털 오디오 기본 개념 & 주요 포맷</strong>
+                                    <span style="color: var(--text-muted); display: block; margin-bottom: 12px;">오디오 편집을 시작하기 전, 파일 형식과 기본 용어의 차이를 이해하는 것이 중요합니다.</span>
+                                    
+                                    <!-- 주요 오디오 파일 포맷 표 -->
+                                    <strong style="font-size: 0.9rem; display: block; margin-bottom: 4px;">주요 오디오 파일 포맷</strong>
+                                    <div style="overflow-x: auto; margin: 12px 0;">
+                                        <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left; border: 1.5px solid var(--border-color); background: var(--bg-card);">
+                                            <thead>
+                                                <tr style="background: var(--bg-page); border-bottom: 2px solid var(--border-color);">
+                                                    <th style="padding: 10px; border-right: 1.5px solid var(--border-color); font-weight: 700; width: 120px;">포맷</th>
+                                                    <th style="padding: 10px; border-right: 1.5px solid var(--border-color); font-weight: 700; width: 150px;">구분</th>
+                                                    <th style="padding: 10px; font-weight: 700;">특징 및 용도</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr style="border-bottom: 1.5px solid var(--border-color);">
+                                                    <td style="padding: 10px; border-right: 1.5px solid var(--border-color); font-weight: 700; color: var(--primary);">WAV</td>
+                                                    <td style="padding: 10px; border-right: 1.5px solid var(--border-color);">비압축 (무손실)</td>
+                                                    <td style="padding: 10px; color: var(--text-muted);">최고 음질, 용량이 큼. 동영상 편집 및 마스터링용 표준 포맷.</td>
+                                                </tr>
+                                                <tr style="border-bottom: 1.5px solid var(--border-color);">
+                                                    <td style="padding: 10px; border-right: 1.5px solid var(--border-color); font-weight: 700; color: var(--primary);">MP3</td>
+                                                    <td style="padding: 10px; border-right: 1.5px solid var(--border-color);">손실 압축</td>
+                                                    <td style="padding: 10px; color: var(--text-muted);">파일 용량이 작음. 웹 업로드나 가벼운 가이드 음원에 사용.</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding: 10px; border-right: 1.5px solid var(--border-color); font-weight: 700; color: var(--primary);">AAC</td>
+                                                    <td style="padding: 10px; border-right: 1.5px solid var(--border-color);">고효율 압축</td>
+                                                    <td style="padding: 10px; color: var(--text-muted);">MP3보다 압축율 대비 음질이 뛰어남. MP4 영상 파일의 기본 오디오 코덱.</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
+                                    <div style="background: var(--bg-page); border-left: 4px solid var(--secondary); padding: 12px; margin-top: 10px; margin-bottom: 16px; border-radius: var(--radius-sm); border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); font-size: 0.9rem;">
+                                        <strong>💡 Tip:</strong> 일반적인 유튜브나 숏폼 영상 편집용으로는 용량이 작고 다루기 편리한 <strong>MP3 형식</strong>을 가장 널리 사용합니다. 음질 손실이 없는 고품질 사운드 작업이 필요한 경우에는 WAV 형식을 활용해 보세요.
+                                    </div>
+                        
+                                    <strong style="font-size: 0.9rem; display: block; margin-bottom: 4px;">핵심 오디오 용어</strong>
+                                    <ul style="color: var(--text-muted); font-size: 0.9rem; margin-left: 20px; margin-bottom: 0;">
+                                        <li style="margin-bottom: 4px;"><strong>샘플 레이트 (Sample Rate):</strong> 1초당 음성을 몇 번 샘플링했는지 나타내는 단위. 비디오 표준은 48kHz (48,000Hz) 입니다.</li>
+                                        <li style="margin-bottom: 4px;"><strong>비트 깊이 (Bit Depth):</strong> 음량 표현의 정밀도. 영상 작업 시 16-bit 또는 24-bit를 주로 사용합니다.</li>
+                                        <li><strong>데시벨 (dB):</strong> 소리의 크기를 나타내는 단위. 프리미어에서는 0dB가 최대치(Peak)이며, 0dB를 넘어가면 소리가 깨지는 찢어짐(Clipping) 현상이 발생합니다.</li>
+                                    </ul>
+                                </div>
+                                
+                                <div style="margin-bottom: 16px; border-bottom: 1px dashed var(--border-color); padding-bottom: 16px;">
+                                    <strong style="color: var(--primary); display: block; margin-bottom: 4px;">🎛️ 2. 프리미어 프로 오디오 오버뷰 & 타임라인</strong>
+                                    
+                                    <strong style="font-size: 0.9rem; display: block; margin-top: 12px; margin-bottom: 4px;">오디오 트랙 구조</strong>
+                                    <span style="color: var(--text-muted); display: block; margin-bottom: 8px;">A1, A2, A3... 형태의 트랙으로 구성됩니다. 일반적으로 아래와 같이 트랙을 구분하여 관리하는 것이 효율적입니다.</span>
+                                    <ul style="color: var(--text-muted); font-size: 0.9rem; margin-left: 20px; margin-bottom: 12px;">
+                                        <li><strong>A1:</strong> 대사(Dialogue)</li>
+                                        <li><strong>A2:</strong> 효과음(SFX)</li>
+                                        <li><strong>A3:</strong> 배경음악(BGM)</li>
+                                    </ul>
+                        
+                                    <strong style="font-size: 0.9rem; display: block; margin-bottom: 4px;">적정 오디오 레벨 기준 (Audio Meter)</strong>
+                                    <span style="color: var(--text-muted); display: block; margin-bottom: 8px;">영상 전체의 소리 균형을 맞추기 위한 기본 dB 목표치입니다.</span>
+                                    <ul style="color: var(--text-muted); font-size: 0.9rem; margin-left: 20px; margin-bottom: 0;">
+                                        <li style="margin-bottom: 4px;"><strong>대사 / 목소리 (Dialogue):</strong> -12dB ~ -6dB (피크가 -6dB를 넘지 않도록 설정)</li>
+                                        <li style="margin-bottom: 4px;"><strong>효과음 (SFX):</strong> -18dB ~ -12dB</li>
+                                        <li><strong>배경음악 (BGM):</strong> -24dB ~ -18dB (목소리가 있을 때) / -12dB 안팎 (음악만 나올 때)</li>
+                                    </ul>
+                                </div>
+                        
+                                <div>
+                                    <strong style="color: var(--primary); display: block; margin-bottom: 4px;">✂️ 3. 핵심 오디오 편집 방법 (실습 내용)</strong>
+                                    
+                                    <ol style="color: var(--text-muted); font-size: 0.9rem; margin-left: 20px; margin-bottom: 0;">
+                                        <li style="margin-bottom: 12px;">
+                                            <strong style="color: var(--text-main);">클립 볼륨 조절하기 (Gain & Keyframe)</strong><br>
+                                            소리가 너무 크거나 작은 경우 볼륨을 기본 조절합니다.
+                                            <ul style="margin-top: 4px; list-style-type: disc;">
+                                                <li><strong>전체 볼륨 조절 (Audio Gain):</strong> 클립 선택 후 단축키 G 입력 -> Set Gain to에 원하는 dB 지정 (또는 Adjust Gain by로 상대값 조절)</li>
+                                                <li><strong>자동 노멀라이즈:</strong> 단축키 G -> Normalize Max Peak to 선택 후 -3dB 지정 시 가장 큰 소리가 -3dB에 맞게 전체 상향/하향 조절됩니다.</li>
+                                                <li><strong>구간 볼륨 조절 (Keyframe):</strong> 펜 툴(P)을 선택하고 트랙의 흰색 볼륨선에 포인트를 찍어 부분적으로 높이거나 낮출 수 있습니다.</li>
+                                            </ul>
+                                        </li>
+                                        <li style="margin-bottom: 12px;">
+                                            <strong style="color: var(--text-main);">페이드 인 / 페이드 아웃 (Fade In / Out)</strong><br>
+                                            음악이 갑자기 끊기지 않고 자연스럽게 시작하거나 끝나도록 설정합니다.
+                                            <ul style="margin-top: 4px; list-style-type: disc;">
+                                                <li><strong>단축키 적용:</strong> 클립 끝부분 선택 후 Ctrl + Shift + D (Mac: Cmd + Shift + D)를 눌러 기본 오디오 전환 효과(Constant Power)를 적용합니다.</li>
+                                                <li><strong>수동 적용:</strong> Effects 패널 -> Audio Transitions -> Crossfade -> Constant Power 효과를 클립의 앞/뒤로 드래그합니다.</li>
+                                            </ul>
+                                        </li>
+                                        <li style="margin-bottom: 12px;">
+                                            <strong style="color: var(--text-main);">잡음 제거 (Essential Sound - Repair)</strong><br>
+                                            에어컨, 팬 소리, 앰프 노이즈 등 배경 잡음을 클릭 몇 번으로 줄일 수 있습니다.
+                                            <ul style="margin-top: 4px; list-style-type: disc;">
+                                                <li>상단 메뉴에서 Essential Sound 패널을 엽니다.</li>
+                                                <li>편집할 오디오 클립을 선택한 뒤 [Dialogue] 버튼을 클릭합니다.</li>
+                                                <li>[Repair] 항목을 활성화하고 Reduce Noise 체크박스를 켭니다.</li>
+                                                <li>슬라이더를 조절하여 목소리의 왜곡 없이 잡음이 제거되는 적정 수준(보통 2~5 사이)을 맞춥니다.</li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <strong style="color: var(--text-main);">덕킹 (Ducking - BGM 자동 조절)</strong><br>
+                                            말소리가 나올 때 배경음악 크기를 자동으로 줄여주는 기능입니다.
+                                            <ul style="margin-top: 4px; list-style-type: disc;">
+                                                <li>말소리 클립들을 선택 후 Essential Sound 패널에서 <strong>[Dialogue]</strong>로 지정합니다.</li>
+                                                <li>배경음악 클립을 선택 후 <strong>[Music]</strong>으로 지정합니다.</li>
+                                                <li>Music 설정 항목 중 [Ducking] 체크박스를 활성화합니다.</li>
+                                                <li><strong>[Generate Keyframes]</strong>를 클릭하면 말소리 위치에 맞춰 BGM 볼륨 키프레임이 자동으로 생성됩니다.</li>
+                                            </ul>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="clips-grid" id="ch2-clips"></div>
@@ -491,8 +649,10 @@
                             <div class="resource-icon">📁</div>
                             <h3>실습 소스팩 A</h3>
                             <p>청귤청 만들기 영상, 배경음악(오디오)</p>
-                            <span class="resource-badge">1-1 ~ 1-8 클립 사용</span>
-                            <a href="files/청귤청 만들기_기본컷편집.zip" download class="btn btn-outline download-btn-action" data-pack="소스팩 A" style="text-decoration: none; text-align: center;">다운로드</a>
+                            <span class="resource-badge">1차시 실습 사용</span>
+                            <div style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
+                                <a href="files/청귤청 만들기_기본컷편집.zip" download class="btn btn-outline download-btn-action" data-pack="소스팩 A" style="text-decoration: none; text-align: center;">다운로드</a>
+                            </div>
                         </div>
 
                         <div class="resource-card glass-panel text-center highlight-resource">
@@ -519,8 +679,8 @@
                         <p class="section-subtitle">어도비 프리미어 프로 영상편집 중 궁금한 점을 Gemini AI에게 즉시 물어보세요!</p>
                     </div>
 
-                    <!-- API Key Setting Panel -->
-                    <div class="glass-panel api-config-card" style="margin-bottom: 24px; padding: 20px;">
+                    <!-- API Key Setting Panel (Hidden for hardcoded key) -->
+                    <div class="glass-panel api-config-card" style="display: none; margin-bottom: 24px; padding: 20px;">
                         <div class="api-config-header" style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="toggleApiPanel()">
                             <h4 style="margin: 0; display: flex; align-items: center; gap: 8px;">
                                 🔑 <span>Gemini API 키 설정 (선택 사항)</span>
@@ -831,10 +991,24 @@
 
     <!-- Image Lightbox Modal -->
     <div id="lightbox" class="lightbox-modal" onclick="closeLightbox()">
+        <p class="lightbox-hint">이미지를 클릭하면 화면이 닫힙니다.</p>
         <img id="lightbox-img" class="lightbox-content" src="" alt="확대 이미지" />
     </div>
 
     <!-- JS -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('main-yt-video', {
+                events: {
+                    'onReady': function(event) {
+                        event.target.setVolume(30);
+                    }
+                }
+            });
+        }
+    </script>
     <script src="app.js"></script>
 </body>
 </html>

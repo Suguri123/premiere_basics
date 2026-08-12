@@ -19,14 +19,9 @@ const courseData = {
         { id: "1-14", title: "비디오 효과 vs 효과 필름 이펙트 대시보드(Film Impact Dashboard)", duration: "5분", desc: "• 전환 효과(Transition)와 이펙트(Effect)를 빠르게 적용하고 관리할 수 있는 패널 (비디오, 텍스트)<br>• (메뉴) 창> 확장명 > Film Impack Dashboard 또는 효과패널>비디오 전환/효과", caption: "", resource: "", image: "film_impact_dashboard.png" }
     ],
     ch2: [
-        { id: "2-1", title: "오디오 트랙과 볼륨 조절 기본기", duration: "5분", desc: "A트랙 구조, 클립 볼륨 선 드래그로 조절, 오디오 미터로 적정 레벨(-6dB 내외) 확인", caption: "내레이션이 주인공, 음악은 -20dB 아래로", resource: "실습 소스팩 B" },
-        { id: "2-2", title: "필수 사운드 패널로 소리 자동 정리", duration: "5분", desc: "Essential Sound 패널에서 클립을 '대화'/'음악'으로 지정, 자동 볼륨 매칭, 덕킹(음악 자동 줄이기)", caption: "대화 지정 → 소리 향상 체크 → 끝", resource: "실습 소스팩 B" },
-        { id: "2-3", title: "받아쓰기 기능으로 음성을 텍스트로", duration: "4분", desc: "텍스트 패널 → 받아쓰기 실행 → 언어(한국어) 지정 → 변환된 대본 확인·오타 수정", caption: "받아쓰기 = 모든 AI 편집의 시작점", resource: "실습 소스팩 B" },
-        { id: "2-4", title: "텍스트 지우면 영상이 잘린다? AI 컷 편집", duration: "6분", desc: "받아쓰기 대본에서 불필요한 문장·간투사 선택 → 삭제 → 타임라인에 자동 반영, 일시정지 구간 한 번에 제거", caption: "말버릇 '어…' 검색해서 일괄 삭제", resource: "실습 소스팩 B" },
-        { id: "2-5", title: "대본으로 자막 자동 생성하기", duration: "5분", desc: "캡션 탭 → 대본으로 캡션 만들기 → 자동 생성된 자막 확인, 틀린 부분 문자 도구로 수정, 캡션 분할로 호흡 다듬기", caption: "긴 자막은 캡션 분할로 두 줄 → 한 줄", resource: "실습 소스팩 B" },
-        { id: "2-6", title: "자막 스타일 통일 + 번역 자막 만들기", duration: "5분", desc: "속성 패널에서 자막 스타일(글꼴·테두리·배경) 지정 → 트랙 스타일로 전체 적용, 자동 번역으로 영어 자막 트랙 생성", caption: "스타일은 한 번만 만들고 전체 적용", resource: "실습 소스팩 B" },
-        { id: "2-7", title: "Firefly 프롬프트 작성법", duration: "5분", desc: "firefly.adobe.com 접속, 프롬프트 공식(주제+스타일+분위기+구도) 소개, 같은 주제로 프롬프트를 바꿔가며 결과 비교", caption: "주제 + 스타일 + 분위기 + 구도", resource: "프롬프트 모음집" },
-        { id: "2-8", title: "Firefly 이미지를 프리미어로 가져와 활용", duration: "5분", desc: "생성 이미지 다운로드 → 프리미어로 가져오기 → 인트로 배경으로 배치 → 위치·비율 키프레임으로 살짝 줌인 효과(켄 번즈)", caption: "정지 이미지도 줌인 하나면 영상이 된다", resource: "완성 프로젝트 B" }
+        { id: "2-1", title: "클립 볼륨 조절하기", duration: "5분", desc: "• 전체 볼륨 조절 (Audio Gain) : 클립 선택 후 단축키 G 입력, 또는 마우스 우클릭하고 오디오 게인 선택 -> 원하는 dB 지정<br>• 효과 컨트롤 - 볼륨 (Volume) : 타임라인 클립 선택 후 [효과 컨트롤] 패널, 오디오 레벨 또는 채널 볼륨 조정<br>• 오디오 클립 믹서 : [창] > [오디오 클립 믹서] 선택, 타임라인 인디케이터가 위치한 개별 오디오 클립의 실시간 볼륨 레벨을 세밀하게 조절<br>• 오디오 트랙 믹서 : [창] > [오디오 트랙 믹서] 선택, 특정 트랙(예: A1, A2 전체) 전체의 볼륨 레벨이나 효과(Effect)를 일괄 제어 및 자동화(Read/Write) 조절", caption: "내레이션이 주인공, 음악은 -20dB 아래로", resource: "", images: ["audio_gain.png", "audio_volume_effect.png"] },
+        { id: "2-2", title: "받아쓰기 기능으로 음성을 텍스트로", duration: "4분", desc: "텍스트 패널 → 받아쓰기 실행 → 언어(한국어) 지정 → 변환된 대본 확인·텍스트 기반 편집", caption: "받아쓰기 = 모든 AI 편집의 시작점", resource: "", images: ["스크린샷 2026-08-12 171536.png", "스크린샷 2026-08-12 172230.png"] },
+        { id: "2-3", title: "텍스트 지우면 영상이 잘린다? AI 텍스트 기반 편집", duration: "6분", desc: "받아쓰기 대본에서 불필요한 문장·간투사 선택 → 삭제 → 타임라인에 자동 반영, 일시정지 구간 한 번에 제거", caption: "말버릇 '어…' 검색해서 일괄 삭제", resource: "" }
     ],
     ch3: [
         { id: "3-1", title: "키프레임 첫걸음 — 텍스트 움직이기", duration: "5분", desc: "위치·불투명도 키프레임 개념, 텍스트가 아래서 위로 떠오르며 나타나는 애니메이션 제작", caption: "키프레임 = 시작점과 끝점만 찍으면 사이는 자동", resource: "실습 소스팩 C" },
@@ -178,11 +173,22 @@ function initCurriculum() {
             const card = document.createElement("div");
             card.className = "clip-card glass-panel";
             
-            const imageHtml = clip.image ? `
-                <div class="clip-image-box" style="margin-top: 12px; margin-bottom: 12px; text-align: center;">
-                    <img src="${clip.image}" onclick="openLightbox('${clip.image}')" style="max-width: 100%; border-radius: var(--radius-sm); border: 1.5px solid var(--border-color); display: block; margin: 0 auto;" alt="학습 스크린샷" />
-                </div>
-            ` : "";
+            let imageHtml = "";
+            if (clip.image) {
+                imageHtml = `
+                    <div class="clip-image-box" style="margin-top: 12px; margin-bottom: 12px; text-align: center;">
+                        <img src="${clip.image}" onclick="openLightbox('${clip.image}')" style="max-width: 100%; border-radius: var(--radius-sm); border: 1.5px solid var(--border-color); display: block; margin: 0 auto;" alt="학습 스크린샷" />
+                    </div>
+                `;
+            } else if (clip.images && Array.isArray(clip.images)) {
+                imageHtml = `
+                    <div class="clip-images-box" style="margin-top: 12px; margin-bottom: 12px; display: flex; flex-direction: column; gap: 8px; align-items: center;">
+                        ${clip.images.map(img => `
+                            <img src="${img}" onclick="openLightbox('${img}')" style="max-width: 100%; border-radius: var(--radius-sm); border: 1.5px solid var(--border-color); display: block;" alt="학습 스크린샷" />
+                        `).join('')}
+                    </div>
+                `;
+            }
 
             card.innerHTML = `
                 <div class="clip-card-header">
@@ -736,6 +742,22 @@ function formatMarkdown(text) {
 window.toggleSpecsPanel = function() {
     const panel = document.getElementById("specs-panel");
     const icon = document.getElementById("specs-toggle-icon");
+    if (!panel || !icon) return;
+    
+    if (panel.style.display === "none" || !panel.style.display) {
+        panel.style.display = "block";
+        icon.innerText = "▲";
+        icon.style.transform = "rotate(180deg)";
+    } else {
+        panel.style.display = "none";
+        icon.innerText = "▼";
+        icon.style.transform = "rotate(0deg)";
+    }
+};
+
+window.toggleAudioSpecsPanel = function() {
+    const panel = document.getElementById("audio-specs-panel");
+    const icon = document.getElementById("audio-specs-toggle-icon");
     if (!panel || !icon) return;
     
     if (panel.style.display === "none" || !panel.style.display) {
