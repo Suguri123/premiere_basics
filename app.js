@@ -553,75 +553,42 @@ window.sendChatMessage = async function() {
 };
 
 function getPresetAnswer(userInput) {
-    const text = userInput.toLowerCase().replace(/\s+/g, '');
+    if (typeof PRESET_QNA === 'undefined' || !Array.isArray(PRESET_QNA)) {
+        return null;
+    }
     
-    // Define keyword mappings
-    const database = [
-        {
-            keywords: ["단축키", "c", "v", "자르기", "선택"],
-            answer: `✂️ **자르기 도구 (C)**: 타임라인에서 비디오나 오디오 클립을 자르는 데 사용됩니다.\n\n🖱️ **선택 도구 (V)**: 클립을 선택, 이동하거나 길이를 늘리고 줄이는 등 기본 마우스 역할을 합니다.\n\n💡 **꿀팁**: \`C\`로 자른 뒤 다시 선택하거나 이동하려면 반드시 \`V\`를 눌러 선택 도구로 돌아오셔야 합니다!`
-        },
-        {
-            keywords: ["대본", "받아쓰기", "텍스트기반", "텍스트편집"],
-            answer: `대본을 통한 AI 컷 편집 방법은 다음과 같습니다:\n\n1. 상단 메뉴 \`Window (윈도우)\` -> \`Text (텍스트)\` 패널을 엽니다.\n2. **Transcript (받아쓰기)** 탭에서 받아쓰기(Transcribe)를 실행합니다.\n3. 분석된 텍스트 중 불필요한 단어나 말버릇(예: '어...', '음...')을 선택합니다.\n4. 키보드의 \`Backspace\` 또는 \`Delete\` 키를 누르면, **텍스트와 연동된 타임라인의 영상이 자동으로 삭제**되며 컷 편집이 진행됩니다!`
-        },
-        {
-            keywords: ["색보정", "루미트리", "lut", "색감", "밝기"],
-            answer: `🎨 **루미트리 기본 색보정 추천 순서**:\n\n1. **노출 (Exposure)**: 화면 전체의 밝기를 먼저 맞춥니다.\n2. **대비 (Contrast)**: 어두운 곳과 밝은 곳의 밝기 차이를 조절하여 입체감을 줍니다.\n3. **색온도 (Temperature)**: 실내등이나 실외 환경에 맞춰 캘빈값을 자연스럽게 조절합니다.\n4. **크리에이티브 (Creative) 프리셋**: 필요 시 전체 톤앤매너 프리셋을 50~70% 강도로 입힙니다.`
-        },
-        {
-            keywords: ["쇼츠", "릴스", "틱톡", "9:16", "화면비율", "세로"],
-            answer: `📱 **유튜브 쇼츠(9:16) 시퀀스 설정 방법**:\n\n1. 상단 메뉴 \`Sequence (시퀀스)\` -> \`Sequence Settings (시퀀스 설정)\`으로 들어갑니다.\n2. **Editing Mode**를 \`Custom\`으로 변경합니다.\n3. **Frame Size**를 가로 \`1080\`, 세로 \`1920\` (9:16 비율)로 입력합니다.\n4. 확인을 누르면 세로형 시퀀스로 변경됩니다!`
-        },
-        {
-            keywords: ["볼륨", "오디오", "소리", "데시벨", "db", "배경음악", "bgm", "게인"],
-            answer: `🔊 **사운드 믹싱 데시벨(dB) 기준 가이드**:\n\n* **주요 목소리 (내레이션/스피치)**: \`-6dB\`에서 \`-12dB\` 사이를 넘나들도록 볼륨을 조정합니다. (\`0dB\`를 넘어가면 소리가 깨집니다)\n* **배경음악 (BGM)**: 목소리가 있을 때는 \`-20dB\`에서 \`-25dB\` 이하로 낮춰야 목소리가 묻히지 않습니다.\n\n💡 **단축키**: 클립 선택 후 \`G\` 키를 누르면 빠르게 오디오 게인을 조절할 수 있습니다.`
-        },
-        {
-            keywords: ["속도", "배속", "슬로우", "빠르게", "느리게", "역재생"],
-            answer: `🏃‍♂️ **영상 속도 및 재생 방향 설정 방법**:\n\n1. 타임라인에서 속도를 바꿀 클립을 선택한 뒤 **우클릭**합니다.\n2. **속도/지속시간 (Speed/Duration)** 메뉴를 선택합니다. (단축키 \`Ctrl + R\`)\n3. **속도(%)** 값을 100%보다 높이면 빠르게, 낮추면 느리게(슬로우 모션) 변경됩니다.\n4. **뒤로 재생 (Reverse Speed)** 체크박스를 체크하면 영상이 거꾸로 재생(역재생)됩니다.`
-        },
-        {
-            keywords: ["자막", "글자", "텍스트", "움직이", "키프레임", "애니메이션"],
-            answer: `🎬 **텍스트 자막 애니메이션 (키프레임) 만드는 법**:\n\n1. 문자 도구(\`T\`)로 자막을 작성하고 선택합니다.\n2. **효과 컨트롤 (Effect Controls)** 패널로 이동합니다.\n3. **텍스트 -> 위치(Position)** 항목 왼쪽의 **스톱워치 아이콘**을 클릭해 첫 키프레임을 생성합니다.\n4. 타임라인 헤더를 1~2초 뒤로 이동한 뒤, 위치 값을 조절하면 새로운 키프레임이 자동 생성되며 텍스트가 움직이는 효과가 만들어집니다.`
-        },
-        {
-            keywords: ["전환", "디졸브", "페이드", "트랜지션", "이펙트"],
-            answer: `✨ **비디오/오디오 전환(Transition) 효과 적용하기**:\n\n1. **효과 (Effects)** 패널에서 '비디오 전환' -> '디졸브' -> '교차 디졸브(Cross Dissolve)'를 찾습니다.\n2. 마우스로 드래그하여 타임라인 상의 두 클립 경계선 사이에 놓습니다.\n\n💡 **단축키 꿀팁**: \`Ctrl + D\`를 누르면 선택한 클립 경계에 기본 전환 효과(디졸브)가 즉시 적용됩니다.`
-        },
-        {
-            keywords: ["저장", "위치", "프로젝트", "프로젝트생성"],
-            answer: `💾 **프로젝트 저장 및 시작하기**:\n\n1. 프리미어 프로를 실행하고 **새 프로젝트(New Project)**를 누릅니다.\n2. 왼쪽 상단에서 **프로젝트 이름**을 입력합니다.\n3. **저장 위치(Project Location)** 옆의 폴더 경로를 클릭하여 원하는 위치(예: 바탕화면 작업 폴더)로 지정해야 나중에 파일 분실을 방지할 수 있습니다.`
-        },
-        {
-            keywords: ["잔물결", "딜리트", "빈공간", "삭제"],
-            answer: `🗑️ **잔물결 삭제 (Ripple Delete) 활용하기**:\n\n* 클립을 자르고 지웠을 때 중간에 남는 빈 공간(회색 영역)을 클릭해 선택한 후 \`Delete\` 또는 \`Shift + Delete\`를 누르면 빈 공간이 메워지며 뒤쪽 영상들이 자동으로 당겨집니다.\n* **단축키**: 클립 선택 후 \`Shift + Delete\`를 누르면 클립 삭제와 동시에 잔물결 삭제가 한 번에 이루어집니다.`
-        },
-        {
-            keywords: ["한글", "영어", "언어", "ko_kr", "en_us", "한영"],
-            answer: `🌐 **프리미어 한글/영어 메뉴 언어 변경 방법**:\n\n1. 프리미어 실행 상태에서 \`Ctrl + F12\` (맥은 \`Cmd + F12\`) 키를 눌러 **콘솔(Console) 창**을 엽니다.\n2. 콘솔 창 탭 이름 옆의 三 메뉴 버튼을 눌러 **Debug Database View**를 선택합니다.\n3. 리스트에서 \`ApplicationLanguage\` 항목을 찾아 한국어는 \`ko_KR\`, 영어는 \`en_US\`로 변경합니다.\n4. 프리미어를 재시작하면 언어가 변경됩니다.`
-        },
-        {
-            keywords: ["템플릿", "자막틀", "mogrt", "stock", "스톡"],
-            answer: `📦 **모션 그래픽 템플릿 (.mogrt) 사용 및 설치법**:\n\n1. **기본 그래픽 (Essential Graphics)** 또는 **템플릿** 패널을 엽니다.\n2. 패널 우측 하단의 **[+] 모양 버튼(모션 그래픽 템플릿 설치)**을 누르고 다운로드한 \`.mogrt\` 파일을 선택합니다.\n3. 설치된 템플릿을 타임라인으로 드래그하여 적용한 뒤, 우측 [편집] 탭에서 내용과 색상을 수정할 수 있습니다.`
-        },
-        {
-            keywords: ["내보내기", "렌더링", "저장", "mp4", "인코딩", "출력"],
-            answer: `🎬 **완성된 영상 파일(MP4)로 내보내기 (Export)**:\n\n1. 상단 메뉴에서 **내보내기 (Export)** 탭을 클릭하거나 단축키 \`Ctrl + M\`을 누릅니다.\n2. **파일 이름**과 **저장 경로**를 설정합니다.\n3. 포맷(Format)을 **H.264**로 선택하면 가장 표준적인 MP4 파일로 출력됩니다.\n4. 해상도 및 프레임 레이트 설정을 마친 후 우측 하단의 **내보내기 (Export)** 버튼을 누르면 완성됩니다.`
-        },
-        {
-            keywords: ["소개", "정보", "프리미어란", "프리미어프로"],
-            answer: `🎥 **Adobe Premiere Pro 소개**:\n\n어도비 프리미어 프로(Adobe Premiere Pro)는 영화, 방송, 유튜브 등 전 세계 미디어 산업에서 널리 쓰이는 표준 비선형 영상 편집 소프트웨어입니다.\n\n강력한 컷 편집 기능부터 자막 생성, 색보정(Lumetri Color), 오디오 믹싱, 그리고 최신 생성형 AI 기능(오디오 복구, 생성형 확장 등)까지 결합되어 완성도 높은 콘텐츠 제작이 가능합니다.`
-        }
-    ];
+    const text = userInput.toLowerCase().replace(/\s+/g, '');
+    let bestMatch = null;
+    let highestScore = 0;
 
-    // Find first database item that matches any of the keywords
-    for (const item of database) {
-        for (const keyword of item.keywords) {
-            if (text.includes(keyword)) {
-                return item.answer;
+    for (const item of PRESET_QNA) {
+        let score = 0;
+        
+        // 1. Exact or partial question match
+        const qNormalized = item.q.toLowerCase().replace(/\s+/g, '');
+        if (text.includes(qNormalized) || qNormalized.includes(text)) {
+            score += 50;
+        }
+
+        // 2. Keyword matching
+        if (item.keywords && Array.isArray(item.keywords)) {
+            for (const keyword of item.keywords) {
+                const kwNormalized = keyword.toLowerCase().replace(/\s+/g, '');
+                if (text.includes(kwNormalized)) {
+                    score += 10;
+                }
             }
         }
+
+        if (score > highestScore) {
+            highestScore = score;
+            bestMatch = item;
+        }
+    }
+
+    // Return the answer if the score is high enough (at least one keyword match or partial question match)
+    if (highestScore >= 10 && bestMatch) {
+        return `🙋‍♂️ **질문 Q${String(bestMatch.num).padStart(2, '0')}. ${bestMatch.q}**\n\n💡 **답변**:\n${bestMatch.a}`;
     }
     
     return null;
