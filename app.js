@@ -557,7 +557,7 @@ function getPresetAnswer(userInput) {
         return null;
     }
     
-    const text = userInput.toLowerCase().replace(/\s+/g, '');
+    const text = userInput.toLowerCase().replace(/\s+/g, '').replace(/랜/g, '렌').replace(/넵/g, '냅');
     let bestMatch = null;
     let highestScore = 0;
 
