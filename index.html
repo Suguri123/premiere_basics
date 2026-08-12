@@ -690,27 +690,57 @@
 
                     <div class="qna-workspace-grid">
                         <!-- Questions Suggestions Sidebar -->
-                        <div class="qna-sidebar glass-panel" style="padding: 20px;">
-                            <h4 style="margin-bottom: 16px; border-bottom: 2px solid var(--border-color); padding-bottom: 8px;">💡 자주 묻는 질문 (클릭하여 전송)</h4>
-                            <div class="quick-questions-list" style="display: flex; flex-direction: column; gap: 10px;">
-                                <button class="quick-question-btn" onclick="askQuickQuestion('프리미어에서 단축키 C와 V의 차이가 뭐야?')">
-                                    ✂️ C와 V 단축키 차이점
-                                </button>
-                                <button class="quick-question-btn" onclick="askQuickQuestion('받아쓰기 대본을 활용한 AI 컷 편집이 안 보여요.')">
-                                    💬 AI 활용 텍스트 컷 편집 방법
-                                </button>
-                                <button class="quick-question-btn" onclick="askQuickQuestion('루미트리 색보정을 적용할 때 가장 좋은 순서는?')">
-                                    🎨 루미트리 기본 색보정 순서
-                                </button>
-                                <button class="quick-question-btn" onclick="askQuickQuestion('유튜브 쇼츠용 영상으로 화면 비율(9:16)을 맞추려면 어떻게 세팅해야 해?')">
-                                    📱 쇼츠 9:16 시퀀스 설정법
-                                </button>
-                                <button class="quick-question-btn" onclick="askQuickQuestion('오디오 볼륨 조절할 때 적절한 데시벨(dB) 수준은?')">
-                                    🔊 사운드 크기 조절 기준 (dB)
-                                </button>
-                                <button class="quick-question-btn" onclick="askQuickQuestion('Adobe Firefly에서 비디오 만들 때 쓰는 꿀팁 알려줘.')">
-                                    🪄 Firefly 비디오 생성 프롬프트 팁
-                                </button>
+                        <div class="qna-sidebar glass-panel" style="padding: 20px; max-height: 580px; overflow-y: auto;">
+                            <h4 style="margin-bottom: 16px; border-bottom: 2px solid var(--border-color); padding-bottom: 8px; font-weight: 700;">💡 자주 묻는 질문 (클릭 시 자동 전송)</h4>
+                            
+                            <!-- 카테고리 1: 기본 설정 -->
+                            <div style="margin-bottom: 16px;">
+                                <h5 style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 8px; font-weight: 700; display: flex; align-items: center; gap: 6px;">⚙️ 기본 및 환경 설정</h5>
+                                <div style="display: flex; flex-direction: column; gap: 6px;">
+                                    <button class="quick-question-btn" onclick="askQuickQuestion('프로젝트 생성할 때 스크래치 디스크는 어떻게 지정해야 유용하나요?')">스크래치 디스크 추천 설정</button>
+                                    <button class="quick-question-btn" onclick="askQuickQuestion('프리미어 언어 설정을 한글이나 영어로 변경하려면?')">메뉴 한/영 언어 변경 방법</button>
+                                    <button class="quick-question-btn" onclick="askQuickQuestion('작업 영역 초기화(Reset Layout)는 어떻게 하나요?')">작업 화면 레이아웃 초기화</button>
+                                </div>
+                            </div>
+
+                            <!-- 카테고리 2: 컷 편집 & 타임라인 -->
+                            <div style="margin-bottom: 16px;">
+                                <h5 style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 8px; font-weight: 700; display: flex; align-items: center; gap: 6px;">✂️ 컷 편집 및 타임라인</h5>
+                                <div style="display: flex; flex-direction: column; gap: 6px;">
+                                    <button class="quick-question-btn" onclick="askQuickQuestion('자르기 도구(C)와 선택 도구(V)의 차이가 뭐야?')">단축키 C와 V의 차이</button>
+                                    <button class="quick-question-btn" onclick="askQuickQuestion('잔물결 삭제(Ripple Delete)는 언제 어떻게 사용하나요?')">잔물결 삭제 단축키 및 활용</button>
+                                    <button class="quick-question-btn" onclick="askQuickQuestion('비디오 클립과 오디오 클립의 연결 해제(Unlink) 단축키는?')">비디오/오디오 연결 해제(Ctrl+L)</button>
+                                </div>
+                            </div>
+
+                            <!-- 카테고리 3: 자막 & 그래픽 -->
+                            <div style="margin-bottom: 16px;">
+                                <h5 style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 8px; font-weight: 700; display: flex; align-items: center; gap: 6px;">💬 자막 및 기본 그래픽</h5>
+                                <div style="display: flex; flex-direction: column; gap: 6px;">
+                                    <button class="quick-question-btn" onclick="askQuickQuestion('자막 글꼴이 깨지거나 네모 형태로 보일 때 원인은 무엇인가요?')">자막 폰트 깨짐 해결법</button>
+                                    <button class="quick-question-btn" onclick="askQuickQuestion('반응형 배경 박스 만드는 법이 궁금해요.')">글자 크기에 맞춰 늘어나는 배경</button>
+                                    <button class="quick-question-btn" onclick="askQuickQuestion('모션 그래픽 템플릿(.mogrt) 파일 가져오는 법은?')">.mogrt 템플릿 설치 방법</button>
+                                </div>
+                            </div>
+
+                            <!-- 카테고리 4: 오디오 & 사운드 -->
+                            <div style="margin-bottom: 16px;">
+                                <h5 style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 8px; font-weight: 700; display: flex; align-items: center; gap: 6px;">🔊 오디오 및 사운드</h5>
+                                <div style="display: flex; flex-direction: column; gap: 6px;">
+                                    <button class="quick-question-btn" onclick="askQuickQuestion('대사(목소리)와 배경음악(BGM) 권장 볼륨 레벨(dB) 기준은?')">권장 오디오 볼륨 레벨(dB)</button>
+                                    <button class="quick-question-btn" onclick="askQuickQuestion('오디오 클립 게인(Clip Gain) 변경 단축키와 노멀라이즈 피크 기능은?')">오디오 게인(G) 조절 가이드</button>
+                                    <button class="quick-question-btn" onclick="askQuickQuestion('마이크 노이즈 제거용 추천 기본 이펙트는?')">AI 기반 음성 고음질 보정(DeNoise)</button>
+                                </div>
+                            </div>
+
+                            <!-- 카테고리 5: 색보정 & 내보내기 -->
+                            <div style="margin-bottom: 8px;">
+                                <h5 style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 8px; font-weight: 700; display: flex; align-items: center; gap: 6px;">🎨 색보정 및 인코딩</h5>
+                                <div style="display: flex; flex-direction: column; gap: 6px;">
+                                    <button class="quick-question-btn" onclick="askQuickQuestion('루미트리 기본 색보정(Exposure, Contrast) 순서와 화이트 밸런스 설정')">루미트리 색보정 정석 단계</button>
+                                    <button class="quick-question-btn" onclick="askQuickQuestion('완성된 영상 H.264 mp4 표준 내보내기 방법')">H.264 MP4 내보내기 설정</button>
+                                    <button class="quick-question-btn" onclick="askQuickQuestion('렌더링 중 동영상 컴파일 오류(Error Compiling Movie) 해결법은?')">동영상 컴파일 오류 대처법</button>
+                                </div>
                             </div>
                         </div>
 
