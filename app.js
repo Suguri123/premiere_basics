@@ -1,5 +1,8 @@
 // Premiere AI Basics Interactive Javascript
 
+// ※여기에 API 키를 입력하면 항상 고정된 상태로 작동합니다.
+const GEMINI_API_KEY = ""; 
+
 // 1. Data Definitions
 const courseData = {
     ch1: [
@@ -492,7 +495,7 @@ window.deleteApiKey = function() {
 };
 
 function updateApiStatus() {
-    const apiKey = localStorage.getItem("gemini_api_key");
+    const apiKey = GEMINI_API_KEY || localStorage.getItem("gemini_api_key");
     const statusBadge = document.getElementById("api-status-badge");
     const modeDesc = document.getElementById("chat-mode-desc");
     const keyInput = document.getElementById("gemini-api-key-input");
@@ -585,7 +588,7 @@ window.sendChatMessage = async function() {
     const typingIndicator = showTypingIndicator();
 
     try {
-        const apiKey = localStorage.getItem("gemini_api_key");
+        const apiKey = GEMINI_API_KEY || localStorage.getItem("gemini_api_key");
         let replyText = "";
 
         if (apiKey) {
