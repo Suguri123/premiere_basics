@@ -1,8 +1,5 @@
 // Premiere AI Basics Interactive Javascript
 
-// ※여기에 API 키를 입력하면 항상 고정된 상태로 작동합니다.
-const GEMINI_API_KEY = ""; 
-
 // 1. Data Definitions
 const courseData = {
     ch1: [
@@ -462,64 +459,7 @@ const PRESET_ANSWERS = {
 
 let chatHistory = [];
 
-window.toggleApiPanel = function() {
-    const apiBody = document.getElementById("api-config-body");
-    const toggleIcon = document.getElementById("api-toggle-icon");
-    if (apiBody.style.display === "none" || !apiBody.style.display) {
-        apiBody.style.display = "block";
-        toggleIcon.innerText = "▲";
-    } else {
-        apiBody.style.display = "none";
-        toggleIcon.innerText = "▼";
-    }
-};
-
-window.saveApiKey = function() {
-    const keyInput = document.getElementById("gemini-api-key-input");
-    const apiKey = keyInput.value.trim();
-    if (!apiKey) {
-        alert("API 키를 입력해 주세요.");
-        return;
-    }
-    localStorage.setItem("gemini_api_key", apiKey);
-    updateApiStatus();
-    alert("Gemini API 키가 저장되었습니다!");
-    toggleApiPanel();
-};
-
-window.deleteApiKey = function() {
-    localStorage.removeItem("gemini_api_key");
-    document.getElementById("gemini-api-key-input").value = "";
-    updateApiStatus();
-    alert("Gemini API 키가 삭제되었습니다.");
-};
-
-function updateApiStatus() {
-    const apiKey = GEMINI_API_KEY || localStorage.getItem("gemini_api_key");
-    const statusBadge = document.getElementById("api-status-badge");
-    const modeDesc = document.getElementById("chat-mode-desc");
-    const keyInput = document.getElementById("gemini-api-key-input");
-
-    if (apiKey) {
-        statusBadge.innerText = "연동 완료 (Gemini Live)";
-        statusBadge.style.background = "#dcfce7";
-        statusBadge.style.color = "#15803d";
-        statusBadge.style.borderColor = "#bbf7d0";
-        modeDesc.innerText = "Gemini Live 모드로 작동 중";
-        keyInput.value = apiKey;
-    } else {
-        statusBadge.innerText = "미연동 (기본 응답 모드)";
-        statusBadge.style.background = "#fee2e2";
-        statusBadge.style.color = "#ef4444";
-        statusBadge.style.borderColor = "#fecaca";
-        modeDesc.innerText = "기본 데모 모드로 작동 중";
-        keyInput.value = "";
-    }
-}
-
 window.initQna = function() {
-    updateApiStatus();
-    
     // Set time for welcome message
     const now = new Date();
     const timeString = formatTime(now);
@@ -588,20 +528,14 @@ window.sendChatMessage = async function() {
     const typingIndicator = showTypingIndicator();
 
     try {
-        const apiKey = GEMINI_API_KEY || localStorage.getItem("gemini_api_key");
         let replyText = "";
+        await new Promise(resolve => setTimeout(resolve, 600)); // natural typing delay
 
-        if (apiKey) {
-            // Live Gemini API call
-            replyText = await callGeminiApi(apiKey, text);
+        const matchedAnswer = getPresetAnswer(text);
+        if (matchedAnswer) {
+            replyText = matchedAnswer;
         } else {
-            // Fallback mock responses
-            await new Promise(resolve => setTimeout(resolve, 800)); // natural typing delay
-            if (PRESET_ANSWERS[text]) {
-                replyText = PRESET_ANSWERS[text];
-            } else {
-                replyText = `**[알림: 데모 모드]**\n현재 API 키가 설정되어 있지 않아 사전 정의되지 않은 질문에는 답변할 수 없습니다.\n\n**입력하신 질문**: "${text}"\n\n상단의 **🔑 Gemini API 키 설정** 메뉴를 열어 API 키를 입력해 주시면 Gemini AI의 생생하고 똑똑한 실시간 답변을 받아보실 수 있습니다!`;
-            }
+            replyText = `❓ **답변을 찾지 못했습니다.**\n\n질문하신 내용인 **"${text}"**에 대한 미리 정의된 답변이 데이터베이스에 등록되어 있지 않습니다.\n\n💡 **도움말**: 아래 키워드가 포함된 질문을 입력하시면 관련 답변을 즉시 확인하실 수 있습니다!\n\n* **키워드 안내**: \`단축키\`, \`컷 편집/자르기\`, \`색보정/루미트리\`, \`쇼츠/9:16 비율\`, \`볼륨/데시벨\`, \`배속/속도 조절\`, \`자막 움직임/키프레임\`, \`화면 전환/디졸브\`, \`프로젝트 저장\`, \`잔물결 삭제\`, \`한영 언어 설정\`, \`모션 그래픽 템플릿\`, \`내보내기/렌더링\``;
         }
 
         // Remove typing indicator and render AI response
@@ -618,38 +552,79 @@ window.sendChatMessage = async function() {
     }
 };
 
-async function callGeminiApi(apiKey, userMessageText) {
-    const systemInstruction = "당신은 프리미어 프로(Adobe Premiere Pro) 기초 과정을 학습하는 학생들을 위한 친절하고 전문적인 AI 튜터입니다. 질문에 대해 쉽고 명확하게 한국어로 답변해 주세요. 프리미어와 무관한 질문에는 정중히 거절하고 프리미어 질문으로 유도해 주세요. 코드나 단축키가 포함된 경우 마크다운 형식으로 가독성 좋게 꾸며주세요.";
+function getPresetAnswer(userInput) {
+    const text = userInput.toLowerCase().replace(/\s+/g, '');
     
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=${apiKey}`;
-
-    // Build the request contents array from conversation history (limit to last 10 messages for token usage and performance)
-    const historyLimit = chatHistory.slice(-10);
-    const contents = historyLimit.map(msg => ({
-        role: msg.sender === 'user' ? 'user' : 'model',
-        parts: [{ text: msg.text }]
-    }));
-
-    const response = await fetch(url, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
+    // Define keyword mappings
+    const database = [
+        {
+            keywords: ["단축키", "c", "v", "자르기", "선택"],
+            answer: `✂️ **자르기 도구 (C)**: 타임라인에서 비디오나 오디오 클립을 자르는 데 사용됩니다.\n\n🖱️ **선택 도구 (V)**: 클립을 선택, 이동하거나 길이를 늘리고 줄이는 등 기본 마우스 역할을 합니다.\n\n💡 **꿀팁**: \`C\`로 자른 뒤 다시 선택하거나 이동하려면 반드시 \`V\`를 눌러 선택 도구로 돌아오셔야 합니다!`
         },
-        body: JSON.stringify({
-            contents: contents,
-            systemInstruction: {
-                parts: [{ text: systemInstruction }]
+        {
+            keywords: ["대본", "받아쓰기", "텍스트기반", "텍스트편집"],
+            answer: `대본을 통한 AI 컷 편집 방법은 다음과 같습니다:\n\n1. 상단 메뉴 \`Window (윈도우)\` -> \`Text (텍스트)\` 패널을 엽니다.\n2. **Transcript (받아쓰기)** 탭에서 받아쓰기(Transcribe)를 실행합니다.\n3. 분석된 텍스트 중 불필요한 단어나 말버릇(예: '어...', '음...')을 선택합니다.\n4. 키보드의 \`Backspace\` 또는 \`Delete\` 키를 누르면, **텍스트와 연동된 타임라인의 영상이 자동으로 삭제**되며 컷 편집이 진행됩니다!`
+        },
+        {
+            keywords: ["색보정", "루미트리", "lut", "색감", "밝기"],
+            answer: `🎨 **루미트리 기본 색보정 추천 순서**:\n\n1. **노출 (Exposure)**: 화면 전체의 밝기를 먼저 맞춥니다.\n2. **대비 (Contrast)**: 어두운 곳과 밝은 곳의 밝기 차이를 조절하여 입체감을 줍니다.\n3. **색온도 (Temperature)**: 실내등이나 실외 환경에 맞춰 캘빈값을 자연스럽게 조절합니다.\n4. **크리에이티브 (Creative) 프리셋**: 필요 시 전체 톤앤매너 프리셋을 50~70% 강도로 입힙니다.`
+        },
+        {
+            keywords: ["쇼츠", "릴스", "틱톡", "9:16", "화면비율", "세로"],
+            answer: `📱 **유튜브 쇼츠(9:16) 시퀀스 설정 방법**:\n\n1. 상단 메뉴 \`Sequence (시퀀스)\` -> \`Sequence Settings (시퀀스 설정)\`으로 들어갑니다.\n2. **Editing Mode**를 \`Custom\`으로 변경합니다.\n3. **Frame Size**를 가로 \`1080\`, 세로 \`1920\` (9:16 비율)로 입력합니다.\n4. 확인을 누르면 세로형 시퀀스로 변경됩니다!`
+        },
+        {
+            keywords: ["볼륨", "오디오", "소리", "데시벨", "db", "배경음악", "bgm", "게인"],
+            answer: `🔊 **사운드 믹싱 데시벨(dB) 기준 가이드**:\n\n* **주요 목소리 (내레이션/스피치)**: \`-6dB\`에서 \`-12dB\` 사이를 넘나들도록 볼륨을 조정합니다. (\`0dB\`를 넘어가면 소리가 깨집니다)\n* **배경음악 (BGM)**: 목소리가 있을 때는 \`-20dB\`에서 \`-25dB\` 이하로 낮춰야 목소리가 묻히지 않습니다.\n\n💡 **단축키**: 클립 선택 후 \`G\` 키를 누르면 빠르게 오디오 게인을 조절할 수 있습니다.`
+        },
+        {
+            keywords: ["속도", "배속", "슬로우", "빠르게", "느리게", "역재생"],
+            answer: `🏃‍♂️ **영상 속도 및 재생 방향 설정 방법**:\n\n1. 타임라인에서 속도를 바꿀 클립을 선택한 뒤 **우클릭**합니다.\n2. **속도/지속시간 (Speed/Duration)** 메뉴를 선택합니다. (단축키 \`Ctrl + R\`)\n3. **속도(%)** 값을 100%보다 높이면 빠르게, 낮추면 느리게(슬로우 모션) 변경됩니다.\n4. **뒤로 재생 (Reverse Speed)** 체크박스를 체크하면 영상이 거꾸로 재생(역재생)됩니다.`
+        },
+        {
+            keywords: ["자막", "글자", "텍스트", "움직이", "키프레임", "애니메이션"],
+            answer: `🎬 **텍스트 자막 애니메이션 (키프레임) 만드는 법**:\n\n1. 문자 도구(\`T\`)로 자막을 작성하고 선택합니다.\n2. **효과 컨트롤 (Effect Controls)** 패널로 이동합니다.\n3. **텍스트 -> 위치(Position)** 항목 왼쪽의 **스톱워치 아이콘**을 클릭해 첫 키프레임을 생성합니다.\n4. 타임라인 헤더를 1~2초 뒤로 이동한 뒤, 위치 값을 조절하면 새로운 키프레임이 자동 생성되며 텍스트가 움직이는 효과가 만들어집니다.`
+        },
+        {
+            keywords: ["전환", "디졸브", "페이드", "트랜지션", "이펙트"],
+            answer: `✨ **비디오/오디오 전환(Transition) 효과 적용하기**:\n\n1. **효과 (Effects)** 패널에서 '비디오 전환' -> '디졸브' -> '교차 디졸브(Cross Dissolve)'를 찾습니다.\n2. 마우스로 드래그하여 타임라인 상의 두 클립 경계선 사이에 놓습니다.\n\n💡 **단축키 꿀팁**: \`Ctrl + D\`를 누르면 선택한 클립 경계에 기본 전환 효과(디졸브)가 즉시 적용됩니다.`
+        },
+        {
+            keywords: ["저장", "위치", "프로젝트", "프로젝트생성"],
+            answer: `💾 **프로젝트 저장 및 시작하기**:\n\n1. 프리미어 프로를 실행하고 **새 프로젝트(New Project)**를 누릅니다.\n2. 왼쪽 상단에서 **프로젝트 이름**을 입력합니다.\n3. **저장 위치(Project Location)** 옆의 폴더 경로를 클릭하여 원하는 위치(예: 바탕화면 작업 폴더)로 지정해야 나중에 파일 분실을 방지할 수 있습니다.`
+        },
+        {
+            keywords: ["잔물결", "딜리트", "빈공간", "삭제"],
+            answer: `🗑️ **잔물결 삭제 (Ripple Delete) 활용하기**:\n\n* 클립을 자르고 지웠을 때 중간에 남는 빈 공간(회색 영역)을 클릭해 선택한 후 \`Delete\` 또는 \`Shift + Delete\`를 누르면 빈 공간이 메워지며 뒤쪽 영상들이 자동으로 당겨집니다.\n* **단축키**: 클립 선택 후 \`Shift + Delete\`를 누르면 클립 삭제와 동시에 잔물결 삭제가 한 번에 이루어집니다.`
+        },
+        {
+            keywords: ["한글", "영어", "언어", "ko_kr", "en_us", "한영"],
+            answer: `🌐 **프리미어 한글/영어 메뉴 언어 변경 방법**:\n\n1. 프리미어 실행 상태에서 \`Ctrl + F12\` (맥은 \`Cmd + F12\`) 키를 눌러 **콘솔(Console) 창**을 엽니다.\n2. 콘솔 창 탭 이름 옆의 三 메뉴 버튼을 눌러 **Debug Database View**를 선택합니다.\n3. 리스트에서 \`ApplicationLanguage\` 항목을 찾아 한국어는 \`ko_KR\`, 영어는 \`en_US\`로 변경합니다.\n4. 프리미어를 재시작하면 언어가 변경됩니다.`
+        },
+        {
+            keywords: ["템플릿", "자막틀", "mogrt", "stock", "스톡"],
+            answer: `📦 **모션 그래픽 템플릿 (.mogrt) 사용 및 설치법**:\n\n1. **기본 그래픽 (Essential Graphics)** 또는 **템플릿** 패널을 엽니다.\n2. 패널 우측 하단의 **[+] 모양 버튼(모션 그래픽 템플릿 설치)**을 누르고 다운로드한 \`.mogrt\` 파일을 선택합니다.\n3. 설치된 템플릿을 타임라인으로 드래그하여 적용한 뒤, 우측 [편집] 탭에서 내용과 색상을 수정할 수 있습니다.`
+        },
+        {
+            keywords: ["내보내기", "렌더링", "저장", "mp4", "인코딩", "출력"],
+            answer: `🎬 **완성된 영상 파일(MP4)로 내보내기 (Export)**:\n\n1. 상단 메뉴에서 **내보내기 (Export)** 탭을 클릭하거나 단축키 \`Ctrl + M\`을 누릅니다.\n2. **파일 이름**과 **저장 경로**를 설정합니다.\n3. 포맷(Format)을 **H.264**로 선택하면 가장 표준적인 MP4 파일로 출력됩니다.\n4. 해상도 및 프레임 레이트 설정을 마친 후 우측 하단의 **내보내기 (Export)** 버튼을 누르면 완성됩니다.`
+        },
+        {
+            keywords: ["소개", "정보", "프리미어란", "프리미어프로"],
+            answer: `🎥 **Adobe Premiere Pro 소개**:\n\n어도비 프리미어 프로(Adobe Premiere Pro)는 영화, 방송, 유튜브 등 전 세계 미디어 산업에서 널리 쓰이는 표준 비선형 영상 편집 소프트웨어입니다.\n\n강력한 컷 편집 기능부터 자막 생성, 색보정(Lumetri Color), 오디오 믹싱, 그리고 최신 생성형 AI 기능(오디오 복구, 생성형 확장 등)까지 결합되어 완성도 높은 콘텐츠 제작이 가능합니다.`
+        }
+    ];
+
+    // Find first database item that matches any of the keywords
+    for (const item of database) {
+        for (const keyword of item.keywords) {
+            if (text.includes(keyword)) {
+                return item.answer;
             }
-        })
-    });
-
-    if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error?.message || `HTTP error ${response.status}`);
+        }
     }
-
-    const data = await response.json();
-    return data.candidates?.[0]?.content?.parts?.[0]?.text || "죄송합니다. 답변을 생성하지 못했습니다.";
+    
+    return null;
 }
 
 function renderMessageBubble(sender, text, time) {

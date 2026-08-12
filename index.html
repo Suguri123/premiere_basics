@@ -680,36 +680,12 @@
 
 
 
-            <!-- 6. AI Q&A Section -->
             <section id="ai-qna" class="app-section">
                 <div class="container">
                     <div class="section-header text-center">
-                        <span class="section-tag">AI ASSISTANT</span>
-                        <h2 class="section-title">AI 1:1 문의게시판</h2>
-                        <p class="section-subtitle">어도비 프리미어 프로 영상편집 중 궁금한 점을 Gemini AI에게 즉시 물어보세요!</p>
-                    </div>
-
-                    <!-- API Key Setting Panel -->
-                    <div class="glass-panel api-config-card" style="display: none; margin-bottom: 24px; padding: 20px;">
-                        <div class="api-config-header" style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="toggleApiPanel()">
-                            <h4 style="margin: 0; display: flex; align-items: center; gap: 8px;">
-                                🔑 <span>Gemini API 키 설정 (선택 사항)</span>
-                                <span class="api-status-badge" id="api-status-badge" style="font-size: 0.8rem; padding: 2px 8px; border-radius: 12px; background: #fee2e2; color: #ef4444; border: 1px solid #fecaca;">미연동 (기본 응답 모드)</span>
-                            </h4>
-                            <span id="api-toggle-icon" style="font-size: 1.2rem;">▼</span>
-                        </div>
-                        <div id="api-config-body" style="margin-top: 16px; display: none;">
-                            <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 12px; line-height: 1.5;">
-                                Gemini API 키를 연동하면 실시간으로 모든 프리미어 관련 질문에 답변을 받을 수 있습니다. API 키가 없으면 기본 준비된 질문 및 답변(데모 모드)으로만 동작합니다.<br>
-                                API 키는 브라우저 내부 로컬 스토리지에만 안전하게 저장되며 서버로 전송되지 않습니다.
-                                <a href="https://aistudio.google.com/" target="_blank" style="color: var(--secondary); font-weight: bold; text-decoration: underline;">Google AI Studio에서 무료 API 키 발급받기 &rarr;</a>
-                            </p>
-                            <div style="display: flex; gap: 12px; align-items: center;">
-                                <input type="password" id="gemini-api-key-input" placeholder="AI Studio에서 발급받은 API 키를 입력하세요 (AIzaSy...)" style="flex: 1; padding: 12px 16px; border: 2.5px solid var(--border-color); border-radius: var(--radius-sm); font-size: 1rem; background: var(--bg-page); color: var(--text-main); outline: none; transition: var(--transition);">
-                                <button onclick="saveApiKey()" class="btn btn-purple btn-sm" style="border-radius: var(--radius-sm); white-space: nowrap;">키 저장</button>
-                                <button onclick="deleteApiKey()" class="btn btn-outline btn-sm" style="border-radius: var(--radius-sm); white-space: nowrap; color: #ef4444; border-color: #fca5a5;">삭제</button>
-                            </div>
-                        </div>
+                        <span class="section-tag">QA BOARD</span>
+                        <h2 class="section-title">Premiere 1:1 Q&A 게시판</h2>
+                        <p class="section-subtitle">어도비 프리미어 프로 영상편집 중 궁금한 점을 입력하여 바로 해결하세요!</p>
                     </div>
 
                     <div class="qna-workspace-grid">
