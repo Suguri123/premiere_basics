@@ -621,7 +621,7 @@ window.sendChatMessage = async function() {
 async function callGeminiApi(apiKey, userMessageText) {
     const systemInstruction = "당신은 프리미어 프로(Adobe Premiere Pro) 기초 과정을 학습하는 학생들을 위한 친절하고 전문적인 AI 튜터입니다. 질문에 대해 쉽고 명확하게 한국어로 답변해 주세요. 프리미어와 무관한 질문에는 정중히 거절하고 프리미어 질문으로 유도해 주세요. 코드나 단축키가 포함된 경우 마크다운 형식으로 가독성 좋게 꾸며주세요.";
     
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=${apiKey}`;
 
     // Build the request contents array from conversation history (limit to last 10 messages for token usage and performance)
     const historyLimit = chatHistory.slice(-10);
