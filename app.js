@@ -547,7 +547,18 @@ window.renderFaqSidebar = function() {
         `;
         
         visibleList.forEach(item => {
-            let shortQ = item.q;
+            let shortQ = item.q
+                .replace(/프리미어 프로에서/g, "")
+                .replace(/프리미어 프로 실행 시/g, "실행 시")
+                .replace(/프리미어 프로/g, "")
+                .replace(/프리미어에서/g, "")
+                .replace(/프리미어/g, "")
+                .trim();
+            
+            // Clean up leading particles
+            shortQ = shortQ.replace(/^(는|은|을|를|이|가)\s*/, "");
+            shortQ = shortQ.charAt(0).toUpperCase() + shortQ.slice(1);
+
             if (shortQ.length > 25) {
                 shortQ = shortQ.substring(0, 24) + "...";
             }
@@ -559,7 +570,17 @@ window.renderFaqSidebar = function() {
         if (hiddenList.length > 0) {
             html += `<div class="more-questions" style="display: none; flex-direction: column; gap: 2px;">`;
             hiddenList.forEach(item => {
-                let shortQ = item.q;
+                let shortQ = item.q
+                    .replace(/프리미어 프로에서/g, "")
+                    .replace(/프리미어 프로 실행 시/g, "실행 시")
+                    .replace(/프리미어 프로/g, "")
+                    .replace(/프리미어에서/g, "")
+                    .replace(/프리미어/g, "")
+                    .trim();
+                
+                shortQ = shortQ.replace(/^(는|은|을|를|이|가)\s*/, "");
+                shortQ = shortQ.charAt(0).toUpperCase() + shortQ.slice(1);
+
                 if (shortQ.length > 25) {
                     shortQ = shortQ.substring(0, 24) + "...";
                 }
