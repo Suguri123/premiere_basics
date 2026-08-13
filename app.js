@@ -515,6 +515,9 @@ window.sendChatMessage = async function() {
     // 1. Clear input
     textarea.value = "";
     textarea.style.height = "auto";
+    if (typeof filterQuickQuestions === 'function') {
+        filterQuickQuestions("");
+    }
 
     // 2. Add user message
     const now = new Date();
@@ -708,6 +711,50 @@ window.toggleSpecsPanel = function() {
         icon.innerText = "▼";
         icon.style.transform = "rotate(0deg)";
     }
+};
+
+window.toggleMoreQuestions = function() {
+    const moreDivs = document.querySelectorAll(".more-questions");
+    const btn = document.getElementById("toggle-more-btn");
+    if (!btn || moreDivs.length === 0) return;
+    
+    const isHidden = moreDivs[0].style.display === "none" || !moreDivs[0].style.display;
+    
+    moreDivs.forEach(div => {
+        div.style.display = isHidden ? "flex" : "none";
+    });
+    
+    btn.innerHTML = isHidden ? "➖ 질문 접기" : "➕ 자주 묻는 질문 더보기";
+};
+
+window.filterQuickQuestions = function(query) {
+    const text = query.toLowerCase().replace(/\s+/g, '');
+    const items = document.querySelectorAll(".quick-question-text");
+    const moreDivs = document.querySelectorAll(".more-questions");
+    const btn = document.getElementById("toggle-more-btn");
+    
+    if (query.trim().length > 0) {
+        // Show all hidden question containers during search
+        moreDivs.forEach(div => div.style.display = "flex");
+        if (btn) btn.style.display = "none"; // Hide show more button during search
+    } else {
+        // Revert to current state (default hidden)
+        const isExpanded = btn && btn.innerHTML.includes("접기");
+        moreDivs.forEach(div => div.style.display = isExpanded ? "flex" : "none");
+        if (btn) btn.style.display = "block";
+    }
+
+    items.forEach(item => {
+        const itemText = item.textContent.toLowerCase().replace(/\s+/g, '');
+        const onclickAttr = item.getAttribute("onclick") || "";
+        const matchText = onclickAttr.toLowerCase().replace(/\s+/g, '');
+        
+        if (itemText.includes(text) || matchText.includes(text)) {
+            item.style.display = "flex";
+        } else {
+            item.style.display = "none";
+        }
+    });
 };
 
 window.toggleAudioSpecsPanel = function() {
