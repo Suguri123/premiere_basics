@@ -696,7 +696,7 @@
                                 <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; color: var(--text-main);">🔍 질문 찾기</h4>
                                 <div style="display: flex; gap: 8px; max-width: 240px;">
                                     <input type="text" id="chat-input-textarea" placeholder="키워드를 입력하세요" style="flex: 1; padding: 10px 12px; border: 2.5px solid var(--border-color); border-radius: var(--radius-sm); outline: none; background: var(--bg-page); color: var(--text-main); font-family: var(--font-primary); font-size: 0.9rem; transition: var(--transition);" onkeydown="handleChatInputKeydown(event)" oninput="filterQuickQuestions(this.value)">
-                                    <button id="send-chat-btn" onclick="sendChatMessage()" class="btn btn-purple" style="border-radius: var(--radius-sm); padding: 8px 16px; font-size: 0.85rem; font-weight: 700;">찾기</button>
+                                    <button id="send-chat-btn" onclick="sendChatMessage()" class="btn btn-purple" style="border-radius: var(--radius-sm); padding: 8px 16px; font-size: 0.85rem; font-weight: 700; flex-shrink: 0; white-space: nowrap;">찾기</button>
                                 </div>
                             </div>
 
@@ -988,7 +988,7 @@
             });
         }
     </script>
-    <script src="qa_database.js?v=10"></script>
-    <script src="app.js?v=10"></script>
+    <script src="qa_database.js?v=11"></script>
+    <script src="app.js?v=11"></script>
 </body>
 </html>
