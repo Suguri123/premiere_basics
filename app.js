@@ -479,6 +479,100 @@ window.initQna = function() {
             chatHistory = [];
         }
     }
+
+    // Render 500 Q&As categorized on the left sidebar
+    renderFaqSidebar();
+};
+
+window.renderFaqSidebar = function() {
+    const container = document.getElementById("faq-categories-container");
+    if (!container) return;
+    
+    // Define the 5 categories
+    const categories = [
+        { id: "cat-basic", name: "⚙️ 기본 및 환경 설정", keywords: ['설정', '프로젝트', '언어', '스크래치', '캐시', 'ram', '저장', 'gpu', '초기화', '환경', '도구', '단축키', '단축'] },
+        { id: "cat-timeline", name: "✂️ 컷 편집 및 타임라인", keywords: ['컷', '자르기', '타임라인', '클립', '트랙', '삭제', '스냅', '이동', '재생헤드', '트리밍', 'unlink', '스냅', '자석'] },
+        { id: "cat-caption", name: "💬 자막 및 기본 그래픽", keywords: ['자막', '텍스트', '글꼴', '폰트', '행간', '템플릿', 'mogrt', '그래픽', '정렬', '디자인', '획', 'stroke'] },
+        { id: "cat-audio", name: "🔊 오디오 및 사운드", keywords: ['오디오', '사운드', '볼륨', 'bgm', '게인', '데시벨', 'db', '노이즈', '마이크', '페이드', '리믹스', '음악', '싱크', '동기화'] },
+        { id: "cat-color", name: "🎨 색보정 및 내보내기", keywords: ['색', '루미트리', 'lut', '렌더링', '랜더링', '내보내기', 'mp4', '인코딩', '화질', '컴파일', '알파', 'h.264', '출력', '프레임', 'vfr'] }
+    ];
+    
+    // Group all QnAs
+    const grouped = {
+        "cat-basic": [],
+        "cat-timeline": [],
+        "cat-caption": [],
+        "cat-audio": [],
+        "cat-color": []
+    };
+    
+    if (typeof PRESET_QNA !== 'undefined' && Array.isArray(PRESET_QNA)) {
+        PRESET_QNA.forEach(item => {
+            const q = item.q.toLowerCase();
+            let categorized = false;
+            
+            // 1. Group based on keywords
+            for (const cat of categories) {
+                if (cat.keywords.some(k => q.includes(k))) {
+                    grouped[cat.id].push(item);
+                    categorized = true;
+                    break;
+                }
+            }
+            
+            // 2. Catch-all: default to cat-basic
+            if (!categorized) {
+                grouped["cat-basic"].push(item);
+            }
+        });
+    }
+    
+    // Now, render the HTML
+    container.innerHTML = "";
+    
+    categories.forEach(cat => {
+        const list = grouped[cat.id];
+        if (list.length === 0) return;
+        
+        // Show first 3, hide others
+        const visibleList = list.slice(0, 3);
+        const hiddenList = list.slice(3);
+        
+        const catDiv = document.createElement("div");
+        catDiv.style.marginBottom = "14px";
+        
+        let html = `
+            <h5 style="font-size: 0.85rem; color: var(--primary); margin-bottom: 6px; font-weight: 700; display: flex; align-items: center; gap: 6px;">${cat.name}</h5>
+            <div style="display: flex; flex-direction: column; gap: 2px;">
+        `;
+        
+        visibleList.forEach(item => {
+            let shortQ = item.q;
+            if (shortQ.length > 25) {
+                shortQ = shortQ.substring(0, 24) + "...";
+            }
+            // Use custom escape for quotes to ensure safe HTML in onclick
+            const safeQ = item.q.replace(/'/g, "\\'");
+            html += `<div class="quick-question-text" onclick="askQuickQuestion('${safeQ}')" title="${item.q}">• ${shortQ}</div>`;
+        });
+        
+        if (hiddenList.length > 0) {
+            html += `<div class="more-questions" style="display: none; flex-direction: column; gap: 2px;">`;
+            hiddenList.forEach(item => {
+                let shortQ = item.q;
+                if (shortQ.length > 25) {
+                    shortQ = shortQ.substring(0, 24) + "...";
+                }
+                const safeQ = item.q.replace(/'/g, "\\'");
+                html += `<div class="quick-question-text" onclick="askQuickQuestion('${safeQ}')" title="${item.q}">• ${shortQ}</div>`;
+            });
+            html += `</div>`;
+        }
+        
+        html += `</div>`;
+        catDiv.innerHTML = html;
+        container.appendChild(catDiv);
+    });
 };
 
 window.askQuickQuestion = function(questionText) {
@@ -724,7 +818,7 @@ window.toggleMoreQuestions = function() {
         div.style.display = isHidden ? "flex" : "none";
     });
     
-    btn.innerHTML = isHidden ? "➖ 질문 접기" : "➕ 자주 묻는 질문 더보기";
+    btn.innerHTML = isHidden ? "➖ 질문 접기" : "➕ 자주 묻는 질문 전체보기 (더보기)";
 };
 
 window.filterQuickQuestions = function(query) {
