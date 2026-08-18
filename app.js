@@ -35,10 +35,9 @@ const courseData = {
         { id: "4-3", title: "외부 템플릿 사이트와 설치 방법", duration: "5분", desc: "무료 템플릿 사이트 소개(Mixkit 등), .mogrt 파일 다운로드 → 그래픽 템플릿 패널에 설치", caption: "🔗 <a href='https://mixkit.co/' target='_blank' style='color: var(--secondary); text-decoration: underline; font-weight: 700;'>Mixkit 바로가기</a>", resource: "외부 템플릿" },
         { id: "4-4", title: "생성형 확장으로 짧은 클립 늘리기", duration: "5분", desc: "타임라인에서 생성형 확장 도구 선택 → 클립 끝을 드래그 → AI가 이어 그린 프레임 확인", caption: "부족한 1~2초는 AI에게", resource: "실습 소스팩 A" },
         { id: "4-5", title: "생성형 확장이 잘 되는 장면 vs 안 되는 장면", duration: "4분", desc: "배경 위주·완만한 움직임(잘 됨) vs 빠른 동작·복잡한 손동작(한계) 비교 실험", caption: "풍경 O, 격한 움직임 X", resource: "" },
-        { id: "4-6", title: "숏폼 시퀀스 설정과 기획", duration: "5분", desc: "1080×1920(9:16) 시퀀스 생성, 숏폼 3초 훅의 중요성, 15~30초 구성안 짜기", caption: "첫 3초에 결과물부터 보여주기", resource: "기획 템플릿" },
-        { id: "4-7", title: "숏폼 편집 — 컷·자막·음악 몰아치기", duration: "6분", desc: "빠른 컷 편집 리듬, AI 자동 자막을 숏폼 스타일(큰 글씨·중앙 하단)로 변환, 비트에 컷 맞추기", caption: "숏폼 자막은 크게, 짧게, 중앙에", resource: "완성 프로젝트 D" },
-        { id: "4-8", title: "숏폼 내보내기와 업로드 규격", duration: "4분", desc: "내보내기 설정(H.264, 유튜브 1080p Full HD 프리셋), 쇼츠/릴스 규격·용량, 업로드 시 제목·해시태그 요령", caption: "쇼츠는 60초 이내, #shorts", resource: "규격 비교표" },
-        { id: "4-9", title: "결과물 셀프 점검과 다음 단계", duration: "5분", desc: "자주 하는 실수 체크리스트(자막 가독성·오디오 밸런스·과한 전환) 셀프 점검, 수강생 결과물 피드백 예시, 심화 학습 로드맵(색보정·합성) 안내", caption: "업로드 전 10초 체크리스트", resource: "셀프 점검표" }
+        { id: "4-6", title: "숏폼 편집 — 컷·자막·음악 몰아치기", duration: "6분", desc: "빠른 컷 편집 리듬, AI 자동 자막을 숏폼 스타일(큰 글씨·중앙 하단)로 변환, 비트에 컷 맞추기", caption: "숏폼 자막은 크게, 짧게, 중앙에", resource: "완성 프로젝트 D" },
+        { id: "4-7", title: "숏폼 내보내기와 업로드 규격", duration: "4분", desc: "내보내기 설정(H.264, 유튜브 1080p Full HD 프리셋), 쇼츠/릴스 규격·용량, 업로드 시 제목·해시태그 요령", caption: "쇼츠는 60초 이내, #shorts", resource: "규격 비교표" },
+        { id: "4-8", title: "결과물 셀프 점검과 다음 단계", duration: "5분", desc: "자주 하는 실수 체크리스트(자막 가독성·오디오 밸런스·과한 전환) 셀프 점검, 수강생 결과물 피드백 예시, 심화 학습 로드맵(색보정·합성) 안내", caption: "업로드 전 10초 체크리스트", resource: "셀프 점검표" }
     ]
 };
 
