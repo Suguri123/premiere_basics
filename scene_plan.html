@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=device-width, initial-scale=1.0">
+    <title>Firefly로 AI 비디오 만들기 — 장면 계획서</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-page: #f4f6fa;
+            --bg-page-deep: #e9edf5;
+            --bg-card: #ffffff;
+            --bg-card-soft: #f8fafd;
+            --border-color: #cbd5e1;
+            --border-focus: #0066ff;
+            --primary: #0066ff;
+            --primary-glow: rgba(0, 102, 255, 0.08);
+            --secondary: #0ea5e9;
+            --secondary-glow: rgba(14, 165, 233, 0.2);
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --text-inverse: #ffffff;
+            --font-primary: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body.dark-theme {
+            --bg-page: #0b0f19;
+            --bg-page-deep: #111827;
+            --bg-card: #1f2937;
+            --bg-card-soft: #374151;
+            --border-color: #374151;
+            --border-focus: #60a5fa;
+            --primary: #7dd3fc;
+            --primary-glow: rgba(125, 211, 252, 0.24);
+            --secondary: #67e8f9;
+            --secondary-glow: rgba(14, 165, 233, 0.3);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --text-inverse: #0b0f19;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            font-family: var(--font-primary);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 14px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border-radius: 30px;
+            margin-bottom: 12px;
+            background: var(--primary-glow);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .glass-panel {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            position: relative;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 20px 0 10px 0;
+            color: var(--secondary);
+        }
+
+        p {
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
+        .prompt-container {
+            background: var(--bg-page-deep);
+            border: 1.5px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 16px;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .prompt-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .prompt-text {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-main);
+            word-break: keep-all;
+            margin-bottom: 8px;
+            padding-right: 80px;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: var(--primary);
+            color: var(--text-inverse);
+            border: none;
+            padding: 6px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .copy-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        ul {
+            list-style: none;
+            margin-bottom: 16px;
+        }
+
+        li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: 800;
+        }
+
+        .info-box {
+            background: var(--primary-glow);
+            border-left: 4px solid var(--primary);
+            padding: 16px;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            margin-top: 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .cut-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .cut-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 30px;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .cut-card:hover {
+            border-color: var(--secondary);
+            box-shadow: 0 6px 24px var(--secondary-glow);
+        }
+
+        .cut-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+        }
+
+        .cut-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .cut-status {
+            font-size: 0.85rem;
+            font-weight: 700;
+            background: var(--bg-page-deep);
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+
+        .meta-list {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed var(--border-color);
+        }
+
+        .meta-item {
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+        }
+
+        .meta-item strong {
+            color: var(--primary);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #10b981;
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 2000;
+            opacity: 0;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">실습 자료 3-6</span>
+        <h1>Firefly로 AI 비디오 만들기 — 장면 계획서</h1>
+        <p class="subtitle">프롬프트를 간편하게 복사하여 어도비 파이어플라이(Adobe Firefly)에 입력해 보세요.</p>
+    </header>
+
+    <!-- 고정된 AI 캐릭터 참조 프롬프트 -->
+    <div class="glass-panel">
+        <h2>👤 고정된 AI 캐릭터 참조 프롬프트 (세부 설정)</h2>
+        <p>이 프롬프트는 캐릭터의 전신 샷과 구체적인 외모/복장 디테일, 그리고 균일한 조명 값을 설정하여 모든 컷에서 인물의 얼굴과 스타일이 동일하게 유지되도록 '기준'이 되는 이미지를 생성합니다.</p>
+        
+        <div class="prompt-container">
+            <div class="prompt-label">기준 이미지 생성 프롬프트</div>
+            <div class="prompt-text" id="ref-prompt">단정하게 아래로 묶은 로우 번 헤어스타일과 베이지색 린넨 앞치마, 흰색 면 티셔츠, 남색 데님 팬츠를 입은 밝은 인상의 20대 한국 여성의 전신 인물 사진. 깨끗하고 내추럴한 메이크업, 따뜻한 아침 햇살이 들어오는 밝고 아늑한 원목 주방 배경. 카메라를 향해 환하게 웃고 있는 정면 모습. 스튜디오 조명 수준의 균일한 확산광, 사실적인 피부 질감, 고해상도 4K 실사 스타일.</div>
+            <button class="copy-btn" onclick="copyText('ref-prompt')">복사하기</button>
+        </div>
+
+        <h3>구체적 캐릭터 디테일 (참고용):</h3>
+        <ul>
+            <li><strong>헤어:</strong> 어두운 갈색, 자연스러운 로우 번 (가르마는 왼쪽)</li>
+            <li><strong>상의:</strong> 깨끗하고 평범한 라운드넥 흰색 면 티셔츠</li>
+            <li><strong>앞치마:</strong> 거친 질감의 자연스러운 베이지색 린넨, 허리끈이 앞쪽에서 묶임, 가슴 쪽에 작은 주머니 2개</li>
+            <li><strong>하의:</strong> 스탠다드 핏의 어두운 남색 데님 청바지</li>
+            <li><strong>신발:</strong> 깔끔한 아이보리색 스니커즈 (전신 샷일 경우)</li>
+            <li><strong>배경:</strong> 밝은 원목 싱크대, 흰색 타일, 창가에 작은 화분 (흐릿하게 처리됨)</li>
+        </ul>
+
+        <div class="info-box">
+            💡 이 프롬프트를 사용하여 캐릭터의 '기준 스틸컷'을 먼저 생성한 후, 이 이미지를 어도비 파이어플라이의 '참조 이미지(Reference Image)' 기능이나 이미지 투 비디오(Image to Video) 기능에 입력하여 활용하면 4컷 영상 내내 동일 인물의 모습을 유지할 수 있습니다.
+        </div>
+    </div>
+
+    <!-- 청귤청 4컷 영상 구성 & 프롬프트 -->
+    <h2 style="margin-top: 50px;">🍊 청귤청 4컷 영상 구성 & 프롬프트</h2>
+    
+    <div class="cut-grid">
+        <!-- Cut 1 -->
+        <div class="cut-card">
+            <div class="cut-header">
+                <span class="cut-title">Cut 1. 청귤 세척</span>
+                <span class="cut-status">상황: 청귤 씻기</span>
+            </div>
+            <p><strong>상황:</strong> 싱크대에서 흐르는 맑은 물에 신선한 청귤을 깨끗이 씻으며 미소 짓는 장면.</p>
+            
+            <div class="prompt-container">
+                <div class="prompt-label">이미지 생성 프롬프트 (Firefly 이미지)</div>
+                <div class="prompt-text" id="img-prompt-1">단정하게 머리를 묶고 베이지 앞치마를 두른 20대 한국 여성이 밝은 원목 주방 싱크대에서 흐르는 물에 싱그러운 초록색 청귤을 조심스럽게 씻고 있는 모습, 튀는 물방울, 청귤 껍질에 맺힌 신선한 이슬, 따뜻한 자연광, 영화 같은 구도, 고화질 실사 사진.</div>
+                <button class="copy-btn" onclick="copyText('img-prompt-1')">복사</button>
+            </div>
+
+            <div class="prompt-container">
+                <div class="prompt-label">영상 생성 프롬프트 (Firefly 비디오)</div>
+                <div class="prompt-text" id="vid-prompt-1">흐르는 물에 신선한 초록 청귤을 씻으며 환하게 미소 짓는 20대 한국 여성의 미디엄 클로즈업 샷, 싱그러운 과일 위로 잔잔하게 튀는 물방울, 카메라가 인물을 향해 부드럽게 줌인(Push-in), 자연스러운 아침 햇살, 유기농 주방 분위기.</div>
+                <button class="copy-btn" onclick="copyText('vid-prompt-1')">복사</button>
+            </div>
+
+            <div class="meta-list">
+                <div class="meta-item">🔊 <strong>효과음 (SFX):</strong> 시원하게 콸콸 흐르는 수돗물 소리, 청귤끼리 가볍게 부딪히는 소리</div>
+                <div class="meta-item">🎵 <strong>배경음악 (BGM):</strong> 산뜻하고 따뜻한 어쿠스틱 기타 핑거스타일 인트로</div>
+            </div>
+        </div>
+
+        <!-- Cut 2 -->
+        <div class="cut-card">
+            <div class="cut-header">
+                <span class="cut-title">Cut 2. 슬라이스 썰기</span>
+                <span class="cut-status">상황: 칼질</span>
+            </div>
+            <p><strong>상황:</strong> 나무 도마 위에서 청귤을 일정한 두께로 얇게 썰어 단면의 과즙이 돋보이는 장면.</p>
+            
+            <div class="prompt-container">
+                <div class="prompt-label">이미지 생성 프롬프트 (Firefly 이미지)</div>
+                <div class="prompt-text" id="img-prompt-2">나무 도마 위에서 주방용 칼로 싱싱한 청귤을 얇고 균일하게 썰고 있는 20대 여성의 손 클로즈업 샷, 과즙이 풍부한 연두색과 노란색의 과육 단면, 튀어나온 미세한 과즙 방울들, 밝은 주방 조리대, 매크로 접사 디테일, 초고화질 실사.</div>
+                <button class="copy-btn" onclick="copyText('img-prompt-2')">복사</button>
+            </div>
+
+            <div class="prompt-container">
+                <div class="prompt-label">영상 생성 프롬프트 (Firefly 비디오)</div>
+                <div class="prompt-text" id="vid-prompt-2">나무 도마 위에서 칼로 청귤을 부드럽고 리드미컬하게 써는 손 클로즈업 탑뷰에서 사이드 앵글로 전환, 과즙이 꽉 찬 단면이 드러나는 슬로우 모션 효과, 깔끔하고 선명한 포커스, 얕은 심도.</div>
+                <button class="copy-btn" onclick="copyText('vid-prompt-2')">복사</button>
+            </div>
+
+            <div class="meta-list">
+                <div class="meta-item">🔊 <strong>효과음 (SFX):</strong> 도마에 닿는 깔끔하고 경쾌한 칼질 소리(사각- 톡), 과즙 터지는 소리</div>
+                <div class="meta-item">🎵 <strong>배경음악 (BGM):</strong> 리드미컬하고 경쾌한 로파이(Lo-Fi) 어쿠스틱 비트</div>
+            </div>
+        </div>
+
+        <!-- Cut 3 -->
+        <div class="cut-card">
+            <div class="cut-header">
+                <span class="cut-title">Cut 3. 설탕 버무리기 및 유리병 담기</span>
+                <span class="cut-status">상황: 병에 담기</span>
+            </div>
+            <p><strong>상황:</strong> 유리 볼에 슬라이스한 청귤과 설탕을 버무려 유리병에 차곡차곡 담는 장면.</p>
+            
+            <div class="prompt-container">
+                <div class="prompt-label">이미지 생성 프롬프트 (Firefly 이미지)</div>
+                <div class="prompt-text" id="img-prompt-3">투명한 유리병에 슬라이스된 청귤과 반짝이는 하얀 설탕을 나무숟가락으로  층층이 정성스럽게 담고 있는 베이지 앞치마를 입은 20대 한국 여성의 미디엄 샷, 유리병 속에 채워지는 상큼한 초록색 청귤 단면, 햇살에 반짝이는 설탕 알갱이, 따뜻하고 포근한 홈카페 감성.</div>
+                <button class="copy-btn" onclick="copyText('img-prompt-3')">복사</button>
+            </div>
+
+            <div class="prompt-container">
+                <div class="prompt-label">영상 생성 프롬프트 (Firefly 비디오)</div>
+                <div class="prompt-text" id="vid-prompt-3">청귤 슬라이스 위에 나무 숟가락으로 유리병에 옮겨진 설탕을 조심스럽게 섞고 있는 여성의  미디엄 클로즈업 샷, 주방 창가로 들어오는 따사로운 햇살, 부드러운 카메라 좌우 팬(Pan) 무빙.</div>
+                <button class="copy-btn" onclick="copyText('vid-prompt-3')">복사</button>
+            </div>
+
+            <div class="meta-list">
+                <div class="meta-item">🔊 <strong>효과음 (SFX):</strong> 사각사각 설탕 섞이는 소리, 유리병에 청귤이 닿는 맑은 소리</div>
+                <div class="meta-item">🎵 <strong>배경음악 (BGM):</strong> 달콤하고 감미로운 피아노와 어쿠스틱 앙상블</div>
+            </div>
+        </div>
+
+        <!-- Cut 4 -->
+        <div class="cut-card">
+            <div class="cut-header">
+                <span class="cut-title">Cut 4. 청귤 에이드 완성 & 시음</span>
+                <span class="cut-status">상황: 시음 및 완성</span>
+            </div>
+            <p><strong>상황:</strong> 완성된 청귤청에 얼음과 탄산수를 넣은 에이드를 들고 만족스럽게 마시며 미소 짓는 엔딩.</p>
+            
+            <div class="prompt-container">
+                <div class="prompt-label">이미지 생성 프롬프트 (Firefly 이미지)</div>
+                <div class="prompt-text" id="img-prompt-4">얼음과 탄산수, 민트 잎이 띄워진 시원한 청귤 에이드 유리잔을 들고 환하게 웃고 있는 20대 한국 여성, 유리잔 표면에 맺힌 시원한 물방울, 솟아오르는 탄산 기포, 햇살 가득한 여름 카페 감성, 고화질 인물 사진.</div>
+                <button class="copy-btn" onclick="copyText('img-prompt-4')">복사</button>
+            </div>
+
+            <div class="prompt-container">
+                <div class="prompt-label">영상 생성 프롬프트 (Firefly 비디오)</div>
+                <div class="prompt-text" id="vid-prompt-4">유리잔의 시원한 청귤 에이드를 빨대로 한 모금 맛있게 마신 뒤, 카메라를 보며 기분 좋게 환한 미소를 짓는 여성의 아이레벨 미디엄 샷, 톡톡 터지는 탄산 기포, 청량하고 상쾌한 분위기, 부드러운 줌아웃(Zoom-out).</div>
+                <button class="copy-btn" onclick="copyText('vid-prompt-4')">복사</button>
+            </div>
+
+            <div class="meta-list">
+                <div class="meta-item">🔊 <strong>효과음 (SFX):</strong> 톡 쏘는 탄산수 기포 터지는 소리, 달그락거리는 얼음 소리, 만족스러운 숨소리</div>
+                <div class="meta-item">🎵 <strong>배경음악 (BGM):</strong> 산뜻하고 기분 좋게 마무리되는 어쿠스틱 엔딩 코드</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="toast" id="toast">복사 완료!</div>
+
+<script>
+    // Sync theme with main app
+    const currentTheme = localStorage.getItem("pr_basics_theme") || "light";
+    if (currentTheme === "dark") {
+        document.body.classList.add("dark-theme");
+    }
+
+    function copyText(elementId) {
+        const text = document.getElementById(elementId).innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            const toast = document.getElementById("toast");
+            toast.classList.add("show");
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 2000);
+        });
+    }
+</script>
+</body>
+</html>

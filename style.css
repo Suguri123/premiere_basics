@@ -1544,3 +1544,55 @@ body.dark-theme .user-msg .msg-bubble {
 }
 
 .tool-table-container:not(.expanded) .tool-table tbody tr:nth-child(n+4) { display: none; }
+
+/* Hero Visual Video Slider */
+.video-slider-container {
+    position: relative;
+    width: 100%;
+}
+.carousel-arrow {
+    position: absolute;
+    left: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--bg-card);
+    border: 2.5px solid var(--border-color);
+    color: var(--text-main);
+    font-size: 1.2rem;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    transition: var(--transition);
+    z-index: 100;
+}
+.carousel-arrow:hover {
+    background: var(--primary);
+    color: var(--text-inverse);
+    border-color: var(--primary);
+    transform: translateY(-50%) scale(1.1);
+}
+.video-slider-viewport {
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+}
+.video-slider-track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 200%;
+}
+.video-slide-item {
+    width: 50%;
+    flex-shrink: 0;
+}
+
+@media (max-width: 1024px) {
+    .carousel-arrow {
+        left: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+}
