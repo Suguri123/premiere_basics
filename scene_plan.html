@@ -321,6 +321,28 @@
         </div>
     </div>
 
+    <!-- 영상 제목 추천 -->
+    <div class="glass-panel" style="margin-top: 30px;">
+        <h2>🎬 영상 제목 추천 (타이틀 프롬프트)</h2>
+        <p>유튜브나 숏폼 업로드 시 시선을 사로잡을 수 있는 추천 제목 리스트입니다. 클릭하여 복사해 보세요.</p>
+        
+        <div class="prompt-container">
+            <div class="prompt-label">추천 제목 1</div>
+            <div class="prompt-text" id="title-prompt-1">싱그러운 초록빛 한 잔, 홈메이드 청귤청 만들기</div>
+            <button class="copy-btn" onclick="copyText('title-prompt-1')">복사</button>
+        </div>
+        <div class="prompt-container">
+            <div class="prompt-label">추천 제목 2</div>
+            <div class="prompt-text" id="title-prompt-2">늦여름의 상큼함, 4단계로 끝내는 수제 청귤청</div>
+            <button class="copy-btn" onclick="copyText('title-prompt-2')">복사</button>
+        </div>
+        <div class="prompt-container">
+            <div class="prompt-label">추천 제목 3</div>
+            <div class="prompt-text" id="title-prompt-3">청량감 가득! 감성 홈카페 청귤청 & 에이드</div>
+            <button class="copy-btn" onclick="copyText('title-prompt-3')">복사</button>
+        </div>
+    </div>
+
     <!-- 청귤청 4컷 영상 구성 & 프롬프트 -->
     <h2 style="margin-top: 50px;">🍊 청귤청 4컷 영상 구성 & 프롬프트</h2>
     
@@ -343,6 +365,12 @@
                 <div class="prompt-label">영상 생성 프롬프트 (Firefly 비디오)</div>
                 <div class="prompt-text" id="vid-prompt-1">흐르는 물에 신선한 초록 청귤을 씻으며 환하게 미소 짓는 20대 한국 여성의 미디엄 클로즈업 샷, 싱그러운 과일 위로 잔잔하게 튀는 물방울, 카메라가 인물을 향해 부드럽게 줌인(Push-in), 자연스러운 아침 햇살, 유기농 주방 분위기.</div>
                 <button class="copy-btn" onclick="copyText('vid-prompt-1')">복사</button>
+            </div>
+
+            <div class="prompt-container" style="border-color: var(--secondary); background: var(--bg-page-deep);">
+                <div class="prompt-label" style="color: var(--secondary); font-weight: 700;">🎙️ 나레이션 / 자막 프롬프트 (TTS용)</div>
+                <div class="prompt-text" id="voice-prompt-1">흐르는 맑은 물에 뽀득뽀득, 싱그러운 청귤을 깨끗하게 씻어줘요.</div>
+                <button class="copy-btn" style="background: var(--secondary);" onclick="copyText('voice-prompt-1')">복사</button>
             </div>
 
             <div class="meta-list">
@@ -371,6 +399,12 @@
                 <button class="copy-btn" onclick="copyText('vid-prompt-2')">복사</button>
             </div>
 
+            <div class="prompt-container" style="border-color: var(--secondary); background: var(--bg-page-deep);">
+                <div class="prompt-label" style="color: var(--secondary); font-weight: 700;">🎙️ 나레이션 / 자막 프롬프트 (TTS용)</div>
+                <div class="prompt-text" id="voice-prompt-2">과즙이 톡 터지도록 일정한 두께로 얇게 슬라이스해 줍니다.</div>
+                <button class="copy-btn" style="background: var(--secondary);" onclick="copyText('voice-prompt-2')">복사</button>
+            </div>
+
             <div class="meta-list">
                 <div class="meta-item">🔊 <strong>효과음 (SFX):</strong> 도마에 닿는 깔끔하고 경쾌한 칼질 소리(사각- 톡), 과즙 터지는 소리</div>
                 <div class="meta-item">🎵 <strong>배경음악 (BGM):</strong> 리드미컬하고 경쾌한 로파이(Lo-Fi) 어쿠스틱 비트</div>
@@ -397,6 +431,12 @@
                 <button class="copy-btn" onclick="copyText('vid-prompt-3')">복사</button>
             </div>
 
+            <div class="prompt-container" style="border-color: var(--secondary); background: var(--bg-page-deep);">
+                <div class="prompt-label" style="color: var(--secondary); font-weight: 700;">🎙️ 나레이션 / 자막 프롬프트 (TTS용)</div>
+                <div class="prompt-text" id="voice-prompt-3">소독한 유리병에 청귤과 설탕을 1대 1로 차곡차곡 정성껏 담아요.</div>
+                <button class="copy-btn" style="background: var(--secondary);" onclick="copyText('voice-prompt-3')">복사</button>
+            </div>
+
             <div class="meta-list">
                 <div class="meta-item">🔊 <strong>효과음 (SFX):</strong> 사각사각 설탕 섞이는 소리, 유리병에 청귤이 닿는 맑은 소리</div>
                 <div class="meta-item">🎵 <strong>배경음악 (BGM):</strong> 달콤하고 감미로운 피아노와 어쿠스틱 앙상블</div>
@@ -421,6 +461,12 @@
                 <div class="prompt-label">영상 생성 프롬프트 (Firefly 비디오)</div>
                 <div class="prompt-text" id="vid-prompt-4">유리잔의 시원한 청귤 에이드를 빨대로 한 모금 맛있게 마신 뒤, 카메라를 보며 기분 좋게 환한 미소를 짓는 여성의 아이레벨 미디엄 샷, 톡톡 터지는 탄산 기포, 청량하고 상쾌한 분위기, 부드러운 줌아웃(Zoom-out).</div>
                 <button class="copy-btn" onclick="copyText('vid-prompt-4')">복사</button>
+            </div>
+
+            <div class="prompt-container" style="border-color: var(--secondary); background: var(--bg-page-deep);">
+                <div class="prompt-label" style="color: var(--secondary); font-weight: 700;">🎙️ 나레이션 / 자막 프롬프트 (TTS용)</div>
+                <div class="prompt-text" id="voice-prompt-4">탄산수와 얼음을 더하면, 나만의 상큼한 청귤 에이드 완성!</div>
+                <button class="copy-btn" style="background: var(--secondary);" onclick="copyText('voice-prompt-4')">복사</button>
             </div>
 
             <div class="meta-list">
