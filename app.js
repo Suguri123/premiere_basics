@@ -32,7 +32,7 @@ const courseData = {
     ch4: [
         { id: "4-1", title: "모션그래픽 템플릿(.mogrt) 사용법", duration: "5분", desc: "그래픽 템플릿 패널 열기, 타이틀 템플릿 드래그 적용, 텍스트·색상 커스터마이징", caption: "템플릿은 디자인 외주, 수정은 내 맘대로", resource: "내장 템플릿" },
         { id: "4-2", title: "Adobe Stock 무료 템플릿 가져오기", duration: "4분", desc: "라이브러리 패널에서 Adobe Stock 검색, 무료 필터, 라이브러리로 저장 → 프로젝트에 적용", caption: "무료 필터 체크 잊지 말기", resource: "Adobe Stock" },
-        { id: "4-3", title: "외부 템플릿 사이트와 설치 방법", duration: "5분", desc: "무료 템플릿 사이트 소개(Mixkit 등), .mogrt 파일 다운로드 → 그래픽 템플릿 패널에 설치", caption: "🔗 <a href='https://mixkit.co/' target='_blank' style='color: var(--secondary); text-decoration: underline; font-weight: 700;'>Mixkit 바로가기</a>", resource: "외부 템플릿" },
+        { id: "4-3", title: "외부 템플릿 사이트와 설치 방법", duration: "5분", desc: "무료 템플릿 사이트(Mixkit 등), .mogrt 파일 다운로드 → 그래픽 템플릿 패널에 설치", caption: "🔗 <a href='https://mixkit.co/' target='_blank' style='color: var(--secondary); text-decoration: underline; font-weight: 700;'>Mixkit 바로가기</a>", resource: "외부 템플릿" },
         { id: "4-4", title: "생성형 확장으로 짧은 클립 늘리기", duration: "5분", desc: "타임라인에서 생성형 확장 도구 선택 → 클립 끝을 드래그 → AI가 이어 그린 프레임 확인", caption: "부족한 1~2초는 AI에게", resource: "실습 소스팩 A" },
         { id: "4-5", title: "생성형 확장이 잘 되는 장면 vs 안 되는 장면", duration: "4분", desc: "배경 위주·완만한 움직임(잘 됨) vs 빠른 동작·복잡한 손동작(한계) 비교 실험", caption: "풍경 O, 격한 움직임 X", resource: "" },
         { id: "4-6", title: "숏폼 편집 — 컷·자막·음악 몰아치기", duration: "6분", desc: "빠른 컷 편집 리듬, AI 자동 자막을 숏폼 스타일(큰 글씨·중앙 하단)로 변환, 비트에 컷 맞추기", caption: "숏폼 자막은 크게, 짧게, 중앙에", resource: "완성 프로젝트 D" },
