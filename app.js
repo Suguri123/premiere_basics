@@ -31,7 +31,7 @@ const courseData = {
     ],
     ch4: [
         { id: "4-1", title: "모션그래픽 템플릿(.mogrt) 사용법", duration: "5분", desc: "그래픽 템플릿 패널 열기, 타이틀 템플릿 드래그 적용, 텍스트·색상 커스터마이징", caption: "템플릿 디자인을 다운받고, 수정은 내 맘대로", resource: "내장 템플릿(내 템플릿)", image: "mogrt_usage_concept.png" },
-        { id: "4-2", title: "Adobe Stock 무료 템플릿 가져오기", duration: "4분", desc: "라이브러리 패널에서 Adobe Stock 검색, 무료 필터, 라이브러리로 저장 → 프로젝트에 적용", caption: "무료 필터 체크 잊지 말기", resource: "Adobe Stock" },
+        { id: "4-2", title: "Adobe Stock 무료 템플릿 가져오기", duration: "4분", desc: "라이브러리 패널에서 Adobe Stock 검색, 무료 필터, 라이브러리로 저장(다운로드) → 프로젝트에 적용", caption: "무료 필터 체크 잊지 말기", resource: "Adobe Stock" },
         { id: "4-3", title: "외부 템플릿 사이트와 설치 방법", duration: "5분", desc: "무료 템플릿 사이트(Mixkit 등), .mogrt 파일 다운로드 → 그래픽 템플릿 패널에 설치", caption: "🔗 <a href='https://mixkit.co/' target='_blank' style='color: var(--secondary); text-decoration: underline; font-weight: 700;'>Mixkit 바로가기</a>", resource: "외부 템플릿" },
         { id: "4-4", title: "생성형 확장으로 짧은 클립 늘리기", duration: "5분", desc: "타임라인에서 생성형 확장 도구 선택 → 클립 끝을 드래그 → AI가 이어 그린 프레임 확인", caption: "부족한 1~2초는 AI에게", resource: "실습 소스팩 A" },
         { id: "4-5", title: "장면계획서 작성 프롬프트 복사", duration: "3분", desc: "AI가 분석 및 장면 기획을 원활하게 수행할 수 있도록 정의된 기획 프롬프트 템플릿입니다.", caption: "", resource: "", promptToCopy: `주제 : \n\n위 주제를 바탕으로 AI 영상 제작 교육생이 바로 복사/붙여넣기할 수 있는 4컷(Scene 1~4) 씬 플랜을 아래 규칙에 맞춰 '전부 한글'로 작성해 줘.\n\n[작성 규칙]:\n1. 상단에 주제에 어울리는 매력적인 "씬 플랜: [새로운 제목]" 생성\n2. 각 Scene 번호 옆에 직관적인 "컷 제목" 표기 (예: Scene 1. 평화로운 아침 과수원)\n3. 컷 구성 (Scene 1~4):\n   - [이미지 프롬프트]: 구도, 피사체, 조명, 화질(8K), 스타일 등 상세 묘사\n   - [비디오 모션 프롬프트]: 카메라 무빙(팬, 줌, 틸트 등), 피사체 움직임 지시어\n4. 하단에 영상 전체를 아우르는 "[오디오 & 효과음 프롬프트]" 딱 1개만 생성 (BGM 스타일/템포, 주요 효과음 포함)` }
