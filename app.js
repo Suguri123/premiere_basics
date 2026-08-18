@@ -25,7 +25,7 @@ const courseData = {
     ],
     ch3: [
         { id: "3-1", title: "키프레임 첫걸음 — 도형 움직이기", duration: "5분", desc: "• 시간의 흐름에 따라 영상 속성(위치, 크기, 불투명도, 회전 등)의 변화를 주어 움직임을 만드는 기능<br>• 최소 2개의 키프레임(시작점과 끝점)이 설정되면, 프로그램이 그 사이의 변화를 자동으로 보간하여 부드러운 움직임을 생성<br>• 효과 컨트롤 패널>클립 선택 후 [모션-위치/비율조정]에 애니메이션 적용(키프레임)", caption: "키프레임 = 시작점과 끝점만 찍으면 사이는 자동", resource: "", images: ["keyframe_concept_2.png", "keyframe_concept_3.png"] },
-        { id: "3-2", title: "마스크 개념과 오브젝트 마스크", duration: "5분", desc: "• 마스크는 화면의 특정 영역만 지정하여 보이게 하거나 가리고, 원하는 부분에만 효과(모자이크, 색보정 등)를 적용할 때 사용하는 기능<br>• 오브젝트 마스크 적용: 클립에 적용한 효과(효과 컨트롤 패널) 하위의 펜 도구(마스크)로 개체의 외곽선을 따서 해당 영역에만 효과를 한정 적용", caption: "마스크 = 보여줄 곳만 오려내는 가위", resource: "", images: ["mask_concept_2.png", "mask_concept_3.png"], videoTutorialUrl: "https://youtu.be/06q1OrPuIyM" },
+        { id: "3-2", title: "마스크 개념과 오브젝트 마스크", duration: "5분", desc: "• 마스크는 화면의 특정 영역만 지정하여 보이게 하거나 가리고, 원하는 부분에만 효과(모자이크, 색보정 등)를 적용할 때 사용하는 기능<br>• 오브젝트 마스크 적용: 클립에 적용한 효과(효과 컨트롤 패널) 하위의 펜 도구(마스크)로 개체의 외곽선을 따서 해당 영역에만 효과를 한정 적용", caption: "마스크 = 보여줄 곳만 오려내는 가위", resource: "", images: ["mask_concept_2.png", "mask_concept_3.png"], videoTutorialUrl: "https://youtu.be/06q1OrPuIyM", videoTutorialLabel: "동영상 보기 (모자이크 넣기)" },
         { id: "3-3", title: "Firefly로 AI 비디오 만들기 — 장면 계획", duration: "5분", desc: "만들고 싶은 장면을 글로 정리(피사체·움직임·카메라·분위기) → 텍스트→비디오 생성 → 결과 비교·재생성", caption: "🔗 <strong>생성형 AI 바로가기:</strong><ul style='margin: 8px 0 0 16px; padding: 0; text-align: left; display: flex; flex-direction: column; gap: 4px; font-style: normal; list-style-type: disc;'><li><a href='https://firefly.adobe.com' target='_blank' style='color: var(--secondary); text-decoration: underline; font-weight: 700;'>Adobe Firefly 바로가기</a></li><li><a href='https://flow.google' target='_blank' style='color: var(--secondary); text-decoration: underline; font-weight: 700;'>Google Flow 바로가기</a></li><li><a href='https://aistudio.google.com/prompts/new_chat' target='_blank' style='color: var(--secondary); text-decoration: underline; font-weight: 700;'>Google AI Studio 바로가기</a></li></ul>", resource: "장면 계획서", images: ["scene_plan_concept_1.png", "scene_plan_concept_2.png"] },
         { id: "3-4", title: "실습예제 — 시네마틱 인트로", duration: "6분", desc: "• 트랙매트 키 효과로 글자 속에 영상 넣기<br>• AI 배경클립+키프레임 애니메이션+전환효과를 활용한 시네마틱 인트로 완성", caption: "", resource: "", images: ["cinematic_intro_1.png", "cinematic_intro_2.png"] }
     ],
@@ -196,10 +196,11 @@ function initCurriculum() {
 
             let videoTutorialHtml = "";
             if (clip.videoTutorialUrl) {
+                const label = clip.videoTutorialLabel || "동영상 보기";
                 videoTutorialHtml = `
                     <div class="clip-video-tutorial-box" style="margin-top: 12px; margin-bottom: 12px;">
                         <a href="${clip.videoTutorialUrl}" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; text-decoration: none; padding: 8px 14px; font-size: 0.9rem; font-weight: 700; border-radius: var(--radius-sm); color: white; background: #ef4444; border: 1px solid #dc2626; transition: var(--transition);" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
-                            🎬 동영상 튜토리얼 보기
+                            🎬 ${label}
                         </a>
                     </div>
                 `;
