@@ -33,7 +33,8 @@ const courseData = {
         { id: "4-1", title: "모션그래픽 템플릿(.mogrt) 사용법", duration: "5분", desc: "그래픽 템플릿 패널 열기, 타이틀 템플릿 드래그 적용, 텍스트·색상 커스터마이징", caption: "템플릿은 디자인 외주, 수정은 내 맘대로", resource: "내장 템플릿" },
         { id: "4-2", title: "Adobe Stock 무료 템플릿 가져오기", duration: "4분", desc: "라이브러리 패널에서 Adobe Stock 검색, 무료 필터, 라이브러리로 저장 → 프로젝트에 적용", caption: "무료 필터 체크 잊지 말기", resource: "Adobe Stock" },
         { id: "4-3", title: "외부 템플릿 사이트와 설치 방법", duration: "5분", desc: "무료 템플릿 사이트(Mixkit 등), .mogrt 파일 다운로드 → 그래픽 템플릿 패널에 설치", caption: "🔗 <a href='https://mixkit.co/' target='_blank' style='color: var(--secondary); text-decoration: underline; font-weight: 700;'>Mixkit 바로가기</a>", resource: "외부 템플릿" },
-        { id: "4-4", title: "생성형 확장으로 짧은 클립 늘리기", duration: "5분", desc: "타임라인에서 생성형 확장 도구 선택 → 클립 끝을 드래그 → AI가 이어 그린 프레임 확인", caption: "부족한 1~2초는 AI에게", resource: "실습 소스팩 A" }
+        { id: "4-4", title: "생성형 확장으로 짧은 클립 늘리기", duration: "5분", desc: "타임라인에서 생성형 확장 도구 선택 → 클립 끝을 드래그 → AI가 이어 그린 프레임 확인", caption: "부족한 1~2초는 AI에게", resource: "실습 소스팩 A" },
+        { id: "4-5", title: "장면계획서 작성 프롬프트 복사", duration: "3분", desc: "AI가 분석 및 장면 기획을 원활하게 수행할 수 있도록 잘 정의된 기획 프롬프트 템플릿입니다.", caption: "", resource: "", promptToCopy: `주제 : \n\n위 주제를 바탕으로 AI 영상 제작 교육생이 바로 복사/붙여넣기할 수 있는 4컷(Scene 1~4) 씬 플랜을 아래 규칙에 맞춰 '전부 한글'로 작성해 줘.\n\n[작성 규칙]:\n1. 상단에 주제에 어울리는 매력적인 "씬 플랜: [새로운 제목]" 생성\n2. 각 Scene 번호 옆에 직관적인 "컷 제목" 표기 (예: Scene 1. 평화로운 아침 과수원)\n3. 컷 구성 (Scene 1~4):\n   - [이미지 프롬프트]: 구도, 피사체, 조명, 화질(8K), 스타일 등 상세 묘사\n   - [비디오 모션 프롬프트]: 카메라 무빙(팬, 줌, 틸트 등), 피사체 움직임 지시어\n4. 하단에 영상 전체를 아우르는 "[오디오 & 효과음 프롬프트]" 딱 1개만 생성 (BGM 스타일/템포, 주요 효과음 포함)` }
     ]
 };
 
@@ -182,6 +183,17 @@ function initCurriculum() {
                 `;
             }
 
+            let copyPromptHtml = "";
+            if (clip.promptToCopy) {
+                copyPromptHtml = `
+                    <div class="prompt-container" style="margin-top: 12px; margin-bottom: 12px; background: var(--bg-page-deep); border: 1.5px solid var(--border-color); border-radius: var(--radius-sm); padding: 16px; position: relative;">
+                        <div class="prompt-label" style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase;">📋 복사할 프롬프트 내용</div>
+                        <div class="prompt-text" id="prompt-to-copy-${clip.id}" style="font-size: 0.95rem; font-weight: 600; color: var(--text-main); white-space: pre-wrap; word-break: break-all; padding-right: 80px; text-align: left; line-height: 1.5;">${clip.promptToCopy}</div>
+                        <button class="copy-btn" style="position: absolute; top: 16px; right: 16px; background: var(--primary); color: var(--text-inverse); border: none; padding: 6px 12px; border-radius: var(--radius-sm); font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: var(--transition);" onclick="copyCardPrompt('prompt-to-copy-${clip.id}')">복사</button>
+                    </div>
+                `;
+            }
+
             card.innerHTML = `
                 <div class="clip-card-header">
                     <div class="clip-label-area">
@@ -195,6 +207,7 @@ function initCurriculum() {
                     <span class="clip-meta-resource" style="font-size: 1.05rem;">📦 ${clip.resource === "장면 계획서" ? `<a href="scene_plan.html" target="_blank" style="color: var(--secondary); text-decoration: underline; font-weight: 700; font-size: 1.1rem;">${clip.resource} (새창 열기)</a>` : clip.resource}</span>
                 </div>` : ''}
                 ${imageHtml}
+                ${copyPromptHtml}
                 ${clip.caption ? `<div class="clip-caption-box">${clip.caption}</div>` : ''}
             `;
             container.appendChild(card);
@@ -969,4 +982,24 @@ function initVideoCarousel() {
         }
     });
 }
+
+window.copyCardPrompt = function(elementId) {
+    const text = document.getElementById(elementId).innerText;
+    navigator.clipboard.writeText(text).then(() => {
+        let toast = document.getElementById('card-toast');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.id = 'card-toast';
+            toast.style.cssText = 'position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: #10b981; color: #ffffff; padding: 12px 24px; border-radius: 30px; font-weight: 700; font-size: 0.95rem; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s; z-index: 2000; opacity: 0;';
+            document.body.appendChild(toast);
+        }
+        toast.innerText = '프롬프트가 클립보드에 복사되었습니다!';
+        toast.style.transform = 'translateX(-50%) translateY(0)';
+        toast.style.opacity = '1';
+        setTimeout(() => {
+            toast.style.transform = 'translateX(-50%) translateY(100px)';
+            toast.style.opacity = '0';
+        }, 2000);
+    });
+};
 
