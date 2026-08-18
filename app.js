@@ -30,7 +30,7 @@ const courseData = {
         { id: "3-4", title: "실습예제 — 시네마틱 인트로", duration: "6분", desc: "• 트랙매트 키 효과로 글자 속에 영상 넣기<br>• AI 배경클립+키프레임 애니메이션+전환효과를 활용한 시네마틱 인트로 완성", caption: "", resource: "", images: ["cinematic_intro_1.png", "cinematic_intro_2.png"] }
     ],
     ch4: [
-        { id: "4-1", title: "모션그래픽 템플릿(.mogrt) 사용법", duration: "5분", desc: "그래픽 템플릿 패널 열기, 타이틀 템플릿 드래그 적용, 텍스트·색상 커스터마이징", caption: "템플릿은 디자인 외주, 수정은 내 맘대로", resource: "내장 템플릿" },
+        { id: "4-1", title: "모션그래픽 템플릿(.mogrt) 사용법", duration: "5분", desc: "그래픽 템플릿 패널 열기, 타이틀 템플릿 드래그 적용, 텍스트·색상 커스터마이징", caption: "템플릿은 디자인 외주, 수정은 내 맘대로", resource: "내장 템플릿", image: "mogrt_usage_concept.png" },
         { id: "4-2", title: "Adobe Stock 무료 템플릿 가져오기", duration: "4분", desc: "라이브러리 패널에서 Adobe Stock 검색, 무료 필터, 라이브러리로 저장 → 프로젝트에 적용", caption: "무료 필터 체크 잊지 말기", resource: "Adobe Stock" },
         { id: "4-3", title: "외부 템플릿 사이트와 설치 방법", duration: "5분", desc: "무료 템플릿 사이트(Mixkit 등), .mogrt 파일 다운로드 → 그래픽 템플릿 패널에 설치", caption: "🔗 <a href='https://mixkit.co/' target='_blank' style='color: var(--secondary); text-decoration: underline; font-weight: 700;'>Mixkit 바로가기</a>", resource: "외부 템플릿" },
         { id: "4-4", title: "생성형 확장으로 짧은 클립 늘리기", duration: "5분", desc: "타임라인에서 생성형 확장 도구 선택 → 클립 끝을 드래그 → AI가 이어 그린 프레임 확인", caption: "부족한 1~2초는 AI에게", resource: "실습 소스팩 A" },
